@@ -9,7 +9,12 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
+<<<<<<< HEAD
     "bootstrap": "^5.1.0",
+=======
+    "dotenv-webpack": "^7.0.3",
+    "multer": "^1.4.3",
+>>>>>>> origin/notification_and_tables
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-material-ui-carousel": "^2.3.1",
@@ -46,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }

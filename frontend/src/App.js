@@ -1,4 +1,5 @@
 import './App.css';
+import TestImage from './components/testImage';
 
 import {
   BrowserRouter as Router,
