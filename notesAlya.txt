@@ -1,0 +1,16 @@
+npm install --save reactstrap react react-dom
+
+
+https://material-ui.com/getting-started/installation/
+npm install @material-ui/core
+npm install @material-ui/icons
+npm install react-material-ui-carousel --save
+npm install @material-ui/lab
+https://material-ui.com/components/buttons/
+
+для юзер аккаунта
+https://material-ui.com/components/app-bar/
+-----
+https://ant.design/docs/react/introduce
+авто заполение ввода
+----
