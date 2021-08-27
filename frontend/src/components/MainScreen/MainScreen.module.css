@@ -50,7 +50,7 @@
 }
 
 .tags_area {
-  width: 80%;
+  width: 70%;
   /* order: 1; */
   grid-area: tagss;
   justify-self: center;

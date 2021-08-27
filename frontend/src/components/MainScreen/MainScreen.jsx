@@ -1,11 +1,9 @@
-// import ProductCarusel from "../ProductCarousel/ProductCarusel";
-// import ShowProducts from "../ShowProducts/ShowProducts";
+
 import Login from "../Login/Login";
 import style from "./MainScreen.module.css";
 import { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-// import ProductCarusel from "../ProductCarousel/ProductCarusel";
-// import ShowProducts from "../ShowProducts/ShowProducts";
+
 
 export default function MainScreen() {
   const userRedux = useSelector((state) => state.user);
