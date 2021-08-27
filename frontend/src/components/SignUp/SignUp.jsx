@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { REGISTRATION_USER } from "../../urls/url";
 
 function SignUp() {
   const changeStatusHandler = (e) => {
@@ -9,7 +10,7 @@ function SignUp() {
     const login = e.target.regLogin.value;
 
     axios
-      .post(`${process.env.REACT_APP_HOST}/signup`, {
+      .post(REGISTRATION_USER, {
         email,
         password,
         login,

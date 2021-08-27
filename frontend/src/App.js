@@ -1,28 +1,22 @@
-import './App.css';
-import TestImage from './components/testImage';
+import "./App.css";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import PrivateRoute from './components/PrivateRouter/PrivateRouter';
-import Nav from './components/Nav/Nav';
-import SignUp from './components/Forms/SignUp/SignUp';
-import SignOut from './components/Forms/SignOut/SignOut';
-import SignIn from './components/Forms/SignIn/SignIn';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { checkAuthStart } from './redux/actions/user.ac';
-import MainScreen from './components/MainScreen/MainScreen';
+import Nav from "./components/Nav/Nav";
+import SignUp from "./components/Forms/SignUp/SignUp";
+import SignOut from "./components/Forms/SignOut/SignOut";
+import SignIn from "./components/Forms/SignIn/SignIn";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { checkAuthStart } from "./redux/actions/user.ac";
+import MainScreen from "./components/MainScreen/MainScreen";
 
 function App() {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(checkAuthStart())
-  }, [])
+    dispatch(checkAuthStart());
+  }, []);
 
   return (
     <Router>
@@ -32,16 +26,16 @@ function App() {
           {/* <PrivateRoute path="/user/notesList">
             <Main />
           </PrivateRoute>  */}
-          <Route path="/auth/signup">
+          <Route exact path="/auth/signup">
             <SignUp />
           </Route>
-          <Route path="/auth/signin">
+          <Route exact path="/auth/signin">
             <SignIn />
           </Route>
-          <Route path="/auth/signout">
+          <Route exact path="/auth/signout">
             <SignOut />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <MainScreen />
           </Route>
         </Switch>
