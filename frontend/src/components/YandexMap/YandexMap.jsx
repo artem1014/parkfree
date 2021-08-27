@@ -1,15 +1,15 @@
 
-import Map from "./Map";
+// import Map from "./Map";
 
-const YandexMap = () => {
+// const YandexMap = () => {
 
 
-  return (
-    <>
-      <Map />
+//   return (
+//     <>
+//       <Map />
       
-    </>
-  )
-}
+//     </>
+//   )
+// }
 
-export default YandexMap;
+// export default YandexMap;

@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import './YandexMap.css'
 import axios from 'axios'
 
+
 export default function Map({ }) {
   let myPlacemark;
-
+  const arr = [{ coords: [55.729324292067254, 37.65196207958984], adress: 'Россия, Москва, Шлюзовая набережная' }, { coords: [55.76069738614288, 37.64234904248048], adress: 'Россия, Москва, Чистопрудный бульвар, 12к7А' }]
   const [placemarkCoords, setPlacemarkCoords] = useState([])
   const [adress, setAdress] = useState('')
-  const [madeMap, setMadeMap] = useState(null)
+  const [allPlacemarks, setAllPlacemarks] = useState([])
 
   const placemarkHandler = () => {
     // тут будет dispatch данных из локального стейта 
@@ -19,7 +20,7 @@ export default function Map({ }) {
     window.ymaps.ready(init);
     // madeMap.geoObjects.remove(myPlacemark)
   }
-  
+
   const init = () => {
 
     const myMap = new window.ymaps.Map(
@@ -34,6 +35,18 @@ export default function Map({ }) {
       }
     );
 
+    setAdress('')
+    setAllPlacemarks([])
+
+    for (let i = 0; i < arr.length; ++i) {
+      let pl = new window.ymaps.Placemark(arr[i].coords);
+      pl.properties.set({
+        iconCaption: arr[i].adress,
+        balloonContent: arr[i].adress,
+      });
+      myMap.geoObjects.add(pl);
+      // console.log(arr[i]);
+    }
 
     // myPlacemark = createPlacemark([55.74741048760227, 37.604411878173835]); //создать метку
     // myMap.geoObjects.add(myPlacemark);  //опубликовать ее на экране
@@ -54,10 +67,8 @@ export default function Map({ }) {
           getAddress(myPlacemark.geometry.getCoordinates());
         });
       }
-
       setPlacemarkCoords(myPlacemark.geometry._coordinates);
       getAddress(newCoords);
-      
     });
 
     // Создание метки.
@@ -74,7 +85,6 @@ export default function Map({ }) {
         }
       );
     }
-
 
     // Определяем адрес по координатам (обратное геокодирование).
     async function getAddress(coords) {
