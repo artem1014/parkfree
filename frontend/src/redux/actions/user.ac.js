@@ -1,5 +1,6 @@
 import { DELETE_USER, SET_USER } from "../types/userTypes"
 import axios from 'axios'
+import { REGISTRATION_USER } from "../../urls/url"
 
 // вызывает логику юзера
 export const setUser = (user) => ({
@@ -12,7 +13,7 @@ export const deleteUser = () => ({
 })
 
 export const signUpStart = (payload, history) => async (dispatch) => { //регистрация
-  const response = await fetch('http://localhost:3005/signup', {
+  const response = await fetch(REGISTRATION_USER, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'

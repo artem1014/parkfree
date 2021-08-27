@@ -3,6 +3,7 @@ const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
 const app = express();
+const userRouter = require("./routes/userRouter");
 const markerRouter = require("./routes/markerRouter");
 
 // Картинки юзера кладет в /public/uploads
@@ -17,6 +18,7 @@ app.use(cors({ origin: true, credentials: true }));
 // Middleware отлавливает картинки юзера
 app.use(multer({ storage: storageConfig }).single("file"));
 
+app.use("/user", userRouter);
 app.use("/marker", markerRouter);
 
 app.listen(process.env.PORT);
