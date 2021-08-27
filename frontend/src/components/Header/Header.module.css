@@ -1,0 +1,169 @@
+.header, .headerRest {
+    border-bottom: solid 1px #fff;
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.header {
+    margin-bottom: -70px;
+    position: relative;
+
+}
+
+.headerRest{
+    background-color: #002e66;
+    border-bottom: 5px solid rgba(14, 175, 170);
+}
+
+.headerLogo {
+    filter: invert(1);
+    height: 25px;
+    width: 25px;
+}
+
+.wrapperHeaderLogo {
+    display: inline-block;
+    margin-right: 10px;
+    background-color: rgba(14, 175, 170);
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.containerHeader {
+    height: 50px;
+    max-width: 100% !important;
+}
+
+.navHeader {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.headerMenu {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    width: 100%;
+}
+
+.headerMenuLink {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 20px;
+    color: #fff;
+    letter-spacing: 1px;
+    transition: 0.2s;
+}
+
+.headerMenuItem {
+    display: flex;
+    align-items: center;
+}
+
+.headerMenuItem:not(:last-child),
+.headerMenuLink:not(:last-child) {
+    margin-right: 10px;
+}
+
+.headerMenuItem:last-child {
+    margin-left: auto;
+}
+
+.headerMenuLink:hover{
+    color: rgba(14, 175, 170) !important;
+}
+
+.logoText {
+    text-transform: uppercase;
+    font-size: 19px;
+    letter-spacing: 5px;
+}
+
+.menuNav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 1;
+    right: -320px;
+    top: 0;
+    width: 320px;
+    height: 150vh;
+    padding: 30px;
+    background: linear-gradient(135deg,#002e66, #0eafaa);
+    transition: 0.5s;
+}
+
+.menuNav {
+    padding-top: 65px;
+}
+
+.menuNav .headerMenuLink{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-right: 0;
+}
+
+.menuNavItem {
+    padding: 10px;
+    border-bottom: 2px solid #5a91a7;
+}
+
+.menuNavItem .headerMenuLinkTelegram {
+    display: flex;
+    align-items: center;
+}
+
+.menuNav .headerMenuLink:hover{ 
+    color: #ffcb77 !important;
+}
+
+.headerSandwich {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.sandwichItem {
+    width: 25px;
+    background-color: #fff;
+    border: solid 1px #fff;
+    transition: 0.4s;
+    margin-top: 5px;
+}
+
+.sandwichItem:first-of-type {
+  margin-top: 0;
+}
+
+.sandwith_1, .sandwith_2, .sandwith_3{
+  transform: rotate(0deg);
+}
+
+
+.telegramBlock {
+    margin-left: 10px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+.telegramIcon {
+    width: 100%;
+    height: 100%;
+}
+
+.telegramBot {
+    display: inline-block;
+    font-size: 20px;
+    transition: 0.2s;
+    color: #fff !important;
+}
+
+.telegramBot:hover {
+    color: #ffcb77 !important;
+}
+

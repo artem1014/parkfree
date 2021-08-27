@@ -1,6 +1,5 @@
 const InitState = {
-  user: null,
-  marks: []
+  user: null
 }
 
 const getInitState = () => {
