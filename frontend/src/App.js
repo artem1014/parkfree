@@ -25,16 +25,19 @@ function App() {
   }, [])
 
   return (
-    <Router>
-      <Nav />
-      <div className="container py-5">
-        <Switch>
+
+    <div className="App">
+
+      <Router>
+        <Nav />
+        {/* <div className="container py-5"> */}
+        < Switch >
           {/* <PrivateRoute path="/user/notesList">
             <Main />
           </PrivateRoute>  */}
-          <Route path="/auth/signup">
+          <Route Route path="/auth/signup" >
             <SignUp />
-          </Route>
+          </Route >
           <Route path="/auth/signin">
             <SignIn />
           </Route>
@@ -44,9 +47,11 @@ function App() {
           <Route path="/">
             <MainScreen />
           </Route>
-        </Switch>
-      </div>
-    </Router>
+        </Switch >
+        {/* </div > */}
+      </Router >
+    </div >
+
   );
 }
 

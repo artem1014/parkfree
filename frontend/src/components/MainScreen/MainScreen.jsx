@@ -4,9 +4,11 @@ import Login from "../Login/Login";
 import style from "./MainScreen.module.css";
 import { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+// import ProductCarusel from "../ProductCarousel/ProductCarusel";
+// import ShowProducts from "../ShowProducts/ShowProducts";
 
 export default function MainScreen() {
-  // const userRedux = useSelector(state => state.user);
+  const userRedux = useSelector((state) => state.user);
   // console.log('hey yo');
   const user = localStorage.getItem("user");
   // console.log('user is ');
@@ -21,9 +23,9 @@ export default function MainScreen() {
            TagCanvas.Start(
              'myCanvas',
              '',
-             {textColour: 'goldenrod',
+             {textColour: 'rgb(101, 125, 233)',
              outlineColour: '#03bcf4', 
-             zoom: 1.1,
+             zoom: 1,
              initial: [0.14, 0.08],
              weightMode: "outline",
              weightSize: 3.0
@@ -41,16 +43,16 @@ export default function MainScreen() {
     <>
       {user ? (
         <div className={style.main_screen_wrapper}>
-          {/* <ProductCarusel />
-      <ShowProducts /> */}
+          {/* <ProductCarusel /> */}
+          {/* <ShowProducts /> */}
         </div>
       ) : (
         <div className={style.main_screen_wrapper2}>
           <div className={style.greeting_area}>
             <div className={style.greeting_words}>
-              <h2>Приветствуем вас в приложении</h2>
+              <h4>Welcome to </h4>
               {/* <h2></h2> */}
-              <h1>Park free</h1>
+              <h3>Park Free</h3>
               {modalShow && <Login toggle={toggle} />}
               <button
                 onClick={() => {
@@ -58,103 +60,97 @@ export default function MainScreen() {
                 }}
                 className={style.button_register}
               >
-                Зарегистрироваться
+                Sign Up
               </button>
-              <p>
-                Для того что бы использовать приложение, пожалуйста,
-                зарегистрируйтесь.
-              </p>
+              <p>In order to use our application, please register.</p>
             </div>
           </div>
           <div className={style.tags_area}>
             <canvas width="700" height="700" id="myCanvas">
               <ul>
                 <li>
-                  <a href="#">Ул.Пушкина</a>
+                  <a href="#">🚜 Ул.Пушкина</a>
                 </li>
                 <li>
-                  <a href="#">Ул.Ленина</a>
+                  <a href="#">🚙 Ул.Ленина</a>
                 </li>
                 <li>
-                  <a href="#">Ул.Фестивальная</a>
+                  <a href="#">🚲 Ул.Фестивальная</a>
                 </li>
                 <li>
-                  <a href="#">Ул.Гагарина</a>
+                  <a href="#">🚚 Ул.Гагарина</a>
                 </li>
                 <li>
-                  <a href="#">Ул.Лермонтова</a>
+                  <a href="#">🚙 Ул.Лермонтова</a>
                 </li>
                 <li>
-                  <a href="#">Ул.Курчатова</a>
+                  <a href="#">🚜 Ул.Курчатова</a>
                 </li>
                 <li>
-                  <a href="#">Ул.Брежнева</a>
+                  <a href="#">🛺 Ул.Брежнева</a>
                 </li>
                 <li>
-                  <a href="#">Куртка</a>
+                  <a href="#">🚐 Ул.Орджоникидзе</a>
                 </li>
                 <li>
-                  <a href="#">Джинсы</a>
+                  <a href="#">🛵 Ул.Неглинная</a>
                 </li>
                 <li>
-                  <a href="#">Трусы</a>
+                  <a href="#">🚛 Садовое кольцо</a>
                 </li>
                 <li>
-                  <a href="#">Купальник</a>
+                  <a href="#">🚖 Вознесенский переулок</a>
                 </li>
                 <li>
-                  <a href="#">Шкатулка</a>
+                  <a href="#">🚍 Ул.Никольская</a>
                 </li>
                 <li>
-                  <a href="#">Ваза</a>
+                  <a href="#">🏎 ул.Фестивальная</a>
                 </li>
                 <li>
-                  <a href="#">Картина</a>
+                  <a href="#">🚖 рт.Антропова</a>
                 </li>
                 <li>
-                  <a href="#">Журнал</a>
+                  <a href="#">🚎 Журнал</a>
                 </li>
                 <li>
-                  <a href="#">Книга</a>
+                  <a href="#">🚍 Шабловская</a>
                 </li>
                 <li>
-                  <a href="#">Пальто</a>
+                  <a href="#">🚕 Ул.Первомайская</a>
                 </li>
                 <li>
-                  <a href="#">Ботинки</a>
+                  <a href="#">🚑 Ул.Ботанический Сад</a>
                 </li>
                 <li>
-                  <a href="#">Лыжи</a>
+                  <a href="#">🛵 Крутицкий пер.</a>
                 </li>
                 <li>
-                  <a href="#">Коньки</a>
+                  <a href="#">🛥 Фрунзенская наб.</a>
                 </li>
                 <li>
-                  <a href="#">Коробка</a>
+                  <a href="#">🚔 Ул.Охотный ряд</a>
                 </li>
                 <li>
-                  <a href="#">Матрас</a>
+                  <a href="#">🚘 Ул.Большая Лубянка</a>
                 </li>
                 <li>
-                  <a href="#">Подушка</a>
+                  <a href="#">🚲 Ул.Кузнецкий мост</a>
                 </li>
                 <li>
-                  <a href="#">Плед</a>
+                  <a href="#">🛻 Ул.Бахатлукума</a>
                 </li>
                 <li>
-                  <a href="#">Кастрюля</a>
+                  <a href="#">🚙Ул.Фестивальная</a>
                 </li>
                 <li>
-                  <a href="#">Гаечный ключ</a>
+                  <a href="#">🏍 Ул.Молодежная</a>
                 </li>
                 <li>
-                  <a href="#">Стол</a>
+                  <a href="#">🚔 ТЦ "Гагаринский"</a>
                 </li>
                 <li>
-                  <a href="#">Диван</a>
-                </li>
-                <li>
-                  <a href="#">Ярик-козел!</a>
+                  <a href="#">🚎 Прт.Ленина</a>
                 </li>
               </ul>
             </canvas>
