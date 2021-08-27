@@ -26,7 +26,6 @@ const Nav = () => {
                 <>
                   <li className="nav-item">
                     <NavLink
-                      exact
                       to="/auth/signout"
                       className="nav-link"
                       activeClassName="active"
@@ -39,7 +38,6 @@ const Nav = () => {
                 <>
                   <li className="nav-item">
                     <NavLink
-                      exact
                       to="/auth/signup"
                       className="nav-link"
                       activeClassName="active"
@@ -49,7 +47,6 @@ const Nav = () => {
                   </li>
                   <li className="nav-item">
                     <NavLink
-                      exact
                       to="/auth/signin"
                       className="nav-link"
                       activeClassName="active"
@@ -59,7 +56,6 @@ const Nav = () => {
                   </li>
                   <li className="nav-item">
                     <NavLink
-                      exact
                       to="/map"
                       className="nav-link"
                       activeClassName="active"
@@ -67,15 +63,16 @@ const Nav = () => {
                       Map
                     </NavLink>
                   </li>
+                  
                 </>
               )}
+
               <li>
                 <IconButton onClick={() => setIsOpen(!isOpen)}>
                   <Badge
                     badgeContent={100}
                     color="secondary"
                     className="nav-item"
-                    exact
                   >
                     <NotificationsIcon />
                   </Badge>

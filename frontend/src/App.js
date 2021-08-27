@@ -20,10 +20,13 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <Nav />
-      <div className="container py-5">
-        <Switch>
+
+    <div className="App">
+
+      <Router>
+        <Nav />
+        {/* <div className="container py-5"> */}
+        < Switch >
           {/* <PrivateRoute path="/user/notesList">
             <Main />
           </PrivateRoute>  */}
@@ -43,8 +46,8 @@ function App() {
             <Main />
           </Route>
         </Switch>
-      </div>
-    </Router>
+      </Router>
+    </div>
   );
 }
 
