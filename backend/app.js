@@ -21,4 +21,6 @@ app.use(multer({ storage: storageConfig }).single("file"));
 app.use("/user", userRouter);
 app.use("/marker", markerRouter);
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, () => {
+  console.log('Server has been started')
+});

@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import './YandexMap.css'
 import axios from 'axios'
+import React from 'react'
+import { SEND_FORMS } from "../../urls/url";
+import style from '../testImage/style.module.css'
 
 
 export default function Map({ }) {
+
   let myPlacemark;
   const arr = [{ coords: [55.729324292067254, 37.65196207958984], adress: 'Россия, Москва, Шлюзовая набережная' }, { coords: [55.76069738614288, 37.64234904248048], adress: 'Россия, Москва, Чистопрудный бульвар, 12к7А' }]
   const [placemarkCoords, setPlacemarkCoords] = useState([])
@@ -20,6 +24,49 @@ export default function Map({ }) {
     window.ymaps.ready(init);
     // madeMap.geoObjects.remove(myPlacemark)
   }
+
+  // для отправки комментов и фоток
+  const uploadedImage = React.useRef(null);
+  const imageUploader = React.useRef(null);
+
+  const handleImageUpload = (e) => {
+    const [file] = e.target.files;
+    if (file) {
+      const reader = new FileReader();
+      const { current } = uploadedImage;
+      current.file = file;
+      reader.onload = (e) => {
+        current.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const sendForm = (e) => {
+    e.preventDefault();
+    // Получаем все значения из формы по атрибуту name
+    const { file } = Object.fromEntries(new FormData(e.target));
+    // console.log(file);
+    const image = file.name;
+
+    // Эта штука собирает все значения через append и через axios отправляет на back
+    let bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+    bodyFormData.append("image", image);
+    bodyFormData.append("width", placemarkCoords[0])
+    bodyFormData.append("longitude", placemarkCoords[1])
+    bodyFormData.append("address", adress)
+    bodyFormData.append("parkingPlaces", 5)
+
+    axios.post(SEND_FORMS, bodyFormData);
+
+    const div = document.querySelector('.ymap');
+    div.innerHTML = '';
+    console.log(placemarkCoords)
+    console.log(adress)
+    window.ymaps.ready(init);
+  };
+
 
   const init = () => {
 
@@ -125,7 +172,42 @@ export default function Map({ }) {
     <>
       <div id="map" className='ymap'>
       </div>
-      {adress && placemarkCoords && <button onClick={placemarkHandler}> Отправить метку на согласование </button>}
+      {adress && placemarkCoords &&
+        <form onSubmit={sendForm}>
+          <div className={style.div}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              ref={imageUploader}
+              style={{
+                display: "none",
+              }}
+              name="file"
+            />
+            <div
+              style={{
+                height: "100px",
+                width: "100px",
+                border: "1px dashed black",
+              }}
+              onClick={() => imageUploader.current.click()}
+            >
+              <img
+                ref={uploadedImage}
+                style={{
+                  width: "100px",
+                  // height: "100px",
+                  // position: "absolute"
+                }}
+              />
+            </div>
+          </div>
+          <button>Send</button>
+          {/* <button onClick={placemarkHandler}> Отправить метку на согласование </button> */}
+        </form>
+      }
     </>
+
   )
 }
