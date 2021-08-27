@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Marker.init(
     {
-      title: {
-        allowNull: false,
-        type: DataTypes.STRING,
-      },
       address: {
         allowNull: false,
         type: DataTypes.TEXT,
@@ -30,10 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       parkingPlaces: {
         allowNull: false,
         type: DataTypes.STRING,
-      },
-      image: {
-        allowNull: false,
-        type: DataTypes.TEXT,
       },
     },
     {
