@@ -1,17 +1,23 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
-import Modal from "../Modal/index";
-import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import IconButton from "@material-ui/core/IconButton";
+import { Link, NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Badge from "@material-ui/core/Badge";
+import Notification from "../Notification";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllNotificationsStart } from "../../redux/actions/notificationAC";
 
 const Nav = () => {
   const user = useSelector((state) => state.user);
+  const notifications = useSelector((state) => state.notification)
   const [isOpen, setIsOpen] = useState(false);
-  // const onClose = () => {
-  //   if (isOpen) setIsOpen(false);
-  // };
+  const dispatch = useDispatch();
+  console.log(notifications);
+
+  useEffect(() => {
+    // Задать userID
+    dispatch(getAllNotificationsStart({ userID: 1 }));
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -63,21 +69,29 @@ const Nav = () => {
                       Map
                     </NavLink>
                   </li>
-                  
+                  <li className="nav-item">
+                    <NavLink
+                      to="/test"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Images
+                    </NavLink>
+                  </li>
                 </>
               )}
 
               <li>
                 <IconButton onClick={() => setIsOpen(!isOpen)}>
                   <Badge
-                    badgeContent={100}
+                    badgeContent={notifications.length}
                     color="secondary"
                     className="nav-item"
                   >
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
-                <Modal open={isOpen}></Modal>
+                <Notification open={isOpen} notifications={notifications} />
               </li>
             </ul>
           </div>

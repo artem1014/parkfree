@@ -1,5 +1,4 @@
 import "./App.css";
-
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import PrivateRoute from './components/PrivateRouter/PrivateRouter';
 import Nav from "./components/Nav/Nav";
@@ -11,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { checkAuthStart } from "./redux/actions/user.ac";
 import MainScreen from "./components/MainScreen/MainScreen";
 import Main from "./components/Main/Main";
+import TestImage from "./components/testImage";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,13 +20,11 @@ function App() {
   }, []);
 
   return (
-
     <div className="App">
-
       <Router>
         <Nav />
         {/* <div className="container py-5"> */}
-        < Switch >
+        <Switch>
           {/* <PrivateRoute path="/user/notesList">
             <Main />
           </PrivateRoute>  */}
@@ -44,6 +42,9 @@ function App() {
           </Route>
           <Route exact path="/map">
             <Main />
+          </Route>
+          <Route exact path="/test">
+            <TestImage />
           </Route>
         </Switch>
       </Router>
