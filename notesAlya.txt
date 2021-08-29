@@ -1,0 +1,39 @@
+npm install --save reactstrap react react-dom
+
+
+https://material-ui.com/getting-started/installation/
+npm install @material-ui/core
+npm install @material-ui/icons
+npm install react-material-ui-carousel --save
+npm install @material-ui/lab
+https://material-ui.com/components/buttons/
+
+для юзер аккаунта
+https://material-ui.com/components/app-bar/
+-----
+https://ant.design/docs/react/introduce
+авто заполение ввода
+----
+https://www.imgonline.com.ua/resize-image.php - уменьшение размера картинок
+https://icons8.com/icons/set/car - icons little
+
+
+                  <a href="#"><img style={{width: '10px'}} src="https://img.icons8.com/doodle/2x/car.png" /></a>
+                </li>
+                <li>
+                  <a href="#"> <img style={{width: '10px'}} src="https://srv2.imgonline.com.ua/result_img/imgonline-com-ua-Resize-44Yt9qdr9UeX.png" /> </a>
+                  <a href="#"> <img style={{width: '10px'}} src="ttps://img.icons8.com/fluency/2x/car.png" /> </a>
+                </li>
+                <li>
+                  <a href="#">👍</a>
+                </li>
+                https://img.icons8.com/fluency/2x/car.png
+                
+https://swiperjs.com/get-started
+npm install swiper
+
+
+npm install jquery --save
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=3ec234ec-c933-467f-b4bb-4f217f11b450" type="text/javascript"></script>  
+<!--

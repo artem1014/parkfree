@@ -1,0 +1,130 @@
+.main_screen_wrapper {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+.main_screen_wrapper2 {
+  width: 100vw;
+  min-height: 1024px;
+  height: 100%;
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; */
+  display: grid;
+  grid-template-columns: 19fr 5fr;
+  grid-template-rows: auto;
+  grid-template-areas: "tagss greet";
+}
+/* размер блока с названием  */
+.greeting_area {
+  color: #8a97e4;
+  width: 100%;
+  display: flex;
+  /* flex-direction: column; */
+  /* justify-content: center;
+  order: 2; */
+  grid-area: greet;
+  justify-self: center;
+}
+/* подпись под кнопкой */
+.greeting_words {
+  width: 100%;
+  margin: 0 auto;
+}
+.greeting_words h3 {
+  font-size: 50px;
+  font-weight: bold;
+  margin: 0;
+  /* color: rgb(128, 124, 124); */
+  /* color: #9fabec; */
+  color: #8a97e4;
+  margin-bottom: 40px;
+}
+
+/* подпись под кнопкой */
+.greeting_words p {
+  width: 50%;
+  margin: 7px auto;
+  color: rgb(181, 181, 181);
+}
+
+.tags_area {
+  width: 80%;
+  /* order: 1; */
+  grid-area: tagss;
+  justify-self: center;
+}
+
+.tags_area canvas {
+  margin-top: 50px;
+  width: 100%;
+  height: 75vh;
+}
+
+.button_register {
+  background-color: #8a97e4;
+  border: 2px solid rgb(134, 140, 179);
+  border-radius: 30px;
+  padding: 10px 40px;
+  color: whitesmoke;
+  font-weight: bold;
+  margin-top: 100px;
+}
+
+.button_register:hover {
+  background-color: rgb(101, 125, 233);
+  color: whitesmoke;
+  transition: 0.5s;
+}
+
+.greeting_words h3 {
+  /* margin: 15px 0px 0px 0px; */
+  width: 100%;
+  display: inline-block;
+  font-size: 4em;
+  letter-spacing: 5px;
+  font-weight: bold;
+  /* border: 1px solid white; */
+  padding: 0 10px;
+  margin: 0;
+  border-bottom: 2px solid whitesmoke;
+  /* border-top: 2px solid whitesmoke; */
+  display: inline-block;
+  /* dnsjdhjshj */
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+  line-height: 0.8em;
+  outline: 0;
+  /* animation: animate 5s linear infinite; */
+}
+
+@keyframes animate {
+  0%,
+  18%,
+  20%,
+  50.1%,
+  60%,
+  65.1%,
+  80%,
+  90.1%,
+  92% {
+    color: rgb(101, 125, 233);
+    text-shadow: none;
+  }
+  0%,
+  18.1%,
+  20.1%,
+  30%,
+  50%,
+  60.1%,
+  65%,
+  80.1%,
+  90%,
+  92.1%,
+  100% {
+    color: #fff;
+    text-shadow: 0 0 10px rgb(101, 125, 233), 0 0 20px rgb(101, 125, 233),
+      0 0 40px rgb(101, 125, 233), 0 0 80px #b3d3e2,
+      0 0 160px rgb(101, 125, 233);
+  }
+}

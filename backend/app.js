@@ -1,9 +1,22 @@
-const express = require('express')
+require("dotenv").config();
+const express = require("express");
+const multer = require("multer");
+const cors = require("cors");
+const app = express();
+const markerRouter = require("./routes/markerRouter");
 
-const app = express()
+// Картинки юзера кладет в /public/uploads
+const storageConfig = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "./public/uploads"),
+  filename: (req, file, cb) => cb(null, file.originalname),
+});
 
-PORT = 3005;
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors({ origin: true, credentials: true }));
+// Middleware отлавливает картинки юзера
+app.use(multer({ storage: storageConfig }).single("file"));
 
-app.listen(PORT, () => {
-  console.log('Server has been started')
-})
+app.use("/marker", markerRouter);
+
+app.listen(process.env.PORT);
