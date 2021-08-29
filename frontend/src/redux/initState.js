@@ -1,5 +1,6 @@
 const InitState = {
-  user: null
+  user: null,
+  notification: [],
 }
 
 const getInitState = () => {

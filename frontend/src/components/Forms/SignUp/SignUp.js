@@ -7,7 +7,7 @@ const SignUp = () => {
   const [userSignUp, setUserSignUp] = useState({
     login: '',
     password: '',
-    fullname: ''
+    email: ''
   })
 
   let history = useHistory();
@@ -36,10 +36,10 @@ const SignUp = () => {
           <input onChange={changeHandler} className="form-control" value={userSignUp.login} type="text" name="login" placeholder='login' />
         </div>
 
-        <div className="mb-3">
-          <input onChange={changeHandler} className="form-control" value={userSignUp.fullname} type="text" name="fullname" placeholder='fullname' />
-        </div>
 
+<div className="mb-3">
+          <input onChange={changeHandler} className="form-control" value={userSignUp.email} type="text" name="email" placeholder='email' />
+        </div>
         <div className="mb-3">
           <input onChange={changeHandler} className="form-control" value={userSignUp.password} type="password" name="password" placeholder='password' />
         </div>

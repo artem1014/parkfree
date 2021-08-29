@@ -6,7 +6,7 @@ import { signInStart } from "../../../redux/actions/user.ac"
 
 const SignIn = () => {
   const [userSignIn, setUserSignIn] = useState({
-    login: '',
+    email: '',
     password: ''
   })
 
@@ -36,7 +36,7 @@ const SignIn = () => {
         <form onSubmit={submitHandler} className="d-flex flex-column align-items-center bg-light text-dark p-3 border rounded-3">
           <legend className="text-center mb-4">User Sign In</legend>
           <div className="mb-3">
-            <input onChange={changeHandler} value={userSignIn.login} className="form-control" type="text" name="login" placeholder='login' />
+            <input onChange={changeHandler} value={userSignIn.email} className="form-control" type="text" name="email" placeholder='email' />
           </div>
 
           <div className="mb-3">

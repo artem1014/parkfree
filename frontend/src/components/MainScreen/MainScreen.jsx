@@ -1,5 +1,5 @@
-// import Login from "../Login/Login";
- import SignIn from "../Forms/SignIn";
+import React from "react";
+//import Login from "../Login/Login";
 import style from "./MainScreen.module.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 // import ShowProducts from "../ShowProducts/ShowProducts";
 
 export default function MainScreen() {
-  const userRedux = useSelector((state) => state.user);
-  const user = localStorage.getItem("user");
+  const user = useSelector((state) => state.user);
+  // const user = localStorage.getItem("user"); // т.к. у нас есть д.б. нам уже не нужен локал сторэдж
   const [modalShow, setModalShow] = useState(false);
 
   const toggle = () => {
@@ -36,22 +36,20 @@ export default function MainScreen() {
           canvas.style.display = 'none';
         }`
     );
-  }, []);
+  }, [user]);
   return (
     <>
       {user ? (
         <div className={style.main_screen_wrapper}>
-          {/* <ProductCarusel /> */}
-          {/* <ShowProducts /> */}
+          {/* <Здесь будет личный кабинет юзера /> */}
         </div>
       ) : (
         <div className={style.main_screen_wrapper2}>
           <div className={style.greeting_area}>
             <div className={style.greeting_words}>
               <h4>Welcome to </h4>
-              {/* <h2></h2> */}
               <h3>Park Free</h3>
-              {/* {modalShow && <SignIn toggle={toggle} />} */}
+              {/* {modalShow && <Login toggle={toggle} />} */}
               <button
                 onClick={() => {
                   // toggle();
@@ -63,7 +61,7 @@ export default function MainScreen() {
               <p>In order to use our application, please register.</p>
             </div>
           </div>
-          
+
           <div className={style.tags_area}>
             <canvas width="700" height="700" id="myCanvas">
               <ul>

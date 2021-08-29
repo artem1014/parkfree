@@ -8,8 +8,8 @@ function Login() {
         <FormGroup>
           <Label for="exampleEmail">Email</Label>
           <Input
-            type="email"
-            name="email"
+            type="text"
+            name="login"
             id="exampleEmail"
             placeholder="your email..."
           />
