@@ -1,31 +1,30 @@
-import React from "react";
-import { Button } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
+import '../../../src/App.css'
+import Map from "../YandexMap/Map";
+import React from 'react'
 
-function Main() {
+const Main = () => {
+
+  // //подключение Я.карт
+  // ymaps.ready(init);
+
+  // function init() {
+  //   const map = new ymaps.Map('map', {
+  //     center: [55.751570808531376,37.6188314338379],
+  //     zoom: 11
+  //   })
+  // }
+
   return (
-    <>
-      {/* <Button variant="outlined" color="primary">
-        Hello World
-      </Button>
-
-      <Button
-        onClick={() => {
-          alert("clicked");
-        }}
-      >
-        Click me
-      </Button>
-      
-      <Container maxWidth="80%">
-        <Typography
-          component="div"
-          style={{ backgroundColor: "#cfe8fc", height: "100vh" }}
-        />
-      </Container> */}
-    </>
-  );
+    // <YMaps>
+    <div className='block-wrapper'>
+      <h2>Отметьте на карте бесплатные слоты в центре Москвы</h2>
+      <div>
+        <Map />
+        {/* <Map width={'100vw'} height={'80vh'} defaultState={{ center: [55.751570808531376, 37.6188314338379], zoom: 11 }} /> */}
+      </div>
+    </div>
+    // </YMaps>
+  )
 }
 
-export default Main;
+export default React.memo(Main)

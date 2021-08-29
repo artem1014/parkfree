@@ -1,16 +1,16 @@
-
-import Login from "../Login/Login";
+// import Login from "../Login/Login";
+ import SignIn from "../Forms/SignIn";
 import style from "./MainScreen.module.css";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
+// import ProductCarusel from "../ProductCarousel/ProductCarusel";
+// import ShowProducts from "../ShowProducts/ShowProducts";
 
 export default function MainScreen() {
   const userRedux = useSelector((state) => state.user);
-  // console.log('hey yo');
   const user = localStorage.getItem("user");
-  // console.log('user is ');
   const [modalShow, setModalShow] = useState(false);
+
   const toggle = () => {
     setModalShow(!modalShow);
   };
@@ -51,7 +51,7 @@ export default function MainScreen() {
               <h4>Welcome to </h4>
               {/* <h2></h2> */}
               <h3>Park Free</h3>
-              {modalShow && <Login toggle={toggle} />}
+              {/* {modalShow && <SignIn toggle={toggle} />} */}
               <button
                 onClick={() => {
                   // toggle();
@@ -63,6 +63,7 @@ export default function MainScreen() {
               <p>In order to use our application, please register.</p>
             </div>
           </div>
+          
           <div className={style.tags_area}>
             <canvas width="700" height="700" id="myCanvas">
               <ul>

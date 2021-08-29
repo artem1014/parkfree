@@ -1,5 +1,6 @@
 import { DELETE_USER, SET_USER } from "../types/userTypes"
 // import axios from 'axios'
+import { REGISTRATION_USER, SIGN_IN_USER, SIGN_OUT_USER } from "../../urls/url"
 
 // вызывает логику юзера
 export const setUser = (user) => ({
@@ -12,12 +13,12 @@ export const deleteUser = () => ({
 })
 
 export const signUpStart = (payload, history) => async (dispatch) => { //регистрация
-  const response = await fetch('http://localhost:3006/signup', {
+  const response = await fetch(REGISTRATION_USER, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
     },
-    credentials: 'include',// most important in this lecture
+    credentials: 'include',
     body: JSON.stringify(payload) //отправляем на бэк все данные введенные в форму
   })
   if (response.status === 200) {
@@ -29,8 +30,8 @@ export const signUpStart = (payload, history) => async (dispatch) => { //рег�
   }
 }
 
-export const signInStart = (payload, history, from) => async (dispatch) => { // вход // setState can be here
-  const response = await fetch('http://localhost:3006/signin', { // вот тут я захардкодил путь, чтобы было понятнее
+export const signInStart = (payload, history, from) => async (dispatch) => { // вход // может еще принимать функцию getState*Alya
+  const response = await fetch(SIGN_IN_USER, { // вот тут я захардкодил путь, чтобы было понятнее
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -48,7 +49,7 @@ export const signInStart = (payload, history, from) => async (dispatch) => { // 
 }
 
 export const signOutStart = () => async (dispatch) => { //выход
-  const response = await fetch('http://localhost:3006/signout', {
+  const response = await fetch(SIGN_OUT_USER, {
     credentials: 'include'
   })
   if (response.status === 200) {
