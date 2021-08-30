@@ -26,7 +26,7 @@ export default function Notification({ open, notification }) {
         </div>
         {notification.length ? (
           notification.map((el) => (
-            <div>
+            <div key={el.id}>
               <li className={style.together}>
                 {el.name}
                 <img
