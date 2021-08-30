@@ -33,7 +33,7 @@ export default function Notification({ open, notification }) {
                   onClick={() => dispatch(deleteNotificationStart(el.id))}
                   id={el.id}
                   className={style.cross}
-                  src="./images/cross-sign.svg"
+                  src="/images/cross-sign.svg"
                   alt="#"
                 />
               </li>

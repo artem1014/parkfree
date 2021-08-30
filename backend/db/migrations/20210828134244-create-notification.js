@@ -18,24 +18,23 @@ module.exports = {
         defaultValue: false,
       },
       userID: {
-        allowNull: false,
         type: Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id",
+          references: {
+            model: "Users",
+            key: "id",
+          },
+          onUpdate: "CASCADE",
+          onDelete: "CASCADE",
         },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-    });
+        createdAt: {
+          allowNull: false,
+          type: Sequelize.DATE,
+        },
+        updatedAt: {
+          allowNull: false,
+          type: Sequelize.DATE,
+        },
+      });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("Notifications");

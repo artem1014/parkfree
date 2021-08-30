@@ -3,12 +3,14 @@ import {
   DELETE_ALL_NOTIFICATION,
   DELETE_NOTIFICATION,
   GET_ALL_NOTIFICATIONS,
+  GET_NOTIFICATIONS_VALUE,
   RESET_NOTIFICATION,
 } from "../types/notificationTypes";
 import {
   DELETE_ALL_NOTIFICATIONS_DB,
   DELETE_NOTIFICATION_DB,
   GET_ALL_NOTIFICATIONS_DB,
+  GET_NOTIFICATIONS_VALUE_DB,
   UDDATE_STATUS_NOTIFICATIONS,
 } from "../../urls/url";
 import axios from "axios";
@@ -22,14 +24,21 @@ export const getAllNotificationsStart =
   ({ userID }) =>
   async (dispatch) => {
     axios.post(GET_ALL_NOTIFICATIONS_DB, { userID }).then((res) => {
-      console.log(res.data);
       dispatch(getAllNotifications(res.data));
+    });
+    axios.post(GET_NOTIFICATIONS_VALUE_DB, { userID }).then((res) => {
+      dispatch(getNotificationsValue(res.data));
     });
   };
 
 export const getAllNotifications = (notifications) => ({
   type: GET_ALL_NOTIFICATIONS,
   payload: notifications,
+});
+
+export const getNotificationsValue = (value) => ({
+  type: GET_NOTIFICATIONS_VALUE,
+  payload: value,
 });
 
 export const deleteNotificationStart = (id) => async (dispatch) => {

@@ -26,4 +26,12 @@ router.post("/status", async (req, res) => {
   await Notification.update({ viewed: true }, { where: { userID } });
 });
 
+router.post("/value", async (req, res) => {
+  const { userID } = req.body;
+  const notifications = await Notification.findAll({
+    where: { userID, viewed: false },
+  });
+  res.json(notifications.length);
+});
+
 module.exports = router;

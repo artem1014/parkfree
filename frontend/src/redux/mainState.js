@@ -1,5 +1,6 @@
 const InitState = {
   user: null,
+  marks: [],
   notifications: { notification: [], notificationValue: null },
 };
 

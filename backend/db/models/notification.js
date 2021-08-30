@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: false,
       },
       userID: {
-        allowNull: false,
         type: DataTypes.INTEGER,
       },
     },

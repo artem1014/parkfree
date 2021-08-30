@@ -28,13 +28,13 @@ const Nav = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className=" navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
+
         <div className="container-fluid d-flex">
-          <Link className="navbar-brand" to="/">
-            Home
-          </Link>
+          <Link className="navbar-brand" to="/">Home</Link>
           <div className="collapse navbar-collapse" id="navbarNav">
+
             <ul className="navbar-nav">
               {user ? (
                 <>
@@ -77,15 +77,26 @@ const Nav = () => {
                       Map
                     </NavLink>
                   </li>
+
                   <li className="nav-item">
                     <NavLink
-                      to="/test"
+                      to="/account"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Account
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      to="/images"
                       className="nav-link"
                       activeClassName="active"
                     >
                       Images
                     </NavLink>
                   </li>
+                  
                 </>
               )}
 
@@ -106,7 +117,8 @@ const Nav = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav
+//export default withStyles(styles)(ClassNames);
