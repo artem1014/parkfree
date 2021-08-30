@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import Badge from "@material-ui/core/Badge";
 import Notification from "../Notification";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllNotificationsStart } from "../../redux/actions/notificationAC";
-import { withStyles } from '@material-ui/core/styles';
 import {
   getAllNotificationsStart,
   updateStatusNotificationsStart,
