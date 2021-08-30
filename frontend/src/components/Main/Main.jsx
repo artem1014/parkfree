@@ -17,11 +17,8 @@ const Main = () => {
   return (
     // <YMaps>
     <div className='block-wrapper'>
-      <h2>Отметьте на карте бесплатные слоты в центре Москвы</h2>
-      <div>
-        <Map />
-        {/* <Map width={'100vw'} height={'80vh'} defaultState={{ center: [55.751570808531376, 37.6188314338379], zoom: 11 }} /> */}
-      </div>
+      <Map />
+      {/* <Map width={'100vw'} height={'80vh'} defaultState={{ center: [55.751570808531376, 37.6188314338379], zoom: 11 }} /> */}
     </div>
     // </YMaps>
   )

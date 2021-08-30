@@ -19,32 +19,32 @@ export const addMark = (newMark) => {
 
 export const acceptMarkAct = (id) => async (dispatch) => {
   try {
-    await axios.post('http://localhost:3005/accept', { id })
-    dispatch(acceptMark(id))
+    const payload = (await axios.post('http://localhost:3005/accept', { id })).data
+    dispatch(acceptMark(payload))
   } catch (e) {
     console.log('error')
   }
 }
 
-export const acceptMark = (id) => {
+export const acceptMark = (payload) => {
   return {
     type: ACCEPT_MARK,
-    payload: id
+    payload
   }
 }
 
 export const declineMarkAct = (id) => async (dispatch) => {
   try {
-    await axios.post('http://localhost:3005/decline', { id })
-    dispatch(declineMark(id))
+    const payload = (await axios.post('http://localhost:3005/decline', { id })).data
+    dispatch(declineMark(payload))
   } catch (e) {
     console.log('error')
   }
 }
 
-export const declineMark = (id) => {
+export const declineMark = (payload) => {
   return {
     type: DECLINE_MARK,
-    payload: id
+    payload
   }
 }

@@ -1,11 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { acceptMarkAct, declineMarkAct } from "../../redux/actions/markActions";
 
 const Mark = ({ adress, id, longitude, latitude}) => {
 
 const coords = [latitude, longitude]
-  const plInfo = {coords, adress}
+
+  const plInfo = {coords, adress, id}
 
   const dispatch = useDispatch();
 
@@ -14,6 +15,8 @@ const coords = [latitude, longitude]
   const acceptHandler = () => {
     dispatch(acceptMarkAct(id))
   }
+
+  const marks = useSelector(state => console.log(state.marks))
 
   const onMapHandler = () => {
     history.push({

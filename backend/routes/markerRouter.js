@@ -14,6 +14,11 @@ router.get("/marker", async (req, res) => {
   res.json({markers, count: count[0][0].count });
 });
 
+router.get('/allAccepted', async (req, res) => {
+  const allMarkers = await Marker.findAll({where: {isAccepted: true}})
+  res.json(allMarkers);
+})
+
 router.post("/marker", async (req, res) => {
   console.log("=============", req.body);
   const { longitude, latitude, address, comment, pics, parkingPlaces } =
@@ -37,30 +42,32 @@ router.post("/marker", async (req, res) => {
   res.json(newMarker);
 });
 
-router.post("/accept", (req, res) => {
+router.post("/accept", async (req, res) => {
   if (req.body) {
     const { id } = req.body;
-    DB.todos.map((el) => {
-      if (el.id === id) {
-        el.isAccepted = !el.isAccepted;
-        el.isChecked = true;
-        return el;
-      } else return el;
-    });
-    res.sendStatus(200);
+    const oneMarker = await Marker.findOne({where: {id}})
+    await Marker.update({isAccepted: !oneMarker.isAccepted, isChecked: true}, {where: {id}})
+    const allMarkers = await Marker.findAll({})
+    // console.log(allMarkers)
+    // allMarkers.map(async (el) => {
+    //   if (el.id === id) {
+    //     el.isAccepted = !el.isAccepted;
+    //     el.isChecked = true;
+    //     await Marker.update({where: {id}})
+    //     return el;
+    //   } else return el;
+    // });
+    res.json(allMarkers);
   }
 });
 
-router.post("/decline", (req, res) => {
+router.post("/decline", async (req, res) => {
   if (req.body) {
     const { id } = req.body;
-    DB.todos.map((el) => {
-      if (el.id === id) {
-        el.isChecked = true;
-        return el;
-      } else return el;
-    });
-    res.sendStatus(200);
+    const oneMarker = await Marker.findOne({where: {id}})
+    await Marker.update({isChecked: true}, {where: {id}})
+    const allMarkers = await Marker.findAll({})
+    res.json(allMarkers)
   }
 });
 
