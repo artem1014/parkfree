@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Router } = require("express");
 const { Marker } = require("../db/models");
 const { Image } = require("../db/models");
 const { Notification } = require("../db/models");
@@ -6,6 +7,14 @@ const { Notification } = require("../db/models");
 // router.post("/", (req, res) => {
 //   console.log('=====', req.body);
 // });
+
+router.post('/marker', async (req, res) => {
+  console.log('=============', req.body)
+  const {longitude, latitude, address, comment, pics, parkingPlaces} = req.body
+  const newMarker = {longitude, latitude, address, comment, pics, parkingPlaces}
+  await Marker.create({longitude, latitude, address, comment, pics, parkingPlaces})
+  res.json(newMarker)
+})
 
 router.post('/accept', (req, res) => {
   if (req.body) {
@@ -37,7 +46,7 @@ router.post('/decline', (req, res) => {
 })
 
 router.post("/", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   // const {
   //   id,
   //   address,
