@@ -1,11 +1,11 @@
 const InitState = {
   user: null,
-  notification: [],
-}
+  notifications: { notification: [], notificationValue: null },
+};
 
 const getInitState = () => {
-  const stateFromLS = JSON.parse(window.localStorage.getItem('user'))
-  return stateFromLS || InitState
-}
+  const stateFromLS = JSON.parse(window.localStorage.getItem("user"));
+  return stateFromLS || InitState;
+};
 
-export default getInitState
+export default getInitState;

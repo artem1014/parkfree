@@ -5,19 +5,27 @@ import { useEffect, useState } from "react";
 import Badge from "@material-ui/core/Badge";
 import Notification from "../Notification";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllNotificationsStart } from "../../redux/actions/notificationAC";
+import {
+  getAllNotificationsStart,
+  updateStatusNotificationsStart,
+} from "../../redux/actions/notificationAC";
 
 const Nav = () => {
   const user = useSelector((state) => state.user);
-  const notifications = useSelector((state) => state.notification)
+  const { notification, notificationValue } = useSelector((state) => state.notifications);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  console.log(notifications);
 
   useEffect(() => {
     // Задать userID
     dispatch(getAllNotificationsStart({ userID: 1 }));
   }, []);
+
+  const updateStatus = () => {
+    // Задать userID
+    dispatch(updateStatusNotificationsStart({ userID: 1 }));
+    setIsOpen(!isOpen);
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -82,16 +90,16 @@ const Nav = () => {
               )}
 
               <li>
-                <IconButton onClick={() => setIsOpen(!isOpen)}>
+                <IconButton onClick={updateStatus}>
                   <Badge
-                    badgeContent={notifications.length}
+                    badgeContent={notificationValue}
                     color="secondary"
                     className="nav-item"
                   >
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
-                <Notification open={isOpen} notifications={notifications} />
+                <Notification open={isOpen} notification={notification} />
               </li>
             </ul>
           </div>

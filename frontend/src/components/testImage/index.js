@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { addNotification } from "../../redux/actions/notificationAC";
 import { useDropzone } from "react-dropzone";
 import { SEND_FORMS } from "../../urls/url";
+import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 import style from "./style.module.css";
 import axios from "axios";
 
 function TestImage() {
+  const dispatch = useDispatch();
   const [files, setFiles] = useState([]);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -47,7 +50,7 @@ function TestImage() {
         url: SEND_FORMS,
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
-      });
+      }).then((res) => dispatch(addNotification(res.data)));
     }
   };
 
