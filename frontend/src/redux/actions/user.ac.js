@@ -2,7 +2,7 @@ import { DELETE_USER, SET_USER } from "../types/userTypes"
 import { REGISTRATION_USER, SIGNIN_USER, SIGNOUT_USER, CHECK_USER } from "../../urls/url"
 
 // вызывает логику юзера
-export const setUser = (user) => ({
+export const setUser = (user) => ({ // 2!
   type: SET_USER,
   payload: user
 })
@@ -22,7 +22,7 @@ export const signUpStart = (payload, history) => async (dispatch) => { //рег�
   })
   if (response.status === 200) {
     const user = await response.json()
-    // console.log('JUST SIgNed UP', user);
+    // console.log('JUST Signed UP', user);
     dispatch(setUser(user))
     history.replace('/'); //если успешно, переходим сюда
   } else {
@@ -30,18 +30,18 @@ export const signUpStart = (payload, history) => async (dispatch) => { //рег�
   }
 }
 
-export const signInStart = (payload, history, from) => async (dispatch) => { // вход // setState can be here
+export const signInStart = (payload, history, from) => async (dispatch) => { // вход // setState can be here 
   const response = await fetch(SIGNIN_USER, { // вот тут я захардкодил путь, чтобы было понятнее
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify(payload) //отправляем данные из формы
+    body: JSON.stringify(payload) //отправляем данные из формы на бэк
   })
   if (response.status === 200) {
     const user = await response.json()
-    console.log('SIGNEDIN USER', user);
+    //console.log('SIGNEDIN USER>>>', user);
     dispatch(setUser(user))
     history.replace(from); //если вошли удачно, то перекидываем на страницу с инфой о пользователе
   } else {

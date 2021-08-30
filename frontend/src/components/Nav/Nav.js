@@ -6,13 +6,14 @@ import Badge from "@material-ui/core/Badge";
 import Notification from "../Notification";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllNotificationsStart } from "../../redux/actions/notificationAC";
+import { withStyles } from '@material-ui/core/styles';
 
 const Nav = () => {
   const user = useSelector((state) => state.user);
   const notifications = useSelector((state) => state.notification)
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  console.log(notifications);
+  console.log("notifications from Nav", notifications);
 
   useEffect(() => {
     // Задать userID
@@ -102,3 +103,4 @@ const Nav = () => {
 }
 
 export default Nav
+//export default withStyles(styles)(ClassNames);

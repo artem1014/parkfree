@@ -22,7 +22,7 @@ const SignIn = () => {
   const dispatch = useDispatch()
 
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault() //  чтобы при нажатии кнопки не происходила перерендера страницы
     let payload = Object.entries(userSignIn).filter((el) => el[1] ? el[1].trim() : el[1])
     if (payload.length) {
       payload = Object.fromEntries(payload)

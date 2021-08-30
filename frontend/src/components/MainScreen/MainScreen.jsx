@@ -3,17 +3,21 @@ import React from "react";
 import style from "./MainScreen.module.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
+
+import SignUp from "../Forms/SignUp/SignUp";
 // import ProductCarusel from "../ProductCarousel/ProductCarusel";
 // import ShowProducts from "../ShowProducts/ShowProducts";
 
-export default function MainScreen() {
+export default function MainScreen({ submitHandler }) {
   const user = useSelector((state) => state.user);
   // const user = localStorage.getItem("user"); // т.к. у нас есть д.б. нам уже не нужен локал сторэдж
-  const [modalShow, setModalShow] = useState(false);
 
-  const toggle = () => {
-    setModalShow(!modalShow);
-  };
+  //const [modalShow, setModalShow] = useState(false);
+
+  // const toggle = () => {
+  //   setModalShow(!modalShow);
+  // };
 
   useEffect(() => {
     eval(
@@ -41,7 +45,7 @@ export default function MainScreen() {
     <>
       {user ? (
         <div className={style.main_screen_wrapper}>
-          {/* <Здесь будет личный кабинет юзера /> */}
+          {/* <Здесь будет вызываться личный кабинет юзера /> */}
         </div>
       ) : (
         <div className={style.main_screen_wrapper2}>
@@ -49,15 +53,10 @@ export default function MainScreen() {
             <div className={style.greeting_words}>
               <h4>Welcome to </h4>
               <h3>Park Free</h3>
-              {/* {modalShow && <Login toggle={toggle} />} */}
-              <button
-                onClick={() => {
-                  // toggle();
-                }}
-                className={style.button_register}
-              >
-                Sign Up
-              </button>
+              <NavLink to="/auth/signup">
+                {/* кнопка с первой станицы ведет на регистрацию */}
+                <button className={style.button_register}>Sign Up</button>
+              </NavLink>
               <p>In order to use our application, please register.</p>
             </div>
           </div>
