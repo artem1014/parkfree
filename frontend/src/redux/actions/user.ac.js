@@ -1,9 +1,8 @@
 import { DELETE_USER, SET_USER } from "../types/userTypes"
-// import axios from 'axios'
-import { REGISTRATION_USER } from "../../urls/url"
+import { REGISTRATION_USER, SIGNIN_USER, SIGNOUT_USER, CHECK_USER } from "../../urls/url"
 
 // вызывает логику юзера
-export const setUser = (user) => ({
+export const setUser = (user) => ({ // 2!
   type: SET_USER,
   payload: user
 })
@@ -18,11 +17,12 @@ export const signUpStart = (payload, history) => async (dispatch) => { //рег�
     headers: {
       'Content-Type': 'application/json'
     },
-    credentials: 'include',
+    credentials: 'include',// настройка для Cors
     body: JSON.stringify(payload) //отправляем на бэк все данные введенные в форму
   })
   if (response.status === 200) {
     const user = await response.json()
+    // console.log('JUST Signed UP', user);
     dispatch(setUser(user))
     history.replace('/'); //если успешно, переходим сюда
   } else {
@@ -30,17 +30,18 @@ export const signUpStart = (payload, history) => async (dispatch) => { //рег�
   }
 }
 
-export const signInStart = (payload, history, from) => async (dispatch) => { // вход
-  const response = await fetch('http://localhost:3005/signin', { // вот тут я захардкодил путь, чтобы было понятнее
+export const signInStart = (payload, history, from) => async (dispatch) => { // вход // setState can be here 
+  const response = await fetch(SIGNIN_USER, { // вот тут я захардкодил путь, чтобы было понятнее
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify(payload) //отправляем данные из формы
+    body: JSON.stringify(payload) //отправляем данные из формы на бэк
   })
   if (response.status === 200) {
     const user = await response.json()
+    //console.log('SIGNEDIN USER>>>', user);
     dispatch(setUser(user))
     history.replace(from); //если вошли удачно, то перекидываем на страницу с инфой о пользователе
   } else {
@@ -49,7 +50,7 @@ export const signInStart = (payload, history, from) => async (dispatch) => { // 
 }
 
 export const signOutStart = () => async (dispatch) => { //выход
-  const response = await fetch('http://localhost:3005/signout', {
+  const response = await fetch(SIGNOUT_USER, {
     credentials: 'include'
   })
   if (response.status === 200) {
@@ -58,7 +59,7 @@ export const signOutStart = () => async (dispatch) => { //выход
 }
 
 export const checkAuthStart = () => async (dispatch) => { //особая семеновская магия с проверкой аутентификации
-  const response = await fetch('http://localhost:3005/check', {
+  const response = await fetch(CHECK_USER, {
     credentials: 'include'
   })
   if (response.status === 200) {

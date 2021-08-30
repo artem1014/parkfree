@@ -30,7 +30,9 @@
 /* подпись под кнопкой */
 .greeting_words {
   width: 100%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  margin-right: 30%;
+  margin-top: 50%;
 }
 .greeting_words h3 {
   font-size: 50px;
@@ -46,7 +48,8 @@
 .greeting_words p {
   width: 50%;
   margin: 7px auto;
-  color: rgb(181, 181, 181);
+  /* color: rgb(181, 181, 181); */
+  color: rgb(134, 140, 179);
 }
 
 .tags_area {
@@ -65,6 +68,7 @@
 .button_register {
   background-color: #8a97e4;
   border: 2px solid rgb(134, 140, 179);
+  /* border: 2px solid rgb(134, 140, 179); */
   border-radius: 30px;
   padding: 10px 40px;
   color: whitesmoke;

@@ -1,26 +1,40 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
-import Modal from "../Modal/index";
-import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import IconButton from "@material-ui/core/IconButton";
+import { Link, NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Badge from "@material-ui/core/Badge";
+import Notification from "../Notification";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllNotificationsStart,
+  updateStatusNotificationsStart,
+} from "../../redux/actions/notificationAC";
 
 const Nav = () => {
   const user = useSelector((state) => state.user);
+  const { notification, notificationValue } = useSelector((state) => state.notifications);
   const [isOpen, setIsOpen] = useState(false);
-  // const onClose = () => {
-  //   if (isOpen) setIsOpen(false);
-  // };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Задать userID
+    dispatch(getAllNotificationsStart({ userID: 1 }));
+  }, []);
+
+  const updateStatus = () => {
+    // Задать userID
+    dispatch(updateStatusNotificationsStart({ userID: 1 }));
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className=" navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
+
         <div className="container-fluid d-flex">
-          <Link className="navbar-brand" to="/">
-            Home
-          </Link>
+          <Link className="navbar-brand" to="/">Home</Link>
           <div className="collapse navbar-collapse" id="navbarNav">
+
             <ul className="navbar-nav">
               {user ? (
                 <>
@@ -73,28 +87,38 @@ const Nav = () => {
                       Account
                     </NavLink>
                   </li>
+                  <li className="nav-item">
+                    <NavLink
+                      to="/images"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Images
+                    </NavLink>
+                  </li>
                   
                 </>
               )}
 
               <li>
-                <IconButton onClick={() => setIsOpen(!isOpen)}>
+                <IconButton onClick={updateStatus}>
                   <Badge
-                    badgeContent={100}
+                    badgeContent={notificationValue}
                     color="secondary"
                     className="nav-item"
                   >
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
-                <Modal open={isOpen}></Modal>
+                <Notification open={isOpen} notification={notification} />
               </li>
             </ul>
           </div>
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav
+//export default withStyles(styles)(ClassNames);

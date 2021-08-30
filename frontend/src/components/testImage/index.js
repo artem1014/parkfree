@@ -1,79 +1,78 @@
-import React from "react";
-import axios from "axios";
+import { addNotification } from "../../redux/actions/notificationAC";
+import { useDropzone } from "react-dropzone";
 import { SEND_FORMS } from "../../urls/url";
+import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 import style from "./style.module.css";
+import axios from "axios";
 
-const TestImage = () => {
-  const uploadedImage = React.useRef(null);
-  const imageUploader = React.useRef(null);
+function TestImage() {
+  const dispatch = useDispatch();
+  const [files, setFiles] = useState([]);
 
-  const handleImageUpload = (e) => {
-    const [file] = e.target.files;
-    if (file) {
-      const reader = new FileReader();
-      const { current } = uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-        current.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
+      setFiles((prevFiles) => [
+        ...prevFiles,
+        ...acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        ),
+      ]);
+    },
+  });
+
+  const images = files.map((file) => (
+    <div key={file.name}>
+      <div>
+        <img src={file.preview} style={{ width: "200px" }} alt="preview" />
+      </div>
+    </div>
+  ));
 
   const sendForm = (e) => {
     e.preventDefault();
     // Получаем все значения из формы по атрибуту name
-    const { file } = Object.fromEntries(new FormData(e.target));
-    // console.log(file);
-    const image = file.name;
-
+    const { text } = Object.fromEntries(new FormData(e.target));
     // Эта штука собирает все значения через append и через axios отправляет на back
-    let bodyFormData = new FormData();
-    bodyFormData.append("file", file);
-    bodyFormData.append("image", image);
+    if (text.trim()) {
+      let bodyFormData = new FormData();
+      files.map((el) => {
+        bodyFormData.append("files", el);
+        bodyFormData.append("images", el.name);
+      });
+      bodyFormData.append("text", text);
 
-    axios({
-      method: "post",
-      url: SEND_FORMS,
-      data: bodyFormData,
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+      axios({
+        method: "post",
+        url: SEND_FORMS,
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" },
+      }).then((res) => dispatch(addNotification(res.data)));
+    }
   };
 
   return (
-    <form onSubmit={sendForm}>
-      <div className={style.div}>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          ref={imageUploader}
-          style={{
-            display: "none",
-          }}
-          name="file"
-        />
-        <div
-          style={{
-            height: "100px",
-            width: "100px",
-            border: "1px dashed black",
-          }}
-          onClick={() => imageUploader.current.click()}
-        >
+    <form className={style.formForMarker} onSubmit={sendForm}>
+      <h1>Send marker</h1>
+      <input placeholder="text" name="text" />
+      <div>
+        <div className={style.formAddImage} {...getRootProps()}>
           <img
-            ref={uploadedImage}
-            style={{
-              width: "100px",
-              // height: "100px",
-              // position: "absolute"
-            }}
+            className={style.add}
+            src="/images/—Pngtree—plus vector icon_4236965.png"
+            alt=""
           />
+          <input {...getInputProps()} />
+          {/* <p>Add minimum 1 photo</p> */}
         </div>
+        <div>{images}</div>
       </div>
       <button>Send</button>
     </form>
   );
-};
+}
 
 export default TestImage;
