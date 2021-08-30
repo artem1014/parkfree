@@ -8,7 +8,7 @@ const FileStore = require("session-file-store")(session);
 const app = express();
 const userRouter = require("./routes/userRouter");
 const markerRouter = require("./routes/markerRouter");
-const notificationRouter = require("./routes/notificationRouter");
+// const notificationRouter = require("./routes/notificationRouter");
 
 // Картинки юзера кладет в /public/uploads
 const storageConfig = multer.diskStorage({
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors({ origin: true, credentials: true }));
 // Middleware отлавливает картинки юзера
-app.use(multer({ storage: storageConfig }).any("files"));
+app.use(multer({ storage: storageConfig }).any("file"));
 
 app.use(
   session({
@@ -40,9 +40,10 @@ app.use(
     },
   })
 ),
-  app.use("/user", userRouter);
-app.use("/marker", markerRouter);
-app.use("/notification", notificationRouter);
+  
+app.use("/", userRouter);
+app.use("/", markerRouter);
+// app.use("/notification", notificationRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Server has been started on PORT:", process.env.PORT);

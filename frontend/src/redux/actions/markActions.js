@@ -1,9 +1,9 @@
 import axios from 'axios'
 const { ADD_MARK_TO_ACCEPT, ACCEPT_MARK, DECLINE_MARK } = require("../types/markTypes")
 
-export const addMarkAct = (coords, adress) => async (dispatch) => {
+export const addMarkAct = (longitude, latitude, adress, comment, pics, parkingPlaces, file) => async (dispatch) => {
   try {
-    const addedItem = await axios.post('http://localhost:3005/marker', { coords, adress })
+    const addedItem = await axios.post('http://localhost:3005/marker', { longitude, latitude, adress, comment, pics, parkingPlaces, file })
     dispatch(addMark(addedItem.data))
   } catch (e) {
     console.log('error')

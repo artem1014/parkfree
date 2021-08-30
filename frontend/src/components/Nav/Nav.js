@@ -16,16 +16,16 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // Задать userID
-    dispatch(getAllNotificationsStart({ userID: 1 }));
-  }, []);
+  // useEffect(() => {
+  //   // Задать userID
+  //   dispatch(getAllNotificationsStart({ userID: 1 }));
+  // }, []);
 
-  const updateStatus = () => {
-    // Задать userID
-    dispatch(updateStatusNotificationsStart({ userID: 1 }));
-    setIsOpen(!isOpen);
-  };
+  // const updateStatus = () => {
+  //   // Задать userID
+  //   dispatch(updateStatusNotificationsStart({ userID: 1 }));
+  //   setIsOpen(!isOpen);
+  // };
 
   return (
     <nav className=" navbar navbar-expand-lg navbar-light bg-light">
@@ -100,7 +100,7 @@ const Nav = () => {
                 </>
               )}
 
-              <li>
+              {/* <li>
                 <IconButton onClick={updateStatus}>
                   <Badge
                     badgeContent={notificationValue}
@@ -111,7 +111,7 @@ const Nav = () => {
                   </Badge>
                 </IconButton>
                 <Notification open={isOpen} notification={notification} />
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

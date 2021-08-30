@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.TEXT,
       },
-      width: {
+      latitude: {
         allowNull: false,
         type: DataTypes.STRING,
       },
@@ -24,6 +24,20 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
       parkingPlaces: {
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      isAccepted: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        defaultValue: false
+      },
+      isChecked: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        defaultValue: false
+      },
+      pics: {
         allowNull: false,
         type: DataTypes.STRING,
       },

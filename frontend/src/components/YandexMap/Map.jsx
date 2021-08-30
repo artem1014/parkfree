@@ -5,6 +5,8 @@ import React from 'react'
 import { SEND_FORMS } from "../../urls/url";
 import style from '../testImage/style.module.css'
 import { useLocation } from "react-router";
+import { useDispatch } from "react-redux";
+import { addMarkAct } from "../../redux/actions/markActions";
 
 
 export default function Map({ }) {
@@ -19,14 +21,19 @@ export default function Map({ }) {
 
   const location = useLocation(); //принимаем координаты новой метки из личного кабинета, чтобы высветить ее на карте
   console.log(location.state);
+  const dispatch = useDispatch();
 
-  const placemarkHandler = () => {
+  const placemarkHandler = (e) => {
+    e.preventDefault();
     // тут будет dispatch данных из локального стейта 
     // window.ymaps.ready()
+
+
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
     console.log(placemarkCoords)
     console.log(adress)
+    // dispatch(addMarkAct(placemarkCoords[0], placemarkCoords[1], adress, e.target.comment.value, ))
     window.ymaps.ready(init);
     // madeMap.geoObjects.remove(myPlacemark)
   }
@@ -58,10 +65,11 @@ export default function Map({ }) {
     // Эта штука собирает все значения через append и через axios отправляет на back
     let bodyFormData = new FormData();
     bodyFormData.append("file", file);
-    bodyFormData.append("image", image);
-    bodyFormData.append("width", placemarkCoords[0])
+    bodyFormData.append("pics", image);
+    bodyFormData.append("latitude", placemarkCoords[0])
     bodyFormData.append("longitude", placemarkCoords[1])
     bodyFormData.append("address", adress)
+    bodyFormData.append("comment", e.target.comment.value)
     bodyFormData.append("parkingPlaces", 5)
 
     axios.post(SEND_FORMS, bodyFormData);
@@ -91,7 +99,7 @@ export default function Map({ }) {
     setAdress('')
     setAllPlacemarks([])
 
-    if(location.state) { //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
+    if (location.state) { //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
       let adminNewPlacemark = new window.ymaps.Placemark(location.state.coords);
       adminNewPlacemark.properties.set({
         iconCaption: location.state.adress,
@@ -218,6 +226,10 @@ export default function Map({ }) {
                 display: "none",
               }}
               name="file"
+            />
+            <input type="text"
+              placholder='comment'
+              name="comment"
             />
             <div
               style={{
