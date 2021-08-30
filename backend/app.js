@@ -40,8 +40,7 @@ app.use(
     },
   })
 ),
-  
-app.use("/", userRouter);
+  app.use("/", userRouter);
 app.use("/", markerRouter);
 // app.use("/notification", notificationRouter);
 

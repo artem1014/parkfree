@@ -28,11 +28,13 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       isAccepted: {
-        type: Sequelize.TEXT,
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
       isChecked: {
-        type: Sequelize.TEXT,
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
       parkingPlaces: {

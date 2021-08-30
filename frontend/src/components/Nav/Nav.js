@@ -12,29 +12,31 @@ import {
 
 const Nav = () => {
   const user = useSelector((state) => state.user);
-  const { notification, notificationValue } = useSelector((state) => state.notifications);
+  const { notification, notificationValue } = useSelector(
+    (state) => state.notifications
+  );
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   // Задать userID
-  //   dispatch(getAllNotificationsStart({ userID: 1 }));
-  // }, []);
+  useEffect(() => {
+    // Задать userID
+    dispatch(getAllNotificationsStart({ userID: 1 }));
+  }, []);
 
-  // const updateStatus = () => {
-  //   // Задать userID
-  //   dispatch(updateStatusNotificationsStart({ userID: 1 }));
-  //   setIsOpen(!isOpen);
-  // };
+  const updateStatus = () => {
+    // Задать userID
+    dispatch(updateStatusNotificationsStart({ userID: 1 }));
+    setIsOpen(!isOpen);
+  };
 
   return (
     <nav className=" navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-
         <div className="container-fluid d-flex">
-          <Link className="navbar-brand" to="/">Home</Link>
+          <Link className="navbar-brand" to="/">
+            Home
+          </Link>
           <div className="collapse navbar-collapse" id="navbarNav">
-
             <ul className="navbar-nav">
               {user ? (
                 <>
@@ -96,11 +98,10 @@ const Nav = () => {
                       Images
                     </NavLink>
                   </li>
-                  
                 </>
               )}
 
-              {/* <li>
+              <li>
                 <IconButton onClick={updateStatus}>
                   <Badge
                     badgeContent={notificationValue}
@@ -111,14 +112,14 @@ const Nav = () => {
                   </Badge>
                 </IconButton>
                 <Notification open={isOpen} notification={notification} />
-              </li> */}
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;
 //export default withStyles(styles)(ClassNames);

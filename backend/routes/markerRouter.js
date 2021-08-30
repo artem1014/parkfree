@@ -2,48 +2,67 @@ const router = require("express").Router();
 const { Router } = require("express");
 const { Marker } = require("../db/models");
 const { Image } = require("../db/models");
-const { Notification } = require("../db/models");
+const { Notification, sequelize } = require("../db/models");
 
 // router.post("/", (req, res) => {
 //   console.log('=====', req.body);
 // });
 
-router.post('/marker', async (req, res) => {
-  console.log('=============', req.body)
-  const {longitude, latitude, address, comment, pics, parkingPlaces} = req.body
-  const newMarker = {longitude, latitude, address, comment, pics, parkingPlaces}
-  await Marker.create({longitude, latitude, address, comment, pics, parkingPlaces})
-  res.json(newMarker)
-})
+router.get("/marker", async (req, res) => {
+  const count = await sequelize.query('SELECT count(*) FROM "Markers"');
+  const markers = await Marker.findAll({ where: { isChecked: false } });
+  res.json({markers, count: count[0][0].count });
+});
 
-router.post('/accept', (req, res) => {
+router.post("/marker", async (req, res) => {
+  console.log("=============", req.body);
+  const { longitude, latitude, address, comment, pics, parkingPlaces } =
+    req.body;
+  const newMarker = {
+    longitude,
+    latitude,
+    address,
+    comment,
+    pics,
+    parkingPlaces,
+  };
+  await Marker.create({
+    longitude,
+    latitude,
+    address,
+    comment,
+    pics,
+    parkingPlaces,
+  });
+  res.json(newMarker);
+});
+
+router.post("/accept", (req, res) => {
   if (req.body) {
     const { id } = req.body;
-    DB.todos.map(el => {
+    DB.todos.map((el) => {
       if (el.id === id) {
-        el.isAccepted = !el.isAccepted
-        el.isChecked = true
-        return el
-      } else
-        return el
-    })
-    res.sendStatus(200)
+        el.isAccepted = !el.isAccepted;
+        el.isChecked = true;
+        return el;
+      } else return el;
+    });
+    res.sendStatus(200);
   }
 });
 
-router.post('/decline', (req, res) => {
+router.post("/decline", (req, res) => {
   if (req.body) {
     const { id } = req.body;
-    DB.todos.map(el => {
+    DB.todos.map((el) => {
       if (el.id === id) {
-        el.isChecked = true
-        return el
-      } else
-        return el
-    })
-    res.sendStatus(200)
+        el.isChecked = true;
+        return el;
+      } else return el;
+    });
+    res.sendStatus(200);
   }
-})
+});
 
 router.post("/", async (req, res) => {
   // console.log(req.body);
@@ -72,13 +91,13 @@ router.post("/", async (req, res) => {
   //     images.map((el) => Image.create({ name: el, markerID: id }));
   //   }
   // } catch (error) {}
-  const {id, name} = await Notification.create({
+  const { id, name } = await Notification.create({
     name: "Ожидайте подтверждения модератора",
     userID: 1,
   });
 
   // Отправляет данные на сервер
-  res.json({id, name});
+  res.json({ id, name });
 });
 
 module.exports = router;

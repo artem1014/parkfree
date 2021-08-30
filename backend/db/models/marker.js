@@ -29,13 +29,13 @@ module.exports = (sequelize, DataTypes) => {
       },
       isAccepted: {
         allowNull: false,
-        type: DataTypes.STRING,
-        defaultValue: false
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
       isChecked: {
         allowNull: false,
-        type: DataTypes.STRING,
-        defaultValue: false
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
       pics: {
         allowNull: false,
