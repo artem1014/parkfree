@@ -8,10 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
       address: {
         allowNull: false,
         type: Sequelize.TEXT,
@@ -30,10 +26,6 @@ module.exports = {
       parkingPlaces: {
         allowNull: false,
         type: Sequelize.STRING,
-      },
-      image: {
-        allowNull: false,
-        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,

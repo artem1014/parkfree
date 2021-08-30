@@ -1,21 +1,23 @@
-// import ProductCarusel from "../ProductCarousel/ProductCarusel";
-// import ShowProducts from "../ShowProducts/ShowProducts";
-import Login from "../Login/Login";
+import React from "react";
+//import Login from "../Login/Login";
 import style from "./MainScreen.module.css";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
+
+import SignUp from "../Forms/SignUp/SignUp";
 // import ProductCarusel from "../ProductCarousel/ProductCarusel";
 // import ShowProducts from "../ShowProducts/ShowProducts";
 
-export default function MainScreen() {
-  const userRedux = useSelector((state) => state.user);
-  // console.log('hey yo');
-  const user = localStorage.getItem("user");
-  // console.log('user is ');
-  const [modalShow, setModalShow] = useState(false);
-  const toggle = () => {
-    setModalShow(!modalShow);
-  };
+export default function MainScreen({ submitHandler }) {
+  const user = useSelector((state) => state.user);
+  // const user = localStorage.getItem("user"); // т.к. у нас есть д.б. нам уже не нужен локал сторэдж
+
+  //const [modalShow, setModalShow] = useState(false);
+
+  // const toggle = () => {
+  //   setModalShow(!modalShow);
+  // };
 
   useEffect(() => {
     eval(
@@ -38,34 +40,27 @@ export default function MainScreen() {
           canvas.style.display = 'none';
         }`
     );
-  }, []);
+  }, [user]);
   return (
     <>
       {user ? (
         <div className={style.main_screen_wrapper}>
-          <p>{user}</p>
-          {/* <ProductCarusel /> */}
-          {/* <ShowProducts /> */}
+          {/* <Здесь будет вызываться личный кабинет юзера /> */}
         </div>
       ) : (
         <div className={style.main_screen_wrapper2}>
           <div className={style.greeting_area}>
             <div className={style.greeting_words}>
               <h4>Welcome to </h4>
-              {/* <h2></h2> */}
               <h3>Park Free</h3>
-              {modalShow && <Login toggle={toggle} />}
-              <button
-                onClick={() => {
-                  // toggle();
-                }}
-                className={style.button_register}
-              >
-                Sign Up
-              </button>
+              <NavLink to="/auth/signup">
+                {/* кнопка с первой станицы ведет на регистрацию */}
+                <button className={style.button_register}>Sign Up</button>
+              </NavLink>
               <p>In order to use our application, please register.</p>
             </div>
           </div>
+
           <div className={style.tags_area}>
             <canvas width="700" height="700" id="myCanvas">
               <ul>
