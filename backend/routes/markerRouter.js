@@ -63,13 +63,13 @@ router.post("/", async (req, res) => {
   //     images.map((el) => Image.create({ name: el, markerID: id }));
   //   }
   // } catch (error) {}
-  await Notification.create({
+  const {id, name} = await Notification.create({
     name: "Ожидайте подтверждения модератора",
     userID: 1,
   });
 
   // Отправляет данные на сервер
-  res.json("");
+  res.json({id, name});
 });
 
 module.exports = router;
