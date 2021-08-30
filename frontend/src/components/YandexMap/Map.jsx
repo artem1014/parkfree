@@ -4,6 +4,7 @@ import axios from 'axios'
 import React from 'react'
 import { SEND_FORMS } from "../../urls/url";
 import style from '../testImage/style.module.css'
+import { useLocation } from "react-router";
 
 
 export default function Map({ }) {
@@ -12,7 +13,12 @@ export default function Map({ }) {
   const arr = [{ coords: [55.729324292067254, 37.65196207958984], adress: 'Россия, Москва, Шлюзовая набережная' }, { coords: [55.76069738614288, 37.64234904248048], adress: 'Россия, Москва, Чистопрудный бульвар, 12к7А' }]
   const [placemarkCoords, setPlacemarkCoords] = useState([])
   const [adress, setAdress] = useState('')
+  const [province, setProvince] = useState('')
   const [allPlacemarks, setAllPlacemarks] = useState([])
+
+
+  const location = useLocation(); //принимаем координаты новой метки из личного кабинета, чтобы высветить ее на карте
+  console.log(location.state);
 
   const placemarkHandler = () => {
     // тут будет dispatch данных из локального стейта 
@@ -62,8 +68,8 @@ export default function Map({ }) {
 
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
-    console.log(placemarkCoords)
-    console.log(adress)
+    console.log('placemarkCoords', placemarkCoords)
+    console.log('adress', adress)
     window.ymaps.ready(init);
   };
 
@@ -85,6 +91,15 @@ export default function Map({ }) {
     setAdress('')
     setAllPlacemarks([])
 
+    if(location.state) { //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
+      let adminNewPlacemark = new window.ymaps.Placemark(location.state.coords);
+      adminNewPlacemark.properties.set({
+        iconCaption: location.state.adress,
+        balloonContent: location.state.adress,
+      });
+      myMap.geoObjects.add(adminNewPlacemark);
+    }
+
     for (let i = 0; i < arr.length; ++i) {
       let pl = new window.ymaps.Placemark(arr[i].coords);
       pl.properties.set({
@@ -92,6 +107,8 @@ export default function Map({ }) {
         balloonContent: arr[i].adress,
       });
       myMap.geoObjects.add(pl);
+
+
       // console.log(arr[i]);
     }
 
@@ -139,7 +156,13 @@ export default function Map({ }) {
 
       window.ymaps.geocode(coords).then(function (res) {
         var firstGeoObject = res.geoObjects.get(0);//адрес метки
+
+        var x = res.geoObjects.get(0)
+
+
         setAdress(firstGeoObject.getAddressLine())
+
+        // console.log(myGeocoder)
 
         myPlacemark.properties.set({
           // Формируем строку с данными об объекте.
@@ -148,6 +171,7 @@ export default function Map({ }) {
             firstGeoObject.getLocalities().length
               ? firstGeoObject.getLocalities()
               : firstGeoObject.getAdministrativeAreas(),
+
             // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
             firstGeoObject.getThoroughfare() || firstGeoObject.getPremise(),
           ]
@@ -156,6 +180,7 @@ export default function Map({ }) {
           // В качестве контента балуна задаем строку с адресом объекта.
           balloonContent: firstGeoObject.getAddressLine(),
         });
+        // console.log('=======sa=f=saf=af=', firstGeoObject.getLocalities())
 
         // setAdress(myPlacemark.properties._data.balloonContent
       });
@@ -163,6 +188,15 @@ export default function Map({ }) {
   }
 
   // console.log(init())
+
+
+
+  // console.log('adddees',adress)
+  // if(adress){
+  //   const prov = axios(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=3ec234ec-c933-467f-b4bb-4f217f11b450&geocode=${adress}`)
+  //     .then(res => setProvince(res.data.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[1].name))
+  //   }
+  //   console.log('province',province)
 
   useEffect(() => {
     window.ymaps.ready(init);

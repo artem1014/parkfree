@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { checkAuthStart } from "./redux/actions/user.ac";
 import MainScreen from "./components/MainScreen/MainScreen";
 import Main from "./components/Main/Main";
+import Account from "./components/Account/Account";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route exact path="/map">
             <Main />
+          </Route>
+          <Route exact path="/account">
+            <Account />
           </Route>
         </Switch>
       </Router>
