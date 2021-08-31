@@ -50,10 +50,10 @@ function App() {
               {/* <PrivateRoute path="/user/notesList">
             <Main />
           </PrivateRoute>  */}
-              <Route exact path="/auth/signup">
+              <Route exact path="/signup">
                 <SignUp />
               </Route>
-              <Route exact path="/auth/signin">
+              <Route exact path="/signin">
                 <SignIn />
               </Route>
               <Route exact path="/auth/signout">

@@ -55,11 +55,11 @@ export default function MainScreen({ submitHandler }) {
             <div className={style.greeting_words}>
               <h4>Welcome to</h4>
               <h3>Park Free</h3>
-              <NavLink to="/auth/signin">
+              <NavLink to="/signin">
                 {/* кнопка с первой станицы ведет на регистрацию */}
                 <button className={style.button_register_top}>Sign  In</button>
               </NavLink>
-              <NavLink to="/auth/signup">
+              <NavLink to="/signup">
                 {/* кнопка с первой станицы ведет на регистрацию */}
                 <button className={style.button_register}>Sign Up</button>
               </NavLink>

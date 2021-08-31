@@ -52,9 +52,9 @@ export const signInStart = (payload, history, from) => async (dispatch) => {
     const user = await response.json();
     // window.localStorage.setItem("user", JSON.stringify(user.login));
     dispatch(setUser(user));
-    history.replace(from); //если вошли удачно, то перекидываем на страницу с инфой о пользователе
+    return history.replace(from); //если вошли удачно, то перекидываем на страницу с инфой о пользователе
   } else {
-    history.replace("/signin"); //иначе остаемся на странице входа
+    return history.replace('/') //иначе остаемся на странице входа
   }
 };
 
