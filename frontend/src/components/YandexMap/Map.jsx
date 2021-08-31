@@ -132,10 +132,11 @@ export default function Map({ }) {
     if (allMarks.length) {
       for (let i = 0; i < allMarks.length; i++) {
         console.log('dsfsgsgsdgdsgdsgsdg')
+        console.log(allMarks[i].pics)
         let pl = new window.ymaps.Placemark([allMarks[i].latitude, allMarks[i].longitude]);
         pl.properties.set({
-          iconCaption: allMarks[i].adress,
-          balloonContent: allMarks[i].adress,
+          iconCaption: allMarks[i].address,
+          balloonContent: `<div> ${allMarks[i].address} <br/> <img className='stat' src=http://localhost:3005/uploads/${allMarks[i].pics} /> </div>`
         });
         myMap.geoObjects.add(pl);
       }

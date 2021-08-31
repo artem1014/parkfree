@@ -8,6 +8,7 @@ const FileStore = require("session-file-store")(session);
 const app = express();
 const userRouter = require("./routes/userRouter");
 const markerRouter = require("./routes/markerRouter");
+const path = require('path')
 // const notificationRouter = require("./routes/notificationRouter");
 
 // Картинки юзера кладет в /public/uploads
@@ -22,6 +23,7 @@ app.set("cookieName", "Elbrus"); // поменяйте имя куки
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(express.static(path.join(process.env.PWD, 'public')));
 app.use(cors({ origin: true, credentials: true }));
 // Middleware отлавливает картинки юзера
 app.use(multer({ storage: storageConfig }).any("file"));
@@ -39,8 +41,9 @@ app.use(
       maxAge: 1e3 * 86400, // COOKIE'S LIFETIME — 1 DAY
     },
   })
-),
-  app.use("/", userRouter);
+)
+
+app.use("/", userRouter);
 app.use("/", markerRouter);
 // app.use("/notification", notificationRouter);
 
