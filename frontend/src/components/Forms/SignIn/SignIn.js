@@ -6,6 +6,9 @@ import { signInStart } from "../../../redux/actions/user.ac"
 // import signin from "./signin.module.css";
 import style from "./signin.module.css";
 import Nav from "../../Nav/Nav";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const SignIn = () => {
   const [userSignIn, setUserSignIn] = useState({
@@ -18,21 +21,29 @@ const SignIn = () => {
 
   let { from } = location.state || { from: { pathname: "/" } };
 
+
+
   const changeHandler = (e) => {
     setUserSignIn((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const dispatch = useDispatch();
 
+  const notify = () => toast('🦄 Wow so easy!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });;
+
   const submitHandler = (e) => {
     e.preventDefault(); //  чтобы при нажатии кнопки не происходила перерендера страницы
-    let payload = Object.entries(userSignIn).filter((el) =>
-      el[1] ? el[1].trim() : el[1]
-    );
-    if (payload.length) {
-      payload = Object.fromEntries(payload);
-      dispatch(signInStart(payload, history, from));
-    }
+    let payload = Object.fromEntries(new FormData(e.target))
+    console.log(payload)
+    dispatch(signInStart(payload, history, from));
   };
 
   return (

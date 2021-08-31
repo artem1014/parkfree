@@ -26,7 +26,12 @@ router.get("/signout", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ where: { email }, raw: true });
+  console.log('singin', req.body)
+  const user = await User.findOne({ where: { email }});
+  console.log('=====user', user)
+  console.log('=====password', password)
+  console.log('=====user.password', user.password)
+  console.log(password === user.password)
   if (user) {
     if (password === user.password) {
       req.session.user = user;
@@ -35,8 +40,8 @@ router.post("/signin", async (req, res) => {
         .status(200)
         .json({ login: user.login, email: user.email, id: user.id });
     }
+    return res.status(400);
   }
-  res.json(false);
 });
 
 router.get("/check", checkAuth, async (req, res) => {

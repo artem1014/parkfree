@@ -31,6 +31,9 @@ const Nav = () => {
     setIsOpen(!isOpen);
   };
 
+
+  console.log('=============>', user)
+
   return (
 
     <nav className=" navbar navbar-expand-lg navbar-light bg-light">
@@ -106,7 +109,7 @@ const Nav = () => {
                 <>
                   <li className="nav-item">
                     <NavLink
-                      to="/auth/signup"
+                      to="/signup"
                       className="nav-link"
                       activeClassName="active"
                     >
@@ -115,7 +118,7 @@ const Nav = () => {
                   </li>
                   <li className="nav-item">
                     <NavLink
-                      to="/auth/signin"
+                      to="/signin"
                       className="nav-link"
                       activeClassName="active"
                     >
