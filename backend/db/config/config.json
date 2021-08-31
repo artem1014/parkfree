@@ -7,9 +7,9 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "admin",
-    "password": "123",
-    "database": "final",
+    "username": "parktree",
+    "password": "parktree",
+    "database": "parktree",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
