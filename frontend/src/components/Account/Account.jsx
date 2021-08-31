@@ -32,7 +32,7 @@ const Account = () => {
     latitude={el.latitude} adress={el.address} key={el.id}/>)}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Account
+export default Account;

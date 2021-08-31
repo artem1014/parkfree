@@ -8,6 +8,7 @@ import { useLocation } from "react-router";
 import { ReactReduxContext, useDispatch } from "react-redux";
 import { acceptMarkAct, addMarkAct } from "../../redux/actions/markActions";
 import SendingForm from "../SendingForm/SendingForm";
+import { addNotification } from "../../redux/actions/notificationAC";
 
 
 export default function Map({ }) {

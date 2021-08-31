@@ -1,3 +1,8 @@
+.back {
+  background-color: rgb(158, 163, 185);
+  /* height: 100vh; */
+}
+
 .myNav {
   background-color: rgb(139, 174, 206);
   border-radius: 3px;
@@ -6,6 +11,17 @@
   color: aliceblue;
   margin-top: 5%;
   height: 100px;
+  border: 2px solid rgb(173, 33, 33);
+}
+
+.logo {
+  /* width: 10%;
+  height: 100%; */
+  /* border-radius: 30px; */
+  /* border: 2px solid rgb(57, 63, 110); */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }
 
 .modal {
@@ -80,4 +96,8 @@
 .footer {
   width: 100%;
   text-align: center;
+}
+
+.img {
+  width: 100px;
 }
