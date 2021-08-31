@@ -13,8 +13,6 @@ router.get('/allAccepted', async (req, res) => {
 })
 
 router.post("/marker", async (req, res) => {
-  console.log('HEYEHYEHEYE', req.session)
-  console.log("=============", req.body);
   const { longitude, latitude, address, comment, pics, parkingPlaces } =
     req.body;
   const newMarker = {
@@ -37,7 +35,6 @@ router.post("/marker", async (req, res) => {
     userID: 1,
     name: "Ожидайте подтверждения модератора",
   });
-  console.log(name, userID);
   res.json({ newMarker, name, userID });
 });
 
