@@ -82,13 +82,15 @@ export default function Map({ }) {
     let bodyFormData = new FormData();
     bodyFormData.append("file", file);
     bodyFormData.append("pics", image);
-    bodyFormData.append("latitude", placemarkCoords[0])
-    bodyFormData.append("longitude", placemarkCoords[1])
-    bodyFormData.append("address", adress)
-    bodyFormData.append("comment", e.target.comment.value)
-    bodyFormData.append("parkingPlaces", 5)
+    bodyFormData.append("latitude", placemarkCoords[0]);
+    bodyFormData.append("longitude", placemarkCoords[1]);
+    bodyFormData.append("address", adress);
+    bodyFormData.append("comment", e.target.comment.value);
+    bodyFormData.append("parkingPlaces", 5);
 
-    axios.post(SEND_FORMS, bodyFormData);
+    axios.post(SEND_FORMS, bodyFormData).then((res) => {
+      dispatch(addNotification({ userID: res.data.userID, name: res.data.name }));
+    })
 
     const div = document.querySelector('.ymap');
     div.innerHTML = '';

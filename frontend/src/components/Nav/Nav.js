@@ -19,9 +19,8 @@ const Nav = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Задать userID
-    dispatch(getAllNotificationsStart({ userID: 1 }));
-  }, []);
+    dispatch(getAllNotificationsStart());
+  }, [user]);
 
   const updateStatus = () => {
     // Задать userID
@@ -49,6 +48,45 @@ const Nav = () => {
                       Sign out
                     </NavLink>
                   </li>
+                  <li className="nav-item">
+                    <NavLink
+                      to="/account"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Account
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      to="/images"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Images
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      to="/map"
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      Map
+                    </NavLink>
+                  </li>
+                  <li>
+                    <IconButton onClick={updateStatus}>
+                      <Badge
+                        badgeContent={notificationValue}
+                        color="secondary"
+                        className="nav-item"
+                      >
+                        <NotificationsIcon />
+                      </Badge>
+                    </IconButton>
+                    <Notification open={isOpen} notification={notification} />
+                  </li>
                 </>
               ) : (
                 <>
@@ -70,49 +108,8 @@ const Nav = () => {
                       Sign In
                     </NavLink>
                   </li>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/map"
-                      className="nav-link"
-                      activeClassName="active"
-                    >
-                      Map
-                    </NavLink>
-                  </li>
-
-                  <li className="nav-item">
-                    <NavLink
-                      to="/account"
-                      className="nav-link"
-                      activeClassName="active"
-                    >
-                      Account
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/images"
-                      className="nav-link"
-                      activeClassName="active"
-                    >
-                      Images
-                    </NavLink>
-                  </li>
                 </>
               )}
-
-              <li>
-                <IconButton onClick={updateStatus}>
-                  <Badge
-                    badgeContent={notificationValue}
-                    color="secondary"
-                    className="nav-item"
-                  >
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
-                <Notification open={isOpen} notification={notification} />
-              </li>
             </ul>
           </div>
         </div>

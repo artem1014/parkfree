@@ -1,17 +1,10 @@
 const router = require("express").Router();
-const { Router } = require("express");
-const { Marker } = require("../db/models");
-const { Image } = require("../db/models");
-const { Notification, sequelize } = require("../db/models");
-
-// router.post("/", (req, res) => {
-//   console.log('=====', req.body);
-// });
+const { Notification, Marker, Image, sequelize } = require("../db/models");
 
 router.get("/marker", async (req, res) => {
   const count = await sequelize.query('SELECT count(*) FROM "Markers"');
   const markers = await Marker.findAll({ where: { isChecked: false } });
-  res.json({markers, count: count[0][0].count });
+  res.json({ markers, count: count[0][0].count });
 });
 
 router.get('/allAccepted', async (req, res) => {
@@ -20,6 +13,7 @@ router.get('/allAccepted', async (req, res) => {
 })
 
 router.post("/marker", async (req, res) => {
+  console.log('HEYEHYEHEYE', req.session)
   console.log("=============", req.body);
   const { longitude, latitude, address, comment, pics, parkingPlaces } =
     req.body;
@@ -39,7 +33,12 @@ router.post("/marker", async (req, res) => {
     pics,
     parkingPlaces,
   });
-  res.json(newMarker);
+  const { name, userID } = await Notification.create({
+    userID: 1,
+    name: "Ожидайте подтверждения модератора",
+  });
+  console.log(name, userID);
+  res.json({ newMarker, name, userID });
 });
 
 router.post("/accept", async (req, res) => {

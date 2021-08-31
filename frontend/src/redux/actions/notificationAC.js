@@ -20,16 +20,14 @@ export const addNotification = (data) => ({
   payload: data,
 });
 
-export const getAllNotificationsStart =
-  ({ userID }) =>
-  async (dispatch) => {
-    axios.post(GET_ALL_NOTIFICATIONS_DB, { userID }).then((res) => {
-      dispatch(getAllNotifications(res.data));
-    });
-    axios.post(GET_NOTIFICATIONS_VALUE_DB, { userID }).then((res) => {
-      dispatch(getNotificationsValue(res.data));
-    });
-  };
+export const getAllNotificationsStart = () => async (dispatch) => {
+  axios.get(GET_ALL_NOTIFICATIONS_DB, { withCredentials: true }).then((res) => {
+    dispatch(getAllNotifications(res.data));
+  });
+  axios.post(GET_NOTIFICATIONS_VALUE_DB).then((res) => {
+    dispatch(getNotificationsValue(res.data));
+  });
+};
 
 export const getAllNotifications = (notifications) => ({
   type: GET_ALL_NOTIFICATIONS,
