@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useLocation } from "react-router"
 import { signInStart } from "../../../redux/actions/user.ac"
 // import signin from "./signin.module.css";
@@ -11,17 +11,18 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const SignIn = () => {
+
   const [userSignIn, setUserSignIn] = useState({
     email: "",
     password: "",
   });
 
+  const userSign = useSelector(state => state.user)
+
   let history = useHistory();
   let location = useLocation();
 
   let { from } = location.state || { from: { pathname: "/" } };
-
-
 
   const changeHandler = (e) => {
     setUserSignIn((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -29,7 +30,7 @@ const SignIn = () => {
 
   const dispatch = useDispatch();
 
-  const notify = () => toast('🦄 Wow so easy!', {
+  const notify = () => toast('ВВЕДИ НОРМАЛЬНЫЕ ДАННЫЕ', {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -44,6 +45,9 @@ const SignIn = () => {
     let payload = Object.fromEntries(new FormData(e.target))
     console.log(payload)
     dispatch(signInStart(payload, history, from));
+    if(userSign === null) {
+       notify();
+    }
   };
 
   return (
@@ -67,6 +71,7 @@ const SignIn = () => {
 
               <button className={style.button_register} type="submit" >Sign In</button>
             </form>
+            <ToastContainer />
           </div>
         </div>
       </div>
