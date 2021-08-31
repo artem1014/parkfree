@@ -8,8 +8,4 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(rootReducer, getInitState(), composeWithDevTools(applyMiddleware(thunk)))
 
-store.subscribe(() => {
-  window.localStorage.setItem('marks', JSON.stringify(store.getState()))
-})
-
 export default store

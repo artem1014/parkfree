@@ -5,8 +5,7 @@ const InitState = {
 };
 
 const getInitState = () => {
-  const stateFromLS = JSON.parse(window.localStorage.getItem("user"));
-  return stateFromLS || InitState;
+  return InitState;
 };
 
 export default getInitState;

@@ -7,6 +7,7 @@ import style from '../testImage/style.module.css'
 import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 import { addMarkAct } from "../../redux/actions/markActions";
+import { addNotification } from "../../redux/actions/notificationAC";
 
 
 export default function Map({ }) {
@@ -20,7 +21,6 @@ export default function Map({ }) {
 
 
   const location = useLocation(); //принимаем координаты новой метки из личного кабинета, чтобы высветить ее на карте
-  console.log(location.state);
   const dispatch = useDispatch();
 
   const placemarkHandler = (e) => {
@@ -66,13 +66,15 @@ export default function Map({ }) {
     let bodyFormData = new FormData();
     bodyFormData.append("file", file);
     bodyFormData.append("pics", image);
-    bodyFormData.append("latitude", placemarkCoords[0])
-    bodyFormData.append("longitude", placemarkCoords[1])
-    bodyFormData.append("address", adress)
-    bodyFormData.append("comment", e.target.comment.value)
-    bodyFormData.append("parkingPlaces", 5)
+    bodyFormData.append("latitude", placemarkCoords[0]);
+    bodyFormData.append("longitude", placemarkCoords[1]);
+    bodyFormData.append("address", adress);
+    bodyFormData.append("comment", e.target.comment.value);
+    bodyFormData.append("parkingPlaces", 5);
 
-    axios.post(SEND_FORMS, bodyFormData);
+    axios.post(SEND_FORMS, bodyFormData).then((res) => {
+      dispatch(addNotification({ userID: res.data.userID, name: res.data.name }));
+    })
 
     const div = document.querySelector('.ymap');
     div.innerHTML = '';

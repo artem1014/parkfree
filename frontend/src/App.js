@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-//  import PrivateRoute from './components/PrivateRouter/PrivateRouter';
+import PrivateRoute from "./components/PrivateRouter/PrivateRouter";
 import Nav from "./components/Nav/Nav";
 import SignUp from "./components/Forms/SignUp/SignUp";
 import SignOut from "./components/Forms/SignOut/SignOut";
