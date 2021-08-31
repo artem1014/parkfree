@@ -9,6 +9,7 @@ import { ReactReduxContext, useDispatch } from "react-redux";
 import { acceptMarkAct, addMarkAct } from "../../redux/actions/markActions";
 import SendingForm from "../SendingForm/SendingForm";
 import { addNotification } from "../../redux/actions/notificationAC";
+import Popup from "../Popup/Popup";
 
 
 export default function Map({ }) {
@@ -35,7 +36,11 @@ export default function Map({ }) {
   const [adress, setAdress] = useState('')
   const [province, setProvince] = useState('')
   const [allPlacemarks, setAllPlacemarks] = useState([])
+  const [curImg, setCurImg] = useState(null)
 
+  const handleClosePopup = () => {
+    setCurImg(null)
+  }
 
   const location = useLocation(); //принимаем координаты новой метки из личного кабинета, чтобы высветить ее на карте
   const dispatch = useDispatch();
@@ -139,7 +144,17 @@ export default function Map({ }) {
         let pl = new window.ymaps.Placemark([allMarks[i].latitude, allMarks[i].longitude]);
         pl.properties.set({
           iconCaption: allMarks[i].address,
-          balloonContent: `<div> ${allMarks[i].address} <br/> <img className='stat' src=http://localhost:3005/uploads/${allMarks[i].pics} /> </div>`
+          balloonContent: `
+          <div> 
+          ${allMarks[i].address} 
+          <br/> 
+          <button 
+          onClick={()=> setCurImg(http://localhost:3005/uploads/${allMarks[i].pics})} 
+          type='button' 
+          id='statdiv'> 
+          <img id='stat' src=http://localhost:3005/uploads/${allMarks[i].pics} /> 
+          </button> 
+          </div>`
         });
         myMap.geoObjects.add(pl);
       }
@@ -251,6 +266,7 @@ export default function Map({ }) {
   return (
 
     <div className="block-wrapper__map">
+      {curImg && <Popup img={curImg} close={handleClosePopup} />}
       <div id="map" className='ymap map'>
       </div>
       <div className='shit2'>

@@ -1,6 +1,6 @@
 .form {
   width: 240px;
-  height: 340px;
+  height: auto;
   background: #e6e6e6;
   border-radius: 4px;
   box-shadow: 0 0 40px -10px #000;
@@ -67,4 +67,8 @@ button:hover {
 }
 span {
   margin: 0 5px 0 15px;
+}
+
+.inpimg {
+  max-height: 50px;
 }

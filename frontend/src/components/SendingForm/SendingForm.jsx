@@ -27,7 +27,7 @@ const SendingForm = ({ sendForm, handleImageUpload, imageUploader, uploadedImage
         onClick={() => imageUploader.current.click()}
       > */}
 
-      <img
+      <img className='inpimg'
         ref={uploadedImage}
       />
 
