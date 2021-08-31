@@ -5,24 +5,44 @@ import { useEffect, useState } from "react";
 import Badge from "@material-ui/core/Badge";
 import Notification from "../Notification";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllNotificationsStart } from "../../redux/actions/notificationAC";
-import { withStyles } from '@material-ui/core/styles';
+import {
+  getAllNotificationsStart,
+  updateStatusNotificationsStart,
+} from "../../redux/actions/notificationAC";
+// import logo from '../public/images/Daco_555134.png'
+import style from "./Nav.module.css";
+import logos from './car.svg'
 
 const Nav = () => {
   const user = useSelector((state) => state.user);
-  const notifications = useSelector((state) => state.notification)
+  const { notification, notificationValue } = useSelector((state) => state.notifications);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  console.log("notifications from Nav", notifications);
 
   useEffect(() => {
     // Задать userID
     dispatch(getAllNotificationsStart({ userID: 1 }));
   }, []);
 
+  const updateStatus = () => {
+    // Задать userID
+    dispatch(updateStatusNotificationsStart({ userID: 1 }));
+    setIsOpen(!isOpen);
+  };
+
   return (
+
     <nav className=" navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
+
+        {/* logo */}
+        <div className={style.logo}>
+          <Link to='/'>
+            <img src={'https://www.vhv.rs/dpng/d/55-555134_vector-cars-logo-png-transparent-png.png'} />
+            {/* <img src={logos}/> */}
+          </Link>
+        </div>
+
 
         <div className="container-fluid d-flex">
           <Link className="navbar-brand" to="/">Home</Link>
@@ -70,29 +90,31 @@ const Nav = () => {
                       Map
                     </NavLink>
                   </li>
+
                   <li className="nav-item">
                     <NavLink
-                      to="/test"
+                      to="/account"
                       className="nav-link"
                       activeClassName="active"
                     >
-                      Images
+                      Account
                     </NavLink>
                   </li>
+
                 </>
               )}
 
               <li>
-                <IconButton onClick={() => setIsOpen(!isOpen)}>
+                <IconButton onClick={updateStatus}>
                   <Badge
-                    badgeContent={notifications.length}
+                    badgeContent={notificationValue}
                     color="secondary"
                     className="nav-item"
                   >
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
-                <Notification open={isOpen} notifications={notifications} />
+                <Notification open={isOpen} notification={notification} />
               </li>
             </ul>
           </div>

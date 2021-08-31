@@ -1,1 +1,3 @@
-export const ADD_MARK = 'ADD_MARK'
+export const ADD_MARK_TO_ACCEPT = 'ADD_MARK_TO_ACCEPT'
+export const ACCEPT_MARK = 'ACCEPT_MARK'
+export const DECLINE_MARK = 'DECLINE_MARK'

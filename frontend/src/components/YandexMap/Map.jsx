@@ -1,14 +1,24 @@
 import { useEffect, useState } from "react";
 import './YandexMap.css'
 import axios from 'axios'
+import React from 'react'
+import { SEND_FORMS } from "../../urls/url";
+import style from '../testImage/style.module.css'
+import { useLocation } from "react-router";
 
 
 export default function Map({ }) {
+
   let myPlacemark;
   const arr = [{ coords: [55.729324292067254, 37.65196207958984], adress: 'Россия, Москва, Шлюзовая набережная' }, { coords: [55.76069738614288, 37.64234904248048], adress: 'Россия, Москва, Чистопрудный бульвар, 12к7А' }]
   const [placemarkCoords, setPlacemarkCoords] = useState([])
   const [adress, setAdress] = useState('')
+  const [province, setProvince] = useState('')
   const [allPlacemarks, setAllPlacemarks] = useState([])
+
+
+  const location = useLocation(); //принимаем координаты новой метки из личного кабинета, чтобы высветить ее на карте
+  console.log(location.state);
 
   const placemarkHandler = () => {
     // тут будет dispatch данных из локального стейта 
@@ -20,6 +30,49 @@ export default function Map({ }) {
     window.ymaps.ready(init);
     // madeMap.geoObjects.remove(myPlacemark)
   }
+
+  // для отправки комментов и фоток
+  const uploadedImage = React.useRef(null);
+  const imageUploader = React.useRef(null);
+
+  const handleImageUpload = (e) => {
+    const [file] = e.target.files;
+    if (file) {
+      const reader = new FileReader();
+      const { current } = uploadedImage;
+      current.file = file;
+      reader.onload = (e) => {
+        current.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const sendForm = (e) => {
+    e.preventDefault();
+    // Получаем все значения из формы по атрибуту name
+    const { file } = Object.fromEntries(new FormData(e.target));
+    // console.log(file);
+    const image = file.name;
+
+    // Эта штука собирает все значения через append и через axios отправляет на back
+    let bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+    bodyFormData.append("image", image);
+    bodyFormData.append("width", placemarkCoords[0])
+    bodyFormData.append("longitude", placemarkCoords[1])
+    bodyFormData.append("address", adress)
+    bodyFormData.append("parkingPlaces", 5)
+
+    axios.post(SEND_FORMS, bodyFormData);
+
+    const div = document.querySelector('.ymap');
+    div.innerHTML = '';
+    console.log('placemarkCoords', placemarkCoords)
+    console.log('adress', adress)
+    window.ymaps.ready(init);
+  };
+
 
   const init = () => {
 
@@ -38,6 +91,15 @@ export default function Map({ }) {
     setAdress('')
     setAllPlacemarks([])
 
+    if(location.state) { //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
+      let adminNewPlacemark = new window.ymaps.Placemark(location.state.coords);
+      adminNewPlacemark.properties.set({
+        iconCaption: location.state.adress,
+        balloonContent: location.state.adress,
+      });
+      myMap.geoObjects.add(adminNewPlacemark);
+    }
+
     for (let i = 0; i < arr.length; ++i) {
       let pl = new window.ymaps.Placemark(arr[i].coords);
       pl.properties.set({
@@ -45,6 +107,8 @@ export default function Map({ }) {
         balloonContent: arr[i].adress,
       });
       myMap.geoObjects.add(pl);
+
+
       // console.log(arr[i]);
     }
 
@@ -92,7 +156,13 @@ export default function Map({ }) {
 
       window.ymaps.geocode(coords).then(function (res) {
         var firstGeoObject = res.geoObjects.get(0);//адрес метки
+
+        var x = res.geoObjects.get(0)
+
+
         setAdress(firstGeoObject.getAddressLine())
+
+        // console.log(myGeocoder)
 
         myPlacemark.properties.set({
           // Формируем строку с данными об объекте.
@@ -101,6 +171,7 @@ export default function Map({ }) {
             firstGeoObject.getLocalities().length
               ? firstGeoObject.getLocalities()
               : firstGeoObject.getAdministrativeAreas(),
+
             // Получаем путь до топонима, если метод вернул null, запрашиваем наименование здания.
             firstGeoObject.getThoroughfare() || firstGeoObject.getPremise(),
           ]
@@ -109,6 +180,7 @@ export default function Map({ }) {
           // В качестве контента балуна задаем строку с адресом объекта.
           balloonContent: firstGeoObject.getAddressLine(),
         });
+        // console.log('=======sa=f=saf=af=', firstGeoObject.getLocalities())
 
         // setAdress(myPlacemark.properties._data.balloonContent
       });
@@ -116,6 +188,15 @@ export default function Map({ }) {
   }
 
   // console.log(init())
+
+
+
+  // console.log('adddees',adress)
+  // if(adress){
+  //   const prov = axios(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=3ec234ec-c933-467f-b4bb-4f217f11b450&geocode=${adress}`)
+  //     .then(res => setProvince(res.data.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[1].name))
+  //   }
+  //   console.log('province',province)
 
   useEffect(() => {
     window.ymaps.ready(init);
@@ -125,7 +206,42 @@ export default function Map({ }) {
     <>
       <div id="map" className='ymap'>
       </div>
-      {adress && placemarkCoords && <button onClick={placemarkHandler}> Отправить метку на согласование </button>}
+      {adress && placemarkCoords &&
+        <form onSubmit={sendForm}>
+          <div className={style.div}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              ref={imageUploader}
+              style={{
+                display: "none",
+              }}
+              name="file"
+            />
+            <div
+              style={{
+                height: "100px",
+                width: "100px",
+                border: "1px dashed black",
+              }}
+              onClick={() => imageUploader.current.click()}
+            >
+              <img
+                ref={uploadedImage}
+                style={{
+                  width: "100px",
+                  // height: "100px",
+                  // position: "absolute"
+                }}
+              />
+            </div>
+          </div>
+          <button>Send</button>
+          {/* <button onClick={placemarkHandler}> Отправить метку на согласование </button> */}
+        </form>
+      }
     </>
+
   )
 }

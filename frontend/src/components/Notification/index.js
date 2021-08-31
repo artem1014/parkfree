@@ -8,7 +8,7 @@ import {
   deleteNotificationStart,
 } from "../../redux/actions/notificationAC";
 
-export default function Notification({ open, notifications }) {
+export default function Notification({ open, notification }) {
   const dispatch = useDispatch();
   if (!open) return null;
 
@@ -24,13 +24,13 @@ export default function Notification({ open, notifications }) {
             Стереть
           </h6>
         </div>
-        {notifications.length ? (
-          notifications.map((el) => (
+        {notification.length ? (
+          notification.map((el) => (
             <div>
               <li className={style.together}>
                 {el.name}
                 <img
-                  onClick={(e) => dispatch(deleteNotificationStart(e))}
+                  onClick={() => dispatch(deleteNotificationStart(el.id))}
                   id={el.id}
                   className={style.cross}
                   src="./images/cross-sign.svg"

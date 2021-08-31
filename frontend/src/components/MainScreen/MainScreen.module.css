@@ -2,72 +2,95 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .main_screen_wrapper2 {
   width: 100vw;
-  min-height: 1024px;
-  height: 100%;
+  /* min-height: 1024px; */
+  min-height: 720px;
+  overflow: hidden;
+  /* height: 900%; */
+  height: auto;
   /* display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center; */
+
   display: grid;
-  grid-template-columns: 19fr 5fr;
+  grid-template-columns: 14fr 6fr;
   grid-template-rows: auto;
   grid-template-areas: "tagss greet";
+  position: relative;
 }
+
 /* размер блока с названием  */
 .greeting_area {
-  color: #8a97e4;
+  display: flex;
+  justify-self: center;
+
+  /* color: #8a97e4; */
+  /* слова welcome to  */
+  color: #e9eaf1;
   width: 100%;
   display: flex;
   /* flex-direction: column; */
   /* justify-content: center;
   order: 2; */
   grid-area: greet;
-  justify-self: center;
 }
+
 /* подпись под кнопкой */
 .greeting_words {
   width: 100%;
   /* margin: 0 auto; */
-  margin-right: 30%;
-  margin-top: 50%;
+  padding: 0px;
+  margin-right: 40%;
+  margin-top: 30%;
 }
+
+/* название приложения */
 .greeting_words h3 {
   font-size: 50px;
   font-weight: bold;
   margin: 0;
-  /* color: rgb(128, 124, 124); */
+  padding: 0px 0px 0px 0px;
+  /* обводка букв */
+  color: rgb(42, 42, 44);
   /* color: #9fabec; */
-  color: #8a97e4;
+  /* color: #8a97e4; */
+  color: #eaebec;
   margin-bottom: 40px;
 }
 
 /* подпись под кнопкой */
 .greeting_words p {
-  width: 50%;
-  margin: 7px auto;
+  width: 100%;
+  max-width: 150px;
+  margin: 5px 0px 0px 0px;
   /* color: rgb(181, 181, 181); */
-  color: rgb(134, 140, 179);
+  /* color: rgb(134, 140, 179); */
+  color: #e9eaf1;
+  justify-self: center;
+  /* font-weight: bold; */
 }
 
 .tags_area {
-  width: 50%;
+  width: 52%;
   /* order: 1; */
   grid-area: tagss;
   justify-self: center;
 }
 
 .tags_area canvas {
-  margin-top: 50px;
+  margin-top: 80px;
   width: 100%;
   height: 75vh;
 }
 
-.button_register {
-  background-color: #8a97e4;
-  border: 2px solid rgb(134, 140, 179);
+.button_register_top {
+  /* background-color: #a0a4b8; */
+  background-color: #2c6e8e;
+  border: 2px solid rgb(233, 236, 248);
   /* border: 2px solid rgb(134, 140, 179); */
   border-radius: 30px;
   padding: 10px 40px;
@@ -76,8 +99,21 @@
   margin-top: 100px;
 }
 
+.button_register {
+  /* background-color: #a0a4b8; */
+  background-color: #2c6e8e;
+  border: 2px solid rgb(233, 236, 248);
+  /* border: 2px solid rgb(134, 140, 179); */
+  border-radius: 30px;
+  padding: 10px 40px;
+  color: whitesmoke;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
 .button_register:hover {
-  background-color: rgb(101, 125, 233);
+  /* background-color: #7493b4; */
+  background-color: #1f5f80;
   color: whitesmoke;
   transition: 0.5s;
 }
@@ -90,9 +126,9 @@
   letter-spacing: 5px;
   font-weight: bold;
   /* border: 1px solid white; */
-  padding: 0 10px;
+  padding: 0px;
   margin: 0;
-  border-bottom: 2px solid whitesmoke;
+  /* border-bottom: 2px solid rgb(231, 226, 226); */
   /* border-top: 2px solid whitesmoke; */
   display: inline-block;
   /* dnsjdhjshj */
@@ -101,7 +137,7 @@
   outline: 0;
   /* animation: animate 5s linear infinite; */
 }
-
+/* 
 @keyframes animate {
   0%,
   18%,
@@ -131,4 +167,93 @@
       0 0 40px rgb(101, 125, 233), 0 0 80px #b3d3e2,
       0 0 160px rgb(101, 125, 233);
   }
+} */
+
+
+/* если будет время нанесем эфект пыли на эффект */
+
+.fire {
+  animation: animation 1s ease-in-out infinite alternate;
+  -moz-animation: animation 1s ease-in-out infinite alternate;
+  -webkit-animation: animation 1s ease-in-out infinite alternate;
+  -o-animation: animation 1s ease-in-out infinite alternate;
 }
+
+.burn {
+  animation: animation 0.65s ease-in-out infinite alternate;
+  -moz-animation: animation 0.65s ease-in-out infinite alternate;
+  -webkit-animation: animation 0.65s ease-in-out infinite alternate;
+  -o-animation: animation 0.65s ease-in-out infinite alternate;
+}
+
+@keyframes animation {
+  0% {
+    text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85,
+      -20px -20px 40px #ffae34, 20px -40px 50px #ec760c,
+      -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
+  }
+  100% {
+    text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #fefcc9,
+      -20px -20px 40px #feec85, 22px -42px 60px #ffae34,
+      -22px -58px 50px #ec760c, 0 -82px 80px #cd4606, 10px -90px 80px #973716;
+  }
+}
+
+@-moz-keyframes animation {
+  0% {
+    text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85,
+      -20px -20px 40px #ffae34, 20px -40px 50px #ec760c,
+      -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
+  }
+  100% {
+    text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #fefcc9,
+      -20px -20px 40px #feec85, 22px -42px 60px #ffae34,
+      -22px -58px 50px #ec760c, 0 -82px 80px #cd4606, 10px -90px 80px #973716;
+  }
+}
+
+@-webkit-keyframes animation {
+  0% {
+    text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85,
+      -20px -20px 40px #ffae34, 20px -40px 50px #ec760c,
+      -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
+  }
+  100% {
+    text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #fefcc9,
+      -20px -20px 40px #feec85, 22px -42px 60px #ffae34,
+      -22px -58px 50px #ec760c, 0 -82px 80px #cd4606, 10px -90px 80px #973716;
+  }
+}
+
+@-o-keyframes animation {
+  0% {
+    text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85,
+      -20px -20px 40px #ffae34, 20px -40px 50px #ec760c,
+      -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
+  }
+  100% {
+    text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #fefcc9,
+      -20px -20px 40px #feec85, 22px -42px 60px #ffae34,
+      -22px -58px 50px #ec760c, 0 -82px 80px #cd4606, 10px -90px 80px #973716;
+  }
+}
+
+/* 
+.header {
+  position: relative;
+  width: 90%;
+  height: 9%;
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: 1s all;
+  z-index: 100;
+} */

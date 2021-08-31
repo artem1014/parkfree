@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import markReducer from "./markReducer";
-import notificationReducer from "./notificationReduces";
+import notificationReducer from "./notificationReducer";
 import userReducer from "./userReducer";
 
 const rootReducer = combineReducers({
   marks: markReducer,
   user: userReducer,
-  notification: notificationReducer,
+  notifications: notificationReducer,
 });
 
 export default rootReducer;

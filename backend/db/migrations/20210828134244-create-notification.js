@@ -12,6 +12,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      viewed: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       userID: {
         type: Sequelize.INTEGER,
           // references: {

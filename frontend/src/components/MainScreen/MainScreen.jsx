@@ -5,9 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
-import SignUp from "../Forms/SignUp/SignUp";
-// import ProductCarusel from "../ProductCarousel/ProductCarusel";
-// import ShowProducts from "../ShowProducts/ShowProducts";
+import Account from "../Account/Account";
 
 export default function MainScreen({ submitHandler }) {
   const user = useSelector((state) => state.user);
@@ -25,8 +23,11 @@ export default function MainScreen({ submitHandler }) {
            TagCanvas.Start(
              'myCanvas',
              '',
-             {textColour: 'rgb(101, 125, 233)',
-             outlineColour: '#03bcf4', 
+             {textColour: 'white',
+            //  {textColour: 'rgb(101, 125, 233)',
+             outlineColour: '#03bcf4',
+             fontweight:'bold', 
+             filter: 'contrast(200%)',
              zoom: 1,
              initial: [0.14, 0.08],
              weightMode: "outline",
@@ -46,18 +47,23 @@ export default function MainScreen({ submitHandler }) {
       {user ? (
         <div className={style.main_screen_wrapper}>
           {/* <Здесь будет вызываться личный кабинет юзера /> */}
+          <Account />
         </div>
       ) : (
         <div className={style.main_screen_wrapper2}>
           <div className={style.greeting_area}>
             <div className={style.greeting_words}>
-              <h4>Welcome to </h4>
+              <h4>Welcome to</h4>
               <h3>Park Free</h3>
+              <NavLink to="/auth/signin">
+                {/* кнопка с первой станицы ведет на регистрацию */}
+                <button className={style.button_register_top}>Sign  In</button>
+              </NavLink>
               <NavLink to="/auth/signup">
                 {/* кнопка с первой станицы ведет на регистрацию */}
                 <button className={style.button_register}>Sign Up</button>
               </NavLink>
-              <p>In order to use our application, please register.</p>
+              {/* <p>In order to use our application, please register.</p> */}
             </div>
           </div>
 
