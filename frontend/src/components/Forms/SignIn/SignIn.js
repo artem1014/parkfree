@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 import React from "react";
 import { useDispatch } from "react-redux"
 import { useHistory, useLocation } from "react-router"
@@ -9,9 +9,9 @@ import Nav from "../../Nav/Nav";
 
 const SignIn = () => {
   const [userSignIn, setUserSignIn] = useState({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
 
   let history = useHistory();
   let location = useLocation();
@@ -19,19 +19,21 @@ const SignIn = () => {
   let { from } = location.state || { from: { pathname: "/" } };
 
   const changeHandler = (e) => {
-    setUserSignIn(prev => ({ ...prev, [e.target.name]: e.target.value }))
-  }
+    setUserSignIn((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const submitHandler = (e) => {
-    e.preventDefault() //  чтобы при нажатии кнопки не происходила перерендера страницы
-    let payload = Object.entries(userSignIn).filter((el) => el[1] ? el[1].trim() : el[1])
+    e.preventDefault(); //  чтобы при нажатии кнопки не происходила перерендера страницы
+    let payload = Object.entries(userSignIn).filter((el) =>
+      el[1] ? el[1].trim() : el[1]
+    );
     if (payload.length) {
-      payload = Object.fromEntries(payload)
-      dispatch(signInStart(payload, history, from))
+      payload = Object.fromEntries(payload);
+      dispatch(signInStart(payload, history, from));
     }
-  }
+  };
 
   return (
     (

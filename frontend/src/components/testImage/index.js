@@ -62,7 +62,8 @@ function TestImage() {
         <div className={style.formAddImage} {...getRootProps()}>
           <img
             className={style.add}
-            src="./images/—Pngtree—plus vector icon_4236965.png"
+            src="/images/—Pngtree—plus vector icon_4236965.png"
+            alt=""
           />
           <input {...getInputProps()} />
           {/* <p>Add minimum 1 photo</p> */}

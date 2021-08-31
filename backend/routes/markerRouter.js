@@ -1,43 +1,77 @@
 const router = require("express").Router();
-const { Marker } = require("../db/models");
-const { Image } = require("../db/models");
-const { Notification } = require("../db/models");
+const { Notification, Marker, Image, sequelize } = require("../db/models");
 
-// router.post("/", (req, res) => {
-//   console.log('=====', req.body);
-// });
+router.get("/marker", async (req, res) => {
+  const count = await sequelize.query('SELECT count(*) FROM "Markers"');
+  const markers = await Marker.findAll({ where: { isChecked: false } });
+  res.json({ markers, count: count[0][0].count });
+});
 
-router.post('/accept', (req, res) => {
+router.get('/allAccepted', async (req, res) => {
+  const allMarkers = await Marker.findAll({where: {isAccepted: true}})
+  res.json(allMarkers);
+})
+
+router.post("/marker", async (req, res) => {
+  console.log('HEYEHYEHEYE', req.session)
+  console.log("=============", req.body);
+  const { longitude, latitude, address, comment, pics, parkingPlaces } =
+    req.body;
+  const newMarker = {
+    longitude,
+    latitude,
+    address,
+    comment,
+    pics,
+    parkingPlaces,
+  };
+  await Marker.create({
+    longitude,
+    latitude,
+    address,
+    comment,
+    pics,
+    parkingPlaces,
+  });
+  const { name, userID } = await Notification.create({
+    userID: 1,
+    name: "Ожидайте подтверждения модератора",
+  });
+  console.log(name, userID);
+  res.json({ newMarker, name, userID });
+});
+
+router.post("/accept", async (req, res) => {
   if (req.body) {
     const { id } = req.body;
-    DB.todos.map(el => {
-      if (el.id === id) {
-        el.isAccepted = !el.isAccepted
-        el.isChecked = true
-        return el
-      } else
-        return el
-    })
-    res.sendStatus(200)
+    const oneMarker = await Marker.findOne({where: {id}})
+    await Marker.update({isAccepted: !oneMarker.isAccepted, isChecked: true}, {where: {id}})
+    const allMarkers = await Marker.findAll({})
+    // console.log(allMarkers)
+    // allMarkers.map(async (el) => {
+    //   if (el.id === id) {
+    //     el.isAccepted = !el.isAccepted;
+    //     el.isChecked = true;
+    //     await Marker.update({where: {id}})
+    //     return el;
+    //   } else return el;
+    // });
+    res.json(allMarkers);
   }
 });
 
-router.post('/decline', (req, res) => {
+router.post("/decline", async (req, res) => {
   if (req.body) {
     const { id } = req.body;
-    DB.todos.map(el => {
-      if (el.id === id) {
-        el.isChecked = true
-        return el
-      } else
-        return el
-    })
-    res.sendStatus(200)
+    const oneMarker = await Marker.findOne({where: {id}})
+    await Marker.update({isChecked: true}, {where: {id}})
+    const allMarkers = await Marker.findAll({})
+    res.json(allMarkers)
   }
-})
+});
 
 router.post("/", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   // const {
   //   id,
   //   address,
@@ -63,13 +97,13 @@ router.post("/", async (req, res) => {
   //     images.map((el) => Image.create({ name: el, markerID: id }));
   //   }
   // } catch (error) {}
-  const {id, name} = await Notification.create({
+  const { id, name } = await Notification.create({
     name: "Ожидайте подтверждения модератора",
     userID: 1,
   });
 
   // Отправляет данные на сервер
-  res.json({id, name});
+  res.json({ id, name });
 });
 
 module.exports = router;

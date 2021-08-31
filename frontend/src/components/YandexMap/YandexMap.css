@@ -1,4 +1,10 @@
 .ymap {
   width: 60vw;
   height: 80vh;
+  box-shadow: 0 0 40px -10px #000;
+  border-radius: 8px;
 }
+
+.stat { height:auto;  width:100px; transition: 0.5s ease; }
+.stat:hover { width:300px; }
+

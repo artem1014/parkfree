@@ -150,8 +150,8 @@ body {
   font-family: courier;
 }
 
-img {
-  max-width: 50px;
-  max-height: 200px;
-  margin-top: 10px;
+/* img {
+  height:auto;  width:100px; transition: 0.5s ease; 
 }
+
+img:hover { width:500px; } */

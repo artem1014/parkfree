@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-//  import PrivateRoute from './components/PrivateRouter/PrivateRouter';
+import PrivateRoute from "./components/PrivateRouter/PrivateRouter";
 import Nav from "./components/Nav/Nav";
 import SignUp from "./components/Forms/SignUp/SignUp";
 import SignOut from "./components/Forms/SignOut/SignOut";
@@ -50,7 +50,7 @@ function App() {
               {/* <PrivateRoute path="/user/notesList">
             <Main />
           </PrivateRoute>  */}
-              <Route Route exact path="/auth/signup">
+              <Route exact path="/auth/signup">
                 <SignUp />
               </Route>
               <Route exact path="/auth/signin">
@@ -71,10 +71,13 @@ function App() {
               <Route exact path="/">
                 <MainScreen />
               </Route>
+              <Route exact path="/images">
+                <TestImage />
+              </Route>
             </Switch>
           </div>
-        </Router >
-      </div >
+        </Router>
+      </div>
     </div>
   );
 }

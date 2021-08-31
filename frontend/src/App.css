@@ -52,6 +52,32 @@
   justify-content: center;
 }
 
+.block-wrapper__map {
+  width: 100%;
+  height: auto;
+
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: auto;
+  align-items: center;
+  grid-template-areas: 
+  "shit map shit2"
+  ;
+}
+
+.map {
+  grid-area: map;
+}
+
+.shit {
+  grid-area: shit;
+}
+
+.shit2 {
+  grid-area: shit2;
+
+}
+
 .block {
 }
 

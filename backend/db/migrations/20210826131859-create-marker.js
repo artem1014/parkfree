@@ -12,7 +12,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      width: {
+      latitude: {
         allowNull: false,
         type: Sequelize.STRING,
       },
@@ -20,8 +20,22 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      pics: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       comment: {
         type: Sequelize.TEXT,
+      },
+      isAccepted: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      isChecked: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       parkingPlaces: {
         allowNull: false,

@@ -26,14 +26,14 @@ export default function Notification({ open, notification }) {
         </div>
         {notification.length ? (
           notification.map((el) => (
-            <div>
+            <div key={el.id}>
               <li className={style.together}>
                 {el.name}
                 <img
                   onClick={() => dispatch(deleteNotificationStart(el.id))}
                   id={el.id}
                   className={style.cross}
-                  src="./images/cross-sign.svg"
+                  src="/images/cross-sign.svg"
                   alt="#"
                 />
               </li>

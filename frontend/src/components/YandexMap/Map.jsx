@@ -5,12 +5,32 @@ import React from 'react'
 import { SEND_FORMS } from "../../urls/url";
 import style from '../testImage/style.module.css'
 import { useLocation } from "react-router";
+import { ReactReduxContext, useDispatch } from "react-redux";
+import { acceptMarkAct, addMarkAct } from "../../redux/actions/markActions";
+import SendingForm from "../SendingForm/SendingForm";
+import { addNotification } from "../../redux/actions/notificationAC";
 
 
 export default function Map({ }) {
 
   let myPlacemark;
-  const arr = [{ coords: [55.729324292067254, 37.65196207958984], adress: 'Россия, Москва, Шлюзовая набережная' }, { coords: [55.76069738614288, 37.64234904248048], adress: 'Россия, Москва, Чистопрудный бульвар, 12к7А' }]
+  // const arr = [{ coords: [55.729324292067254, 37.65196207958984], adress: 'Россия, Москва, Шлюзовая набережная' }, { coords: [55.76069738614288, 37.64234904248048], adress: 'Россия, Москва, Чистопрудный бульвар, 12к7А' }]
+
+  const [allMarks, setAllMarks] = useState([])
+
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:3005/allAccepted').then(res => {
+  //     setAllMarks(res.data)
+  //   })
+  // }, [])
+
+
+  let arr = [...allMarks]
+  // let a = allMarks?.allMarkers
+  // console.log(arr[0])
+  // console.log(allMarks?.allMarkers[0]?.longitude)
+
   const [placemarkCoords, setPlacemarkCoords] = useState([])
   const [adress, setAdress] = useState('')
   const [province, setProvince] = useState('')
@@ -18,15 +38,19 @@ export default function Map({ }) {
 
 
   const location = useLocation(); //принимаем координаты новой метки из личного кабинета, чтобы высветить ее на карте
-  console.log(location.state);
+  const dispatch = useDispatch();
 
-  const placemarkHandler = () => {
+  const placemarkHandler = (e) => {
+    e.preventDefault();
     // тут будет dispatch данных из локального стейта 
     // window.ymaps.ready()
+
+
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
     console.log(placemarkCoords)
     console.log(adress)
+    // dispatch(addMarkAct(placemarkCoords[0], placemarkCoords[1], adress, e.target.comment.value, ))
     window.ymaps.ready(init);
     // madeMap.geoObjects.remove(myPlacemark)
   }
@@ -58,13 +82,16 @@ export default function Map({ }) {
     // Эта штука собирает все значения через append и через axios отправляет на back
     let bodyFormData = new FormData();
     bodyFormData.append("file", file);
-    bodyFormData.append("image", image);
-    bodyFormData.append("width", placemarkCoords[0])
-    bodyFormData.append("longitude", placemarkCoords[1])
-    bodyFormData.append("address", adress)
-    bodyFormData.append("parkingPlaces", 5)
+    bodyFormData.append("pics", image);
+    bodyFormData.append("latitude", placemarkCoords[0]);
+    bodyFormData.append("longitude", placemarkCoords[1]);
+    bodyFormData.append("address", adress);
+    bodyFormData.append("comment", e.target.comment.value);
+    bodyFormData.append("parkingPlaces", 5);
 
-    axios.post(SEND_FORMS, bodyFormData);
+    axios.post(SEND_FORMS, bodyFormData).then((res) => {
+      dispatch(addNotification({ userID: res.data.userID, name: res.data.name }));
+    })
 
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
@@ -75,6 +102,8 @@ export default function Map({ }) {
 
 
   const init = () => {
+
+    console.log('==========>', arr)
 
     const myMap = new window.ymaps.Map(
       "map",
@@ -89,9 +118,9 @@ export default function Map({ }) {
     );
 
     setAdress('')
-    setAllPlacemarks([])
+    // setAllPlacemarks([])
 
-    if(location.state) { //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
+    if (location.state) { //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
       let adminNewPlacemark = new window.ymaps.Placemark(location.state.coords);
       adminNewPlacemark.properties.set({
         iconCaption: location.state.adress,
@@ -100,17 +129,24 @@ export default function Map({ }) {
       myMap.geoObjects.add(adminNewPlacemark);
     }
 
-    for (let i = 0; i < arr.length; ++i) {
-      let pl = new window.ymaps.Placemark(arr[i].coords);
-      pl.properties.set({
-        iconCaption: arr[i].adress,
-        balloonContent: arr[i].adress,
-      });
-      myMap.geoObjects.add(pl);
+    console.log('dgsdg', allMarks)
 
 
-      // console.log(arr[i]);
+    if (allMarks.length) {
+      for (let i = 0; i < allMarks.length; i++) {
+        console.log('dsfsgsgsdgdsgdsgsdg')
+        console.log(allMarks[i].pics)
+        let pl = new window.ymaps.Placemark([allMarks[i].latitude, allMarks[i].longitude]);
+        pl.properties.set({
+          iconCaption: allMarks[i].address,
+          balloonContent: `<div> ${allMarks[i].address} <br/> <img className='stat' src=http://localhost:3005/uploads/${allMarks[i].pics} /> </div>`
+        });
+        myMap.geoObjects.add(pl);
+      }
     }
+
+    //   // console.log(arr[i]);
+    // }
 
     // myPlacemark = createPlacemark([55.74741048760227, 37.604411878173835]); //создать метку
     // myMap.geoObjects.add(myPlacemark);  //опубликовать ее на экране
@@ -198,50 +234,32 @@ export default function Map({ }) {
   //   }
   //   console.log('province',province)
 
+
+
   useEffect(() => {
-    window.ymaps.ready(init);
-  }, []);
+    axios.get('http://localhost:3005/allAccepted')
+      .then(res => {
+        setAllMarks(res.data)
+      })
+    if (allMarks.length > 0) {
+      window.ymaps.ready(init);
+    }
+  }, [allMarks.length])
+
+  console.log(location.state)
 
   return (
-    <>
-      <div id="map" className='ymap'>
+
+    <div className="block-wrapper__map">
+      <div id="map" className='ymap map'>
       </div>
-      {adress && placemarkCoords &&
-        <form onSubmit={sendForm}>
-          <div className={style.div}>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              ref={imageUploader}
-              style={{
-                display: "none",
-              }}
-              name="file"
-            />
-            <div
-              style={{
-                height: "100px",
-                width: "100px",
-                border: "1px dashed black",
-              }}
-              onClick={() => imageUploader.current.click()}
-            >
-              <img
-                ref={uploadedImage}
-                style={{
-                  width: "100px",
-                  // height: "100px",
-                  // position: "absolute"
-                }}
-              />
-            </div>
-          </div>
-          <button>Send</button>
-          {/* <button onClick={placemarkHandler}> Отправить метку на согласование </button> */}
-        </form>
-      }
-    </>
+      <div className='shit2'>
+        {location.state && <button onClick={() => dispatch(acceptMarkAct(location.state.id))}> Accept </button>} 
+        {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} uploadedImage={uploadedImage} />
+        }
+      </div>
+    </div>
+
 
   )
 }

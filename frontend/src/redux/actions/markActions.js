@@ -1,9 +1,9 @@
 import axios from 'axios'
 const { ADD_MARK_TO_ACCEPT, ACCEPT_MARK, DECLINE_MARK } = require("../types/markTypes")
 
-export const addMarkAct = (coords, adress) => async (dispatch) => {
+export const addMarkAct = (longitude, latitude, adress, comment, pics, parkingPlaces, file) => async (dispatch) => {
   try {
-    const addedItem = await axios.post('http://localhost:3005/marker', { coords, adress })
+    const addedItem = await axios.post('http://localhost:3005/marker', { longitude, latitude, adress, comment, pics, parkingPlaces, file })
     dispatch(addMark(addedItem.data))
   } catch (e) {
     console.log('error')
@@ -19,32 +19,32 @@ export const addMark = (newMark) => {
 
 export const acceptMarkAct = (id) => async (dispatch) => {
   try {
-    await axios.post('http://localhost:3005/accept', { id })
-    dispatch(acceptMark(id))
+    const payload = (await axios.post('http://localhost:3005/accept', { id })).data
+    dispatch(acceptMark(payload))
   } catch (e) {
     console.log('error')
   }
 }
 
-export const acceptMark = (id) => {
+export const acceptMark = (payload) => {
   return {
     type: ACCEPT_MARK,
-    payload: id
+    payload
   }
 }
 
 export const declineMarkAct = (id) => async (dispatch) => {
   try {
-    await axios.post('http://localhost:3005/decline', { id })
-    dispatch(declineMark(id))
+    const payload = (await axios.post('http://localhost:3005/decline', { id })).data
+    dispatch(declineMark(payload))
   } catch (e) {
     console.log('error')
   }
 }
 
-export const declineMark = (id) => {
+export const declineMark = (payload) => {
   return {
     type: DECLINE_MARK,
-    payload: id
+    payload
   }
 }
