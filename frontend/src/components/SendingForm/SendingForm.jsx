@@ -3,7 +3,7 @@ import './SendingForm.css'
 const SendingForm = ({ sendForm, handleImageUpload, imageUploader, uploadedImage }) => {
   return (
 
-    <form onSubmit={sendForm} class="form">
+    <form onSubmit={sendForm} className="form">
       <h5>Добавить метку</h5>
       <p type="Добавьте комментарий">
         <input type="text"
