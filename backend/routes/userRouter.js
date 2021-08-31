@@ -29,7 +29,7 @@ router.post("/signin", async (req, res) => {
   console.log('singin', req.body)
   const user = await User.findOne({ where: { email }});
   console.log('=====user', user)
-  console.log('=====password', password)
+  // console.log('=====password', password)
   console.log('=====user.password', user.password)
   console.log(password === user.password)
   if (user) {
