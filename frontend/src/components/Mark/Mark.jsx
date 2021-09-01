@@ -16,7 +16,7 @@ const coords = [latitude, longitude]
     dispatch(acceptMarkAct(id))
   }
 
-  const marks = useSelector(state => console.log(state.marks))
+  // const marks = useSelector(state => console.log(state.marks))
 
   const onMapHandler = () => {
     history.push({

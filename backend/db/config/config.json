@@ -1,22 +1,22 @@
 {
   "development": {
-    "username": "admin",
-    "password": "123",
-    "database": "final",
+    "username": "parkfree",
+    "password": "parkfree",
+    "database": "parkfree",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "admin",
-    "password": "123",
-    "database": "final",
+    "username": "parkfree",
+    "password": "parkfree",
+    "database": "parkfree",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "admin",
-    "password": "123",
-    "database": "final",
+    "username": "parkfree",
+    "password": "parkfree",
+    "database": "parkfree",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }

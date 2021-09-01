@@ -4,7 +4,7 @@ import {
   SIGNIN_USER,
   SIGNOUT_USER,
   CHECK_USER,
-} from "../../urls/url";
+} from "../../urls/userURLS";
 
 // вызывает логику юзера
 export const setUser = (user) => ({
@@ -54,7 +54,7 @@ export const signInStart = (payload, history, from) => async (dispatch) => {
     dispatch(setUser(user));
     return history.replace(from); //если вошли удачно, то перекидываем на страницу с инфой о пользователе
   } else {
-    return history.replace('/') //иначе остаемся на странице входа
+    return history.replace("/"); //иначе остаемся на странице входа
   }
 };
 

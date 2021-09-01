@@ -14,9 +14,8 @@ const Account = () => {
       setMarkersValue(res.data.count)
       setMarkers(res.data.markers)
     })
-  }, [markers])
+  }, [])
 
-  console.log(arr)
   return (
     <>
       <div id="gradient"></div>

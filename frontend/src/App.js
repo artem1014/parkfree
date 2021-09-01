@@ -22,33 +22,32 @@ function App() {
   }, []);
 
   return (
-    // <div className="App">
+    <div style={{ position: "relative" }}>
+      <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          top: 0,
+          left: 0,
+          backgroundColor: "#224862",
+          opacity: "0.8",
+        }}
+      ></div>
 
-    <div style={{ position: 'relative' }}>
-      <div style={{
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        top: 0,
-        left: 0,
-        backgroundColor: '#224862',
-        opacity: '0.8',
-
-      }}></div>
-
-      <div style={{
-        backgroundImage: `url(${'https://images.unsplash.com/photo-1572799135571-73597b373a9e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1491&q=80'})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
-        overflow: 'hidden',
-      }} >
-
-        < Router >
-
-          < Nav />
+      <div
+        style={{
+          backgroundImage: `url(${"https://images.unsplash.com/photo-1572799135571-73597b373a9e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1491&q=80"})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100%",
+          overflow: "hidden",
+        }}
+      >
+        <Router>
+          <Nav />
           {/* <div className="container py-5"> */}
-          <div style={{ position: 'relative' }}>
-            < Switch >
+          <div style={{ position: "relative" }}>
+            <Switch>
               {/* <PrivateRoute path="/user/notesList">
             <Main />
           </PrivateRoute>  */}
@@ -72,9 +71,6 @@ function App() {
               </Route>
               <Route exact path="/">
                 <MainScreen />
-              </Route>
-              <Route exact path="/images">
-                <TestImage />
               </Route>
             </Switch>
           </div>

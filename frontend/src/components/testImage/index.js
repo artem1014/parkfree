@@ -66,7 +66,7 @@ function TestImage() {
             alt=""
           />
           <input {...getInputProps()} />
-          {/* <p>Add minimum 1 photo</p> */}
+          <p>Add minimum 1 photo</p>
         </div>
         <div>{images}</div>
       </div>
