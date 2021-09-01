@@ -5,6 +5,7 @@ router.get("/", async (req, res) => {
   try {
     const userID = req.session.user.id;
     const notifications = await Notification.findAll({ where: { userID } });
+    console.log("notifications", notifications.length);
     res.json(notifications);
   } catch (error) {}
 });
@@ -27,14 +28,15 @@ router.delete("/all", async (req, res) => {
   } catch (error) {}
 });
 
-router.post("/status", async (req, res) => {
+router.get("/status", async (req, res) => {
   try {
     const userID = req.session.user.id;
+    console.log("userID", userID);
     await Notification.update({ viewed: true }, { where: { userID } });
   } catch (error) {}
 });
 
-router.post("/value", async (req, res) => {
+router.get("/value", async (req, res) => {
   try {
     const userID = req.session.user.id;
     const notifications = await Notification.findAll({

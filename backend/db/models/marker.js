@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Marker extends Model {
     static associate(models) {
       Marker.hasMany(models.Image, { foreignKey: "markerID" });
+      Marker.belongsTo(models.User, { foreignKey: "userID" });
     }
   }
   Marker.init(
@@ -40,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
       pics: {
         allowNull: false,
         type: DataTypes.STRING,
+      },
+      userID: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
       },
     },
     {

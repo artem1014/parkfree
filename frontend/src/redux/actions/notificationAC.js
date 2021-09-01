@@ -12,7 +12,7 @@ import {
   GET_ALL_NOTIFICATIONS_DB,
   GET_NOTIFICATIONS_VALUE_DB,
   UDDATE_STATUS_NOTIFICATIONS,
-} from "../../urls/url";
+} from "../../urls/notificationURLS";
 import axios from "axios";
 
 export const addNotification = (data) => ({
@@ -24,15 +24,20 @@ export const getAllNotificationsStart = () => async (dispatch) => {
   axios.get(GET_ALL_NOTIFICATIONS_DB, { withCredentials: true }).then((res) => {
     dispatch(getAllNotifications(res.data));
   });
-  axios.post(GET_NOTIFICATIONS_VALUE_DB).then((res) => {
-    dispatch(getNotificationsValue(res.data));
-  });
 };
 
 export const getAllNotifications = (notifications) => ({
   type: GET_ALL_NOTIFICATIONS,
   payload: notifications,
 });
+
+export const getAllNotificationValueStart = () => async (dispatch) => {
+  axios
+    .get(GET_NOTIFICATIONS_VALUE_DB, { withCredentials: true })
+    .then((res) => {
+      dispatch(getNotificationsValue(res.data));
+    });
+};
 
 export const getNotificationsValue = (value) => ({
   type: GET_NOTIFICATIONS_VALUE,
@@ -50,24 +55,20 @@ export const deleteNotification = (id) => ({
   payload: id,
 });
 
-export const deleteAllNotificationsStart =
-  ({ userID }) =>
-  async (dispatch) => {
-    axios
-      .delete(DELETE_ALL_NOTIFICATIONS_DB, { data: { userID } })
-      .then(() => dispatch(deleteAllNotifications()));
-  };
+export const deleteAllNotificationsStart = () => async (dispatch) => {
+  axios
+    .delete(DELETE_ALL_NOTIFICATIONS_DB, { withCredentials: true })
+    .then(() => dispatch(deleteAllNotifications()));
+};
 
 export const deleteAllNotifications = () => ({
   type: DELETE_ALL_NOTIFICATION,
 });
 
-export const updateStatusNotificationsStart =
-  ({ userID }) =>
-  async (dispatch) => {
-    axios.post(UDDATE_STATUS_NOTIFICATIONS, { userID });
-    dispatch(resetNotifications());
-  };
+export const updateStatusNotificationsStart = () => async (dispatch) => {
+  axios.get(UDDATE_STATUS_NOTIFICATIONS, { withCredentials: true });
+  dispatch(resetNotifications());
+};
 
 export const resetNotifications = () => ({
   type: RESET_NOTIFICATION,

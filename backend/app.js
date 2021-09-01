@@ -23,7 +23,7 @@ app.set("cookieName", "Elbrus");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 app.use(express.static(path.join(process.env.PWD, 'public')));
 app.use(cors({ origin: true, credentials: true }));
 // Middleware отлавливает картинки юзера

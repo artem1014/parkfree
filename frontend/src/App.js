@@ -45,8 +45,8 @@ function App() {
 
           < Nav />
           {/* <div className="container py-5"> */}
-          <div style={{ position: 'relative' }}>
-            < Switch >
+          <div style={{ position: "relative" }}>
+            <Switch>
               {/* <PrivateRoute path="/user/notesList">
             <Main />
           </PrivateRoute>  */}
@@ -70,9 +70,6 @@ function App() {
               </Route>
               <Route exact path="/">
                 <MainScreen />
-              </Route>
-              <Route exact path="/images">
-                <TestImage />
               </Route>
             </Switch>
           </div>

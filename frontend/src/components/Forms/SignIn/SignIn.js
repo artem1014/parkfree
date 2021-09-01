@@ -22,7 +22,7 @@ const SignIn = () => {
   let history = useHistory();
   let location = useLocation();
 
-  let { from } = location.state || { from: { pathname: "/" } };
+  let { from } = location.state || { from: { pathname: "/map" } };
 
   const changeHandler = (e) => {
     setUserSignIn((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -43,7 +43,7 @@ const SignIn = () => {
   const submitHandler = (e) => {
     e.preventDefault(); //  чтобы при нажатии кнопки не происходила перерендера страницы
     let payload = Object.fromEntries(new FormData(e.target))
-    console.log(payload)
+    // console.log(payload)
     dispatch(signInStart(payload, history, from));
     if (userSign === null) {
       notify();

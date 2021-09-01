@@ -6,9 +6,10 @@ import { SEND_FORMS } from "../../urls/url";
 import style from "../testImage/style.module.css";
 import { useLocation } from "react-router";
 import { ReactReduxContext, useDispatch } from "react-redux";
-import { acceptMarkAct, addMarkAct } from "../../redux/actions/markActions";
+import { acceptMarkAct, addMarkAct, declineMarkAct } from "../../redux/actions/markActions";
 import SendingForm from "../SendingForm/SendingForm";
 import { addNotification } from "../../redux/actions/notificationAC";
+import Popup from "../Popup/Popup";
 
 export default function Map({}) {
   let myPlacemark;
@@ -27,10 +28,15 @@ export default function Map({}) {
   // console.log(arr[0])
   // console.log(allMarks?.allMarkers[0]?.longitude)
 
-  const [placemarkCoords, setPlacemarkCoords] = useState([]);
-  const [adress, setAdress] = useState("");
-  const [province, setProvince] = useState("");
-  const [allPlacemarks, setAllPlacemarks] = useState([]);
+  const [placemarkCoords, setPlacemarkCoords] = useState([])
+  const [adress, setAdress] = useState('')
+  const [province, setProvince] = useState('')
+  const [allPlacemarks, setAllPlacemarks] = useState([])
+  const [curImg, setCurImg] = useState(null)
+
+  const handleClosePopup = () => {
+    setCurImg(null)
+  }
 
   const location = useLocation(); //принимаем координаты новой метки из личного кабинета, чтобы высветить ее на карте
   const dispatch = useDispatch();
@@ -40,10 +46,11 @@ export default function Map({}) {
     // тут будет dispatch данных из локального стейта
     // window.ymaps.ready()
 
-    const div = document.querySelector(".ymap");
-    div.innerHTML = "";
-    console.log(placemarkCoords);
-    console.log(adress);
+
+    const div = document.querySelector('.ymap');
+    div.innerHTML = '';
+    // console.log(placemarkCoords)
+    // console.log(adress)
     // dispatch(addMarkAct(placemarkCoords[0], placemarkCoords[1], adress, e.target.comment.value, ))
     window.ymaps.ready(init);
     // madeMap.geoObjects.remove(myPlacemark)
@@ -83,28 +90,25 @@ export default function Map({}) {
     bodyFormData.append("comment", e.target.comment.value);
     bodyFormData.append("parkingPlaces", 5);
 
-    axios.post(SEND_FORMS, bodyFormData).then((res) => {
-      dispatch(
-        addNotification({ userID: res.data.userID, name: res.data.name })
-      );
-    });
+    axios.post(SEND_FORMS, bodyFormData,  { withCredentials: true }).then((res) => {
+      dispatch(addNotification({ userID: res.data.userID, name: res.data.name }));
+    })
 
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
-    console.log('placemarkCoords', placemarkCoords)
-    // console.log('adress', adress)
     window.ymaps.ready(init);
   };
 
   const init = () => {
-    console.log("==========>", arr);
+
+    // console.log('==========>', arr)
 
     const myMap = new window.ymaps.Map(
       "map",
       {
         center: [55.753994, 37.622093],
-        zoom: 11,
-        behaviors: ["drag", "dblClickZoom"], //убираем масштабирование карты при скролле, оставляем масштабирование при клике мыши
+        zoom: 10,
+        behaviors: ['drag', 'dblClickZoom'] //убираем масштабирование карты при скролле, оставляем масштабирование при клике мыши
       },
       {
         searchControlProvider: "yandex#search",
@@ -114,9 +118,17 @@ export default function Map({}) {
     setAdress("");
     // setAllPlacemarks([])
 
-    if (location.state) {
-      //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
-      let adminNewPlacemark = new window.ymaps.Placemark(location.state.coords);
+    if (location.state) { //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
+      let adminNewPlacemark = new window.ymaps.Placemark(
+        location.state.coords, 
+        {
+          hintContent: 'ЗДАРОВА', //хинт при наведении на метку
+          iconCaption: "поиск" // balloon 
+        },
+        {
+          preset: 'islands#redIcon'
+        });
+
       adminNewPlacemark.properties.set({
         iconCaption: location.state.adress,
         balloonContent: location.state.adress,
@@ -124,19 +136,27 @@ export default function Map({}) {
       myMap.geoObjects.add(adminNewPlacemark);
     }
 
-    console.log("dgsdg", allMarks);
+    // console.log('dgsdg', allMarks)
+
 
     if (allMarks.length) {
       for (let i = 0; i < allMarks.length; i++) {
-        console.log("dsfsgsgsdgdsgdsgsdg");
-        console.log(allMarks[i].pics);
-        let pl = new window.ymaps.Placemark([
-          allMarks[i].latitude,
-          allMarks[i].longitude,
-        ]);
+        // console.log('dsfsgsgsdgdsgdsgsdg')
+        // console.log(allMarks[i].pics)
+        let pl = new window.ymaps.Placemark([allMarks[i].latitude, allMarks[i].longitude]);
         pl.properties.set({
           iconCaption: allMarks[i].address,
-          balloonContent: `<div> ${allMarks[i].address} <br/> <img className='stat' src=http://localhost:3005/uploads/${allMarks[i].pics} /> </div>`,
+          balloonContent: `
+          <div> 
+          ${allMarks[i].address} 
+          <br/> 
+          <button 
+          onClick={()=> setCurImg(http://localhost:3005/uploads/${allMarks[i].pics})} 
+          type='button' 
+          id='statdiv'> 
+          <img id='stat' src=http://localhost:3005/uploads/${allMarks[i].pics} /> 
+          </button> 
+          </div>`
         });
         myMap.geoObjects.add(pl);
       }
@@ -233,31 +253,23 @@ export default function Map({}) {
     axios.get("http://localhost:3005/allAccepted").then((res) => {
       setAllMarks(res.data);
     });
-    // if (allMarks.length > 0) {
+    if (allMarks.length > 0) {
     window.ymaps.ready(init);
-    // }
+    }
   }, [allMarks.length]);
 
-  console.log(location.state);
+  // console.log(location.state);
 
   return (
     <div className="block-wrapper__map">
-      <div id="map" className="ymap map"></div>
-      <div className="shit2">
-        {location.state && (
-          <button onClick={() => dispatch(acceptMarkAct(location.state.id))}>
-            {" "}
-            Accept{" "}
-          </button>
-        )}
-        {adress && placemarkCoords && (
-          <SendingForm
-            sendForm={sendForm}
-            handleImageUpload={handleImageUpload}
-            imageUploader={imageUploader}
-            uploadedImage={uploadedImage}
-          />
-        )}
+      {curImg && <Popup img={curImg} close={handleClosePopup} />}
+      <div id="map" className='ymap map'>
+      </div>
+      <div className='shit2'>
+        {location.state && <button onClick={() => dispatch(acceptMarkAct(location.state.id))}> Accept </button>} 
+        {location.state && <button onClick={() => dispatch(declineMarkAct(location.state.id))}> Decline </button>} 
+        {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} uploadedImage={uploadedImage} />
+        }
       </div>
     </div>
   );

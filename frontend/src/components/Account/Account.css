@@ -106,7 +106,7 @@ body {
   left: 50%;
   top: 67.5px;
   margin-left: -250px;
-  margin-top: 80px;
+  margin-top: 10px;
   background: #e9e2d0;
   box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
   z-index: 5;
@@ -145,3 +145,6 @@ body {
 }
 
 img:hover { width:500px; } */
+
+
+

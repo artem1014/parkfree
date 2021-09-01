@@ -169,3 +169,24 @@
 
   } 
 } */
+
+#stat { 
+  height: 100%;  
+  object-fit: cover;
+  position: relative;
+  transform: scale(1);
+  transform-origin: center;
+  width: 100%; 
+  transition: .2s ease; }
+
+#statdiv {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  padding: 0;
+  border:none;
+  background: transparent;
+}
+#statdiv:hover #stat { 
+  transform: scale(1.1);
+}
