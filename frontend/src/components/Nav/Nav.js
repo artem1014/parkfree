@@ -7,9 +7,14 @@ import Notification from "../Notification";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllNotificationsStart, getAllNotificationValueStart, updateStatusNotificationsStart } from "../../redux/actions/notificationAC";
 import style from "./Nav.module.css";
+import logos from "./car.svg";
+import { getAllAcceptedMarkAct, getAllNewMarkAct } from "../../redux/actions/markActions";
+
 
 const Nav = () => {
+
   const user = useSelector((state) => state.user);
+  const allMarks = useSelector(state => state.marks)
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const { notification, notificationValue } = useSelector(
@@ -19,8 +24,12 @@ const Nav = () => {
   useEffect(() => {
     dispatch(getAllNotificationsStart());
     dispatch(getAllNotificationValueStart());
-  }, [notificationValue])
+    dispatch(getAllAcceptedMarkAct()); 
+  }, [notificationValue]) // вот тут может быть ошибка
 
+
+  
+  console.log('allMarks', allMarks);
 
 
   const updateStatus = () => {

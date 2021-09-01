@@ -1,18 +1,26 @@
 const router = require("express").Router();
 const { Notification, Marker, Image, sequelize } = require("../db/models");
 
-router.get("/marker", async (req, res) => {
+router.get("/", async (req, res) => {
   const count = await sequelize.query('SELECT count(*) FROM "Markers"');
   const markers = await Marker.findAll({ where: { isChecked: false } });
   res.json({ markers, count: count[0][0].count });
 });
 
-router.get("/allAccepted", async (req, res) => {
-  const allMarkers = await Marker.findAll({ where: { isAccepted: true } });
+router.get("/all", async (req, res) => {
+  const allMarkers = await Marker.findAll({ raw: true });
+  // console.log('ALL =====================', allMarkers)
   res.json(allMarkers);
 });
 
-router.post("/marker", async (req, res) => {
+router.get("/allNew", async (req, res) => {
+  const allNewMarkers = await Marker.findAll({ where: { isChecked: false } });
+  // console.log('ALLNEW =====================', allNewMarkers)
+  res.json(allNewMarkers);
+});
+
+router.post("/add", async (req, res) => {
+  // console.log(req.body);
   try {
     const { longitude, latitude, address, comment, pics, parkingPlaces } =
       req.body;
@@ -24,8 +32,51 @@ router.post("/marker", async (req, res) => {
       pics,
       parkingPlaces,
     };
-    const userID = req.session.user.id;
 
+    const userID = req.session.user.id;
+    console.log('REQBODY', req.body)
+
+    const newMarkerFromDB = await Marker.create({
+      longitude,
+      latitude,
+      address,
+      comment,
+      pics,
+      parkingPlaces,
+      userID,
+    });
+
+    const response = newMarkerFromDB.dataValues
+    console.log(response);
+    // const { name } = await Notification.create({
+    //   userID,
+    //   name: "Ожидайте подтверждения модератора",
+    // });
+    // res.json(response);
+    res.json(response)
+  } catch (error) {
+    console.log('ERROR IN CREATE', error);
+    res.sendStatus(401)
+
+  }
+  console.log('hello');
+});
+
+router.post("/", async (req, res) => {
+  // console.log(req.body);
+  try {
+    const { longitude, latitude, address, comment, pics, parkingPlaces } =
+      req.body;
+    const newMarker = {
+      longitude,
+      latitude,
+      address,
+      comment,
+      pics,
+      parkingPlaces,
+    };
+
+    const userID = req.session.user.id;
     if (userID !== 2) {
       await Marker.create({
         longitude,
@@ -58,16 +109,13 @@ router.post("/marker", async (req, res) => {
         isChecked: true,
       });
     }
-  } catch (error) {}
-});
+  } catch (error) {
+    console.log(error)
+  }
+})
 
-router.post("/accept", async (req, res) => {
+router.post('/acceptNots', async (req, res) => {
   try {
-    const { id } = req.body;
-    await Marker.update(
-      { isAccepted: true, isChecked: true },
-      { where: { id } }
-    );
     const { userID } = await Marker.findOne({ where: { id } });
     if (userID !== 2) {
       const { name } = await Notification.create({
@@ -85,8 +133,23 @@ router.post("/accept", async (req, res) => {
       // });
       res.json({ name, allMarkers });
     }
-  } catch (error) {}
-});
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+router.post("/accept", async (req, res) => {
+  try {
+    const { id } = req.body;
+    await Marker.update(
+      { isAccepted: true, isChecked: true },
+      { where: { id } }
+    );
+    res.sendStatus(200)
+  } catch (e) {
+    console.log(e)
+  };
+})
 
 router.post("/decline", async (req, res) => {
   const { id } = req.body;
@@ -109,40 +172,9 @@ router.post("/del", async (req, res) => {
   res.json();
 });
 
-router.post("/", async (req, res) => {
-  // console.log(req.body);
-  // const {
-  //   id,
-  //   address,
-  //   width,
-  //   longitude,
-  //   comment, // Необязательно
-  //   parkingPlaces,
-  //   images, // Принимает массив с картинками
-  // } = req.body;
 
-  // try {
-  //   // Создаёт метку на карте со всеми данными
-  //   const marker = await Marker.create({
-  //     title,
-  //     address,
-  //     width,
-  //     longitude,
-  //     comment,
-  //     parkingPlaces,
-  //   });
-  //   // Массив с картинками кладем в отдельную таблицу
-  //   if (marker) {
-  //     images.map((el) => Image.create({ name: el, markerID: id }));
-  //   }
-  // } catch (error) {}
-  const { id, name } = await Notification.create({
-    name: "Ожидайте подтверждения модератора",
-    userID: 1,
-  });
 
-  // Отправляет данные на сервер
-  res.json({ id, name });
-});
+// Отправляет данные на сервер
+
 
 module.exports = router;

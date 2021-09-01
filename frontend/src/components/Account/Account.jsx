@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { GET_ALL_MARKERS_DB } from "../../urls/url";
 import Mark from "../Mark/Mark";
 import "./Account.css";
@@ -11,17 +12,28 @@ const Account = () => {
   const [flag, setFlag] = useState(null)
   const [allMarkers, setAllMarkers] = useState([])
 
-  useEffect(() => {
-    axios.get(GET_ALL_MARKERS_DB).then(res => { // gets new markers
-      setMarkersValue(res.data.count)
-      setMarkers(res.data.markers)
-    }, [])
 
-    axios.get('http://localhost:3005/allAccepted') //gets all markers
-    .then(res => {
-      setAllMarkers(res.data)
-    })
-  }, [])
+  const allMarks = useSelector(state => state.marks)
+
+  const allAcceptedMarks = allMarks.filter(el => el.isAccepted === true)
+
+  const allNewMarks = allMarks.filter(el => el.isChecked === false)
+
+  console.log('NEWMARKS', allNewMarks)
+  // const newMarks = useSelector(state => state.newMarks)
+
+
+  // useEffect(() => {
+    // axios.get(GET_ALL_MARKERS_DB).then(res => { // gets new markers
+  //     setMarkersValue(res.data.count)
+  //     setMarkers(res.data.markers)
+  //   }, [])
+
+  //   axios.get('http://localhost:3005/all') //gets all markers
+  //   .then(res => {
+  //     setAllMarkers(res.data)
+  //   })
+  // }, [])
 
 
   const newMarkersHandler = () => {
@@ -52,10 +64,10 @@ const Account = () => {
           <button onClick={allMarkersHandler}> Вывести все метки </button>
         </div>
 
-    {flag ? markers.map(el => <Mark id={el.id} identificator={true} longitude={el.longitude}
+    {flag ? allNewMarks.map(el => <Mark id={el.id} identificator={true} longitude={el.longitude}
     latitude={el.latitude} adress={el.address} key={el.id}/>) 
     : 
-    allMarkers.map(el => <Mark id={el.id} identificator={false} longitude={el.longitude}
+    allAcceptedMarks.map(el => <Mark id={el.id} identificator={false} longitude={el.longitude}
       latitude={el.latitude} adress={el.address} key={el.id}/>) 
     }
       </div>

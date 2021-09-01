@@ -48,7 +48,7 @@ app.use(
 
 app.use("/notification", notificationRouter);
 app.use("/", userRouter);
-app.use("/", markerRouter);
+app.use("/marker", markerRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Server has been started on PORT:", process.env.PORT);

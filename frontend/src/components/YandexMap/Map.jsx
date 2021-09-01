@@ -5,23 +5,22 @@ import React from "react";
 import { SEND_FORMS } from "../../urls/url";
 import style from "../testImage/style.module.css";
 import { useLocation } from "react-router";
-import { ReactReduxContext, useDispatch } from "react-redux";
+import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
 import { acceptMarkAct, addMarkAct, declineMarkAct } from "../../redux/actions/markActions";
 import SendingForm from "../SendingForm/SendingForm";
 import { addNotification } from "../../redux/actions/notificationAC";
 import Popup from "../Popup/Popup";
+import { useHistory } from "react-router";
 
-export default function Map({}) {
+export default function Map({ }) {
   let myPlacemark;
-  // const arr = [{ coords: [55.729324292067254, 37.65196207958984], adress: 'Россия, Москва, Шлюзовая набережная' }, { coords: [55.76069738614288, 37.64234904248048], adress: 'Россия, Москва, Чистопрудный бульвар, 12к7А' }]
 
-  const [allMarks, setAllMarks] = useState([]);
+
+  let history = useHistory();
   const [files, setFiles] = useState([]);
-  // useEffect(() => {
-  //   axios.get('http://localhost:3005/allAccepted').then(res => {
-  //     setAllMarks(res.data)
-  //   })
-  // }, [])
+  const marksFromState = useSelector(state => state.marks)
+
+  const allMarks = marksFromState?.filter(el => el.isAccepted === true)
 
   let arr = [...allMarks];
   // let a = allMarks?.allMarkers
@@ -33,6 +32,7 @@ export default function Map({}) {
   const [province, setProvince] = useState('')
   const [allPlacemarks, setAllPlacemarks] = useState([])
   const [curImg, setCurImg] = useState(null)
+  const [flag, setFlag] = useState(true)
 
   const handleClosePopup = () => {
     setCurImg(null)
@@ -73,19 +73,43 @@ export default function Map({}) {
     }
   };
 
+
+  const acceptHandler = () => {
+    dispatch(acceptMarkAct(location.state.id))
+    setFlag(false)
+    const div = document.querySelector('.ymap');
+    div.innerHTML = '';
+    window.ymaps.ready(init);
+  }
+
+  const declineHandler = () => {
+    dispatch(declineMarkAct(location.state.id))
+    setFlag(false)
+    const div = document.querySelector('.ymap');
+    div.innerHTML = '';
+    window.ymaps.ready(init);
+  }
+
+  const backHandler = () => {
+    window.history.back()
+  }
+
   const sendForm = (e) => {
     e.preventDefault();
     // Получаем все значения из формы по атрибуту name
     // const { file } = Object.fromEntries(new FormData(e.target));
     // console.log(file);
     // const image = file.name;
-
+    const pics = [];
     // Эта штука собирает все значения через append и через axios отправляет на back
     let bodyFormData = new FormData();
     files.map((el) => {
       bodyFormData.append("file", el);
       bodyFormData.append("pics", el.name);
+      pics.push(el.name)
     });
+
+
     // bodyFormData.append("file", file);
     // bodyFormData.append("pics", image);
     bodyFormData.append("latitude", placemarkCoords[0]);
@@ -94,9 +118,14 @@ export default function Map({}) {
     bodyFormData.append("comment", e.target.comment.value);
     bodyFormData.append("parkingPlaces", 5);
 
-    axios.post(SEND_FORMS, bodyFormData,  { withCredentials: true }).then((res) => {
-      dispatch(addNotification({ userID: res.data.userID, name: res.data.name }));
-    })
+    const comment = e.target.comment.value
+
+    
+    dispatch(addMarkAct({longitude: placemarkCoords[1], latitude: placemarkCoords[0], address: adress, comment, pics: pics[0], parkingPlaces: 5}));
+    // axios.post(SEND_FORMS, bodyFormData, { withCredentials: true }).then((res) => {
+      // dispatch(addNotification({ userID: res.data.userID, name: res.data.name }));
+    // })
+    
 
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
@@ -124,7 +153,7 @@ export default function Map({}) {
 
     if (location.state) { //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
       let adminNewPlacemark = new window.ymaps.Placemark(
-        location.state.coords, 
+        location.state.coords,
         {
           hintContent: 'ЗДАРОВА', //хинт при наведении на метку
           iconCaption: "поиск" // balloon 
@@ -254,13 +283,13 @@ export default function Map({}) {
   //   console.log('province',province)
 
   useEffect(() => {
-    axios.get("http://localhost:3005/allAccepted").then((res) => {
-      setAllMarks(res.data);
-    });
-    if (allMarks.length > 0) {
-    window.ymaps.ready(init);
+    // axios.get("http://localhost:3005/marker/all").then((res) => {
+    //   setAllMarks(res.data);
+    // });
+    if (allMarks?.length > 0) {
+      window.ymaps.ready(init);
     }
-  }, [allMarks.length]);
+  }, [allMarks?.length]);
 
   // console.log(location.state);
 
@@ -270,9 +299,10 @@ export default function Map({}) {
       <div id="map" className='ymap map'>
       </div>
       <div className='shit2'>
-        {location.state && <button onClick={() => dispatch(acceptMarkAct(location.state.id))}> Accept </button>} 
-        {location.state && <button onClick={() => dispatch(declineMarkAct(location.state.id))}> Decline </button>} 
-        {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} uploadedImage={uploadedImage} setFiles={setFiles} files={files} />
+        {location.state && flag && <button onClick={acceptHandler}> Accept </button>}
+        {location.state && flag && <button onClick={declineHandler}> Decline </button>}
+        {location.state && flag && <button onClick={backHandler}> Back </button>}
+        {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} files={files} setFiles={setFiles} uploadedImage={uploadedImage} />
         }
       </div>
     </div>

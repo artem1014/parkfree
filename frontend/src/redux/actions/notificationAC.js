@@ -20,6 +20,8 @@ export const addNotification = (data) => ({
   payload: data,
 });
 
+
+
 export const getAllNotificationsStart = () => async (dispatch) => {
   axios.get(GET_ALL_NOTIFICATIONS_DB, { withCredentials: true }).then((res) => {
     dispatch(getAllNotifications(res.data));
