@@ -28,37 +28,28 @@ const Account = () => {
   console.log(arr);
   return (
     <>
-      {/* <div className="containerAcc"> */}
-        {/* <img
-          className="avatar"
+      <div id="gradient"></div>
+      <div id="card">
+        <img
           src="https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9c33caef-be28-4257-b7ed-a407698f1a32/280x420"
           alt=""
-        /> */}
-        {/* <div className="wrapper"> */}
-          <div id="gradient"></div>
-          <div id="card">
-            <img
-              src="https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9c33caef-be28-4257-b7ed-a407698f1a32/280x420"
-              alt=""
-            />
-            <h2>Добро пожаловать в ЛК</h2>
-            <p>Admin</p>
-            <p>Всего заметок на сайте: {markersValue}</p>
-          </div>
-          <div id="infoBlock">
-            <h3> Новые заметки </h3>
-            {markers.map((el) => (
-              <Mark
-                id={el.id}
-                longitude={el.longitude}
-                latitude={el.latitude}
-                adress={el.address}
-                key={el.id}
-              />
-            ))}
-          </div>
-        {/* </div> */}
-      {/* </div> */}
+        />
+        <h2>Добро пожаловать в ЛК</h2>
+        <p>Admin</p>
+        <p>Всего заметок на сайте: {markersValue}</p>
+      </div>
+      <div id="infoBlock">
+        <h3> Новые заметки </h3>
+        {markers.map((el) => (
+          <Mark
+            id={el.id}
+            longitude={el.longitude}
+            latitude={el.latitude}
+            adress={el.address}
+            key={el.id}
+          />
+        ))}
+      </div>
     </>
   );
 };

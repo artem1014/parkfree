@@ -89,10 +89,10 @@ export default function Map({}) {
       );
     });
 
-    const div = document.querySelector(".ymap");
-    div.innerHTML = "";
-    console.log("placemarkCoords", placemarkCoords);
-    console.log("adress", adress);
+    const div = document.querySelector('.ymap');
+    div.innerHTML = '';
+    console.log('placemarkCoords', placemarkCoords)
+    // console.log('adress', adress)
     window.ymaps.ready(init);
   };
 
