@@ -9,7 +9,8 @@ import {
   getAllNotificationsStart,
   updateStatusNotificationsStart,
 } from "../../redux/actions/notificationAC";
-// import logo from '../public/images/Daco_555134.png'
+
+
 import style from "./Nav.module.css";
 import logos from './car.svg'
 
@@ -43,8 +44,8 @@ const Nav = () => {
         {/* logo */}
         <div className={style.logo}>
           <Link to='/'>
-            <img className={style.img} src={'https://www.vhv.rs/dpng/d/55-555134_vector-cars-logo-png-transparent-png.png'} />
-            {/* <img src={logos}/> */}
+            {/* <img className={style.img} src={'https://www.vhv.rs/dpng/d/55-555134_vector-cars-logo-png-transparent-png.png'} /> */}
+            <img className={style.img} src={'./images/Daco_555134.png'} />
           </Link>
         </div>
 

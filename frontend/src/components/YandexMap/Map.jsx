@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import './YandexMap.css'
-import axios from 'axios'
-import React from 'react'
+import "./YandexMap.css";
+import axios from "axios";
+import React from "react";
 import { SEND_FORMS } from "../../urls/url";
-import style from '../testImage/style.module.css'
+import style from "../testImage/style.module.css";
 import { useLocation } from "react-router";
 import { ReactReduxContext, useDispatch } from "react-redux";
 import { acceptMarkAct, addMarkAct } from "../../redux/actions/markActions";
@@ -11,14 +11,11 @@ import SendingForm from "../SendingForm/SendingForm";
 import { addNotification } from "../../redux/actions/notificationAC";
 import Popup from "../Popup/Popup";
 
-
-export default function Map({ }) {
-
+export default function Map({}) {
   let myPlacemark;
   // const arr = [{ coords: [55.729324292067254, 37.65196207958984], adress: 'Россия, Москва, Шлюзовая набережная' }, { coords: [55.76069738614288, 37.64234904248048], adress: 'Россия, Москва, Чистопрудный бульвар, 12к7А' }]
 
-  const [allMarks, setAllMarks] = useState([])
-
+  const [allMarks, setAllMarks] = useState([]);
 
   // useEffect(() => {
   //   axios.get('http://localhost:3005/allAccepted').then(res => {
@@ -26,8 +23,7 @@ export default function Map({ }) {
   //   })
   // }, [])
 
-
-  let arr = [...allMarks]
+  let arr = [...allMarks];
   // let a = allMarks?.allMarkers
   // console.log(arr[0])
   // console.log(allMarks?.allMarkers[0]?.longitude)
@@ -47,7 +43,7 @@ export default function Map({ }) {
 
   const placemarkHandler = (e) => {
     e.preventDefault();
-    // тут будет dispatch данных из локального стейта 
+    // тут будет dispatch данных из локального стейта
     // window.ymaps.ready()
 
 
@@ -58,7 +54,7 @@ export default function Map({ }) {
     // dispatch(addMarkAct(placemarkCoords[0], placemarkCoords[1], adress, e.target.comment.value, ))
     window.ymaps.ready(init);
     // madeMap.geoObjects.remove(myPlacemark)
-  }
+  };
 
   // для отправки комментов и фоток
   const uploadedImage = React.useRef(null);
@@ -95,8 +91,10 @@ export default function Map({ }) {
     bodyFormData.append("parkingPlaces", 5);
 
     axios.post(SEND_FORMS, bodyFormData).then((res) => {
-      dispatch(addNotification({ userID: res.data.userID, name: res.data.name }));
-    })
+      dispatch(
+        addNotification({ userID: res.data.userID, name: res.data.name })
+      );
+    });
 
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
@@ -104,7 +102,6 @@ export default function Map({ }) {
     // console.log('adress', adress)
     window.ymaps.ready(init);
   };
-
 
   const init = () => {
 
@@ -122,7 +119,7 @@ export default function Map({ }) {
       }
     );
 
-    setAdress('')
+    setAdress("");
     // setAllPlacemarks([])
 
     if (location.state) { //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
@@ -178,7 +175,8 @@ export default function Map({ }) {
     // Слушаем клик на карте.
     myMap.events.add("click", function (e) {
       let newCoords = e.get("coords"); // вытяигиваем координаты
-      if (myPlacemark) { // если метка создана
+      if (myPlacemark) {
+        // если метка создана
         myPlacemark.geometry.setCoordinates(newCoords);
         // myMap.geoObjects.remove(myPlacemark)
       }
@@ -200,8 +198,8 @@ export default function Map({ }) {
       return new window.ymaps.Placemark(
         coords,
         {
-          hintContent: 'ЗДАРОВА', //хинт при наведении на метку
-          iconCaption: "поиск" // balloon 
+          hintContent: "ЗДАРОВА", //хинт при наведении на метку
+          iconCaption: "поиск", // balloon
         },
         {
           preset: "islands#blueAutoIcon", //preset
@@ -215,12 +213,11 @@ export default function Map({ }) {
       myPlacemark.properties.set("iconCaption", "поиск...");
 
       window.ymaps.geocode(coords).then(function (res) {
-        var firstGeoObject = res.geoObjects.get(0);//адрес метки
+        var firstGeoObject = res.geoObjects.get(0); //адрес метки
 
-        var x = res.geoObjects.get(0)
+        var x = res.geoObjects.get(0);
 
-
-        setAdress(firstGeoObject.getAddressLine())
+        setAdress(firstGeoObject.getAddressLine());
 
         // console.log(myGeocoder)
 
@@ -245,11 +242,9 @@ export default function Map({ }) {
         // setAdress(myPlacemark.properties._data.balloonContent
       });
     }
-  }
+  };
 
   // console.log(init())
-
-
 
   // console.log('adddees',adress)
   // if(adress){
@@ -258,22 +253,18 @@ export default function Map({ }) {
   //   }
   //   console.log('province',province)
 
-
-
   useEffect(() => {
-    axios.get('http://localhost:3005/allAccepted')
-      .then(res => {
-        setAllMarks(res.data)
-      })
+    axios.get("http://localhost:3005/allAccepted").then((res) => {
+      setAllMarks(res.data);
+    });
     if (allMarks.length > 0) {
-      window.ymaps.ready(init);
+    window.ymaps.ready(init);
     }
-  }, [allMarks.length])
+  }, [allMarks.length]);
 
-  console.log(location.state)
+  console.log(location.state);
 
   return (
-
     <div className="block-wrapper__map">
       {curImg && <Popup img={curImg} close={handleClosePopup} />}
       <div id="map" className='ymap map'>
@@ -284,7 +275,5 @@ export default function Map({ }) {
         }
       </div>
     </div>
-
-
-  )
+  );
 }

@@ -22,8 +22,6 @@ function App() {
   }, []);
 
   return (
-    // <div className="App">
-
     <div style={{ position: 'relative' }}>
       <div style={{
         position: 'absolute',

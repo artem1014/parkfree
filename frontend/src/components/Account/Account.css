@@ -1,9 +1,10 @@
-.container {
+/* .containerAcc {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 93%;
+  border: 5px solid rgb(233, 236, 248);
 }
 
 .wrapper {
@@ -14,24 +15,9 @@
   height: 100vh;
   max-width: 1000px;
   width: 50%;
-}
-/* added  */
-
-/* .profile_panel_wrapper {
-  margin-top: 65px;
-  margin-left: 40px;
-  width: 250px;
-  height: 535px;
-  background-color: rgba(49, 51, 64, 1);
-  border-radius: 30px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  z-index: 9999;
+  border: 5px solid rgb(233, 236, 248);
 } */
 
-/* added */
 
 body {
   margin: 0 auto;
@@ -86,8 +72,10 @@ body {
 
 #infoBlock {
   background: #e9e2d0;
+  position: relative;
+  opacity: 0.5;
   margin: 0 auto;
-  margin-top: 70px;
+  margin-top: 100px;
   width: 100%;
   height: 45vh;
 }
@@ -108,6 +96,8 @@ body {
 
 #card {
   position: absolute;
+  margin: 0px;
+  opacity: 0.5;
   width: 450px;
   height: 100px;
   padding: 25px;
