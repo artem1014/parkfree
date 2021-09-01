@@ -7,28 +7,32 @@ import Notification from "../Notification";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllNotificationsStart,
+  getAllNotificationValueStart,
   updateStatusNotificationsStart,
 } from "../../redux/actions/notificationAC";
 
 
 import style from "./Nav.module.css";
-import logos from './car.svg'
+import logos from "./car.svg";
 
 const Nav = () => {
   const user = useSelector((state) => state.user);
   const { notification, notificationValue } = useSelector(
     (state) => state.notifications
   );
+  console.log(notification);
+  console.log(notificationValue);
+
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllNotificationsStart());
-  }, [user]);
+    dispatch(getAllNotificationValueStart());
+  }, []);
 
   const updateStatus = () => {
-    // Задать userID
-    dispatch(updateStatusNotificationsStart({ userID: 1 }));
+    dispatch(updateStatusNotificationsStart());
     setIsOpen(!isOpen);
   };
 
@@ -37,10 +41,8 @@ const Nav = () => {
   }
 
   return (
-
     <nav className=" navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-
         {/* logo */}
         <div className={style.logo}>
           <Link to='/'>
@@ -48,7 +50,6 @@ const Nav = () => {
             <img className={style.img} src={'./images/Daco_555134.png'} />
           </Link>
         </div>
-
 
         <div className="container-fluid d-flex">
           <Link className="navbar-brand" to="/">
@@ -173,7 +174,6 @@ const Nav = () => {
                       Sign In
                     </NavLink>
                   </li>
-
                 </>
               )}
             </ul>

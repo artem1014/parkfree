@@ -7,44 +7,55 @@ router.get("/marker", async (req, res) => {
   res.json({ markers, count: count[0][0].count });
 });
 
-router.get('/allAccepted', async (req, res) => {
-  const allMarkers = await Marker.findAll({where: {isAccepted: true}})
+router.get("/allAccepted", async (req, res) => {
+  const allMarkers = await Marker.findAll({ where: { isAccepted: true } });
   res.json(allMarkers);
-})
+});
 
 router.post("/marker", async (req, res) => {
-  const { longitude, latitude, address, comment, pics, parkingPlaces } =
-    req.body;
-  const newMarker = {
-    longitude,
-    latitude,
-    address,
-    comment,
-    pics,
-    parkingPlaces,
-  };
-  await Marker.create({
-    longitude,
-    latitude,
-    address,
-    comment,
-    pics,
-    parkingPlaces,
-  });
-  const { name, userID } = await Notification.create({
-    userID: 1,
-    name: "Ожидайте подтверждения модератора",
-  });
-  res.json({ newMarker, name, userID });
+  try {
+    const { longitude, latitude, address, comment, pics, parkingPlaces } =
+      req.body;
+    const newMarker = {
+      longitude,
+      latitude,
+      address,
+      comment,
+      pics,
+      parkingPlaces,
+    };
+    const userID = req.session.user.id;
+    await Marker.create({
+      longitude,
+      latitude,
+      address,
+      comment,
+      pics,
+      parkingPlaces,
+      userID,
+    });
+
+    const { name } = await Notification.create({
+      userID,
+      name: "Ожидайте подтверждения модератора",
+    });
+    res.json({ newMarker, name, userID });
+  } catch (error) {}
 });
 
 router.post("/accept", async (req, res) => {
-  if (req.body) {
+  try {
+    const userID = req.session.user.id;
     const { id } = req.body;
-    const oneMarker = await Marker.findOne({where: {id}})
-    await Marker.update({isAccepted: !oneMarker.isAccepted, isChecked: true}, {where: {id}})
-    const allMarkers = await Marker.findAll({})
-    // console.log(allMarkers)
+    await Marker.update(
+      { isAccepted: true, isChecked: true },
+      { where: { id } }
+    );
+    const { name } = await Notification.create({
+      userID,
+      name: "Ваша метка одобрена модератором",
+    });
+    const allMarkers = await Marker.findAll({});
     // allMarkers.map(async (el) => {
     //   if (el.id === id) {
     //     el.isAccepted = !el.isAccepted;
@@ -53,18 +64,15 @@ router.post("/accept", async (req, res) => {
     //     return el;
     //   } else return el;
     // });
-    res.json(allMarkers);
-  }
+    res.json({ name, allMarkers });
+  } catch (error) {}
 });
 
 router.post("/decline", async (req, res) => {
-  if (req.body) {
-    const { id } = req.body;
-    const oneMarker = await Marker.findOne({where: {id}})
-    await Marker.update({isChecked: true}, {where: {id}})
-    const allMarkers = await Marker.findAll({})
-    res.json(allMarkers)
-  }
+  const { id } = req.body;
+  await Marker.update({ isChecked: true }, { where: { id } });
+  const allMarkers = await Marker.findAll({});
+  res.json(allMarkers);
 });
 
 router.post('/del', async (req, res) => {

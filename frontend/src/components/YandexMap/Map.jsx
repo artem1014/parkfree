@@ -6,7 +6,7 @@ import { SEND_FORMS } from "../../urls/url";
 import style from "../testImage/style.module.css";
 import { useLocation } from "react-router";
 import { ReactReduxContext, useDispatch } from "react-redux";
-import { acceptMarkAct, addMarkAct } from "../../redux/actions/markActions";
+import { acceptMarkAct, addMarkAct, declineMarkAct } from "../../redux/actions/markActions";
 import SendingForm from "../SendingForm/SendingForm";
 import { addNotification } from "../../redux/actions/notificationAC";
 import Popup from "../Popup/Popup";
@@ -90,16 +90,12 @@ export default function Map({}) {
     bodyFormData.append("comment", e.target.comment.value);
     bodyFormData.append("parkingPlaces", 5);
 
-    axios.post(SEND_FORMS, bodyFormData).then((res) => {
-      dispatch(
-        addNotification({ userID: res.data.userID, name: res.data.name })
-      );
-    });
+    axios.post(SEND_FORMS, bodyFormData,  { withCredentials: true }).then((res) => {
+      dispatch(addNotification({ userID: res.data.userID, name: res.data.name }));
+    })
 
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
-    // console.log('placemarkCoords', placemarkCoords)
-    // console.log('adress', adress)
     window.ymaps.ready(init);
   };
 
@@ -262,7 +258,7 @@ export default function Map({}) {
     }
   }, [allMarks.length]);
 
-  console.log(location.state);
+  // console.log(location.state);
 
   return (
     <div className="block-wrapper__map">
@@ -271,6 +267,7 @@ export default function Map({}) {
       </div>
       <div className='shit2'>
         {location.state && <button onClick={() => dispatch(acceptMarkAct(location.state.id))}> Accept </button>} 
+        {location.state && <button onClick={() => dispatch(declineMarkAct(location.state.id))}> Decline </button>} 
         {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} uploadedImage={uploadedImage} />
         }
       </div>

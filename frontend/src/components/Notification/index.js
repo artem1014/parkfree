@@ -18,7 +18,7 @@ export default function Notification({ open, notification }) {
         <div className={style.together}>
           <h6>Мои уведомления</h6>
           <h6
-            onClick={() => dispatch(deleteAllNotificationsStart({ userID: 1 }))}
+            onClick={() => dispatch(deleteAllNotificationsStart())}
             className={style.erase}
           >
             Стереть

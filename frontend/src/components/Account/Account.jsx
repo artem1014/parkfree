@@ -21,7 +21,7 @@ const Account = () => {
     .then(res => {
       setAllMarkers(res.data)
     })
-  }, [markers])
+  }, [])
 
 
   const newMarkersHandler = () => {
