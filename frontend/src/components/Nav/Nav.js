@@ -14,14 +14,19 @@ import {
 
 import style from "./Nav.module.css";
 import logos from "./car.svg";
+import { getAllAcceptedMarkAct, getAllNewMarkAct } from "../../redux/actions/markActions";
+
 
 const Nav = () => {
+
   const user = useSelector((state) => state.user);
+  const allMarks = useSelector(state => state.marks)
+  // const newMarks = useSelector(state => state.newMarks)
   const { notification, notificationValue } = useSelector(
     (state) => state.notifications
   );
-  console.log(notification);
-  console.log(notificationValue);
+  // console.log(notification);
+  // console.log(notificationValue);
 
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -29,7 +34,11 @@ const Nav = () => {
   useEffect(() => {
     dispatch(getAllNotificationsStart());
     dispatch(getAllNotificationValueStart());
+    dispatch(getAllAcceptedMarkAct());
   }, []);
+  
+  console.log('allMarks', allMarks);
+
 
   const updateStatus = () => {
     dispatch(updateStatusNotificationsStart());

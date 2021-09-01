@@ -1,24 +1,36 @@
 import axios from 'axios'
-const { ADD_MARK_TO_ACCEPT, ACCEPT_MARK, DECLINE_MARK, DELETE_MARK } = require("../types/markTypes")
+const { ADD_MARK_TO_ACCEPT, ACCEPT_MARK, DECLINE_MARK, DELETE_MARK, GET_ALL_ACCEPTED_MARKS, GET_ALL_NEW_MARKS } = require("../types/markTypes")
 
 export const addMarkAct =
-  (longitude, latitude, adress, comment, pics, parkingPlaces, file) =>
-  async (dispatch) => {
-    try {
-      const addedItem = await axios.post("http://localhost:3005/marker", {
-        longitude,
-        latitude,
-        adress,
-        comment,
-        pics,
-        parkingPlaces,
-        file,
-      });
-      dispatch(addMark(addedItem.data));
-    } catch (e) {
-      console.log("error");
-    }
-  };
+  ({ longitude, latitude, address, comment, pics, parkingPlaces }) =>
+    async (dispatch) => {
+      console.log('in addMarkAct');
+      console.log(longitude, latitude, address, comment, pics, parkingPlaces)
+      try {
+        const addedItem = await fetch("http://localhost:3005/marker/add", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            longitude,
+            latitude,
+            address,
+            comment,
+            pics,
+            parkingPlaces,
+          })
+        })
+
+        const getAddedItem = await addedItem.json();
+        console.log('blabla');
+        console.log('ADDED DATA', getAddedItem);
+        dispatch(addMark(getAddedItem));
+      } catch (e) {
+        console.log("error");
+      }
+    };
 
 export const addMark = (newMark) => {
   return {
@@ -28,22 +40,25 @@ export const addMark = (newMark) => {
 };
 
 export const acceptMarkAct = (id) => async (dispatch) => {
-  axios
-    .post("http://localhost:3005/accept", { id }, { withCredentials: true })
-    .then((res) => dispatch(acceptMark(res.data.allMarkers)));
-    
+  try {
+    axios
+      .post("http://localhost:3005/marker/accept", { id }, { withCredentials: true })
+      .then((res) => dispatch(acceptMark(id)))
+  } catch (e) {
+    console.log('err')
+  }
 };
 
-export const acceptMark = (payload) => {
+export const acceptMark = (id) => {
   return {
     type: ACCEPT_MARK,
-    payload,
+    payload: id
   };
 };
 
 export const declineMarkAct = (id) => async (dispatch) => {
   try {
-    const payload = (await axios.post("http://localhost:3005/decline", { id }))
+    const payload = (await axios.post("http://localhost:3005/marker/decline", { id }))
       .data;
     dispatch(declineMark(payload));
   } catch (e) {
@@ -57,9 +72,10 @@ export const declineMark = (payload) => {
     payload
   }
 }
+
 export const deleteMarkAct = (id) => async (dispatch) => {
   try {
-    axios.post('http://localhost:3005/del', { id })
+    axios.post('http://localhost:3005/marker/del', { id })
       .then(res => dispatch(deleteMark(id)))
   } catch (e) {
     console.log('error')
@@ -72,3 +88,37 @@ export const deleteMark = (id) => {
     payload: id
   }
 }
+
+export const getAllAcceptedMarkAct = () => async (dispatch) => {
+  try {
+    const allMarks = await axios.get('http://localhost:3005/marker/all')
+    console.log('ETO AKSHON', allMarks.data)
+    dispatch(getAllAcceptedMark(allMarks.data))
+  } catch (e) {
+    console.log('error')
+  }
+}
+
+export const getAllAcceptedMark = (arrOfMarks) => {
+  return {
+    type: GET_ALL_ACCEPTED_MARKS,
+    payload: arrOfMarks
+  }
+}
+
+// export const getAllNewMarkAct = () => async (dispatch) => {
+//   try {
+//     const allNewMarks = await axios.get('http://localhost:3005/marker/allNew')
+//     console.log(allNewMarks.data)
+//       dispatch(getAllNewMark(allNewMarks.data))
+//   } catch (e) {
+//     console.log('error')
+//   }
+// }
+
+// export const getAllNewMark = (arrOfNewMarks) => {
+//   return {
+//     type: GET_ALL_NEW_MARKS,
+//     payload: arrOfNewMarks
+//   }
+// }
