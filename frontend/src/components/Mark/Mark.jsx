@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { acceptMarkAct, declineMarkAct } from "../../redux/actions/markActions";
+import { acceptMarkAct, declineMarkAct, deleteMarkAct } from "../../redux/actions/markActions";
+import './Mark.css'
 
-const Mark = ({ adress, id, longitude, latitude}) => {
+const Mark = ({ adress, id, longitude, latitude, identificator }) => {
 
-const coords = [latitude, longitude]
+  const coords = [latitude, longitude]
 
-  const plInfo = {coords, adress, id}
+  
+
+  const plInfo = { coords, adress, id }
 
   const dispatch = useDispatch();
 
@@ -16,7 +19,7 @@ const coords = [latitude, longitude]
     dispatch(acceptMarkAct(id))
   }
 
-  const marks = useSelector(state => console.log(state.marks))
+  // const marks = useSelector(state => console.log(state.marks))
 
   const onMapHandler = () => {
     history.push({
@@ -29,15 +32,25 @@ const coords = [latitude, longitude]
     dispatch(declineMarkAct(id))
   }
 
+  const deleteHandler = () => {
+    dispatch(deleteMarkAct(id))
+  }
+
   return (
     <div className="d-flex justify-content-center flex-row align-items-center">
-      <img src='https://static.thenounproject.com/png/141955-200.png' alt="" />
-      <p> координаты: {coords} </p>
+      <img className='pic' src='https://static.thenounproject.com/png/141955-200.png' alt="" />
       <p> адрес: {adress} </p>
       <div className='d-flex align-items-center'>
-      <button onClick={acceptHandler} className='btn btn-success mx-2'> Accept </button> 
-      <button onClick={onMapHandler} className='btn btn-warning mx-2'> on Map </button>
-      <button onClick={declineHandler} className='btn btn-danger mx-2'> Decline </button>
+        {identificator
+          ?
+          <>
+            <button onClick={acceptHandler} className='btn btn-success mx-2'> Accept </button>
+            <button onClick={onMapHandler} className='btn btn-warning mx-2'> on Map </button>
+            <button onClick={declineHandler} className='btn btn-danger mx-2'> Decline </button>
+          </>
+          :
+          <button onClick={deleteHandler} className='btn btn-danger mx-2'> Delete </button>
+        }
       </div>
     </div>
   )

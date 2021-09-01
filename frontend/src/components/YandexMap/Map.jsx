@@ -53,8 +53,8 @@ export default function Map({ }) {
 
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
-    console.log(placemarkCoords)
-    console.log(adress)
+    // console.log(placemarkCoords)
+    // console.log(adress)
     // dispatch(addMarkAct(placemarkCoords[0], placemarkCoords[1], adress, e.target.comment.value, ))
     window.ymaps.ready(init);
     // madeMap.geoObjects.remove(myPlacemark)
@@ -100,21 +100,21 @@ export default function Map({ }) {
 
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
-    console.log('placemarkCoords', placemarkCoords)
-    console.log('adress', adress)
+    // console.log('placemarkCoords', placemarkCoords)
+    // console.log('adress', adress)
     window.ymaps.ready(init);
   };
 
 
   const init = () => {
 
-    console.log('==========>', arr)
+    // console.log('==========>', arr)
 
     const myMap = new window.ymaps.Map(
       "map",
       {
         center: [55.753994, 37.622093],
-        zoom: 11,
+        zoom: 10,
         behaviors: ['drag', 'dblClickZoom'] //убираем масштабирование карты при скролле, оставляем масштабирование при клике мыши
       },
       {
@@ -126,7 +126,16 @@ export default function Map({ }) {
     // setAllPlacemarks([])
 
     if (location.state) { //добавляем на карту метку из админского кабинета !!!! надо сделать удаление по переходу на новую страницу
-      let adminNewPlacemark = new window.ymaps.Placemark(location.state.coords);
+      let adminNewPlacemark = new window.ymaps.Placemark(
+        location.state.coords, 
+        {
+          hintContent: 'ЗДАРОВА', //хинт при наведении на метку
+          iconCaption: "поиск" // balloon 
+        },
+        {
+          preset: 'islands#redIcon'
+        });
+
       adminNewPlacemark.properties.set({
         iconCaption: location.state.adress,
         balloonContent: location.state.adress,
@@ -134,13 +143,13 @@ export default function Map({ }) {
       myMap.geoObjects.add(adminNewPlacemark);
     }
 
-    console.log('dgsdg', allMarks)
+    // console.log('dgsdg', allMarks)
 
 
     if (allMarks.length) {
       for (let i = 0; i < allMarks.length; i++) {
-        console.log('dsfsgsgsdgdsgdsgsdg')
-        console.log(allMarks[i].pics)
+        // console.log('dsfsgsgsdgdsgdsgsdg')
+        // console.log(allMarks[i].pics)
         let pl = new window.ymaps.Placemark([allMarks[i].latitude, allMarks[i].longitude]);
         pl.properties.set({
           iconCaption: allMarks[i].address,

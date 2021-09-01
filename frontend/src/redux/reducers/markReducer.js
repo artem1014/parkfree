@@ -1,4 +1,4 @@
-import { ACCEPT_MARK, ADD_MARK_TO_ACCEPT, DECLINE_MARK } from "../types/markTypes";
+import { ACCEPT_MARK, ADD_MARK_TO_ACCEPT, DECLINE_MARK, DELETE_MARK } from "../types/markTypes";
 
 const markReducer = (state = [], action) => {
 
@@ -36,6 +36,11 @@ const markReducer = (state = [], action) => {
         //   return el
         // }))
       }
+
+      case DELETE_MARK:
+        {
+          return state.filter(el => el.id != action.payload)
+        }
 
     default:
       return state

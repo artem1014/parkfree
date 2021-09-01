@@ -67,6 +67,13 @@ router.post("/decline", async (req, res) => {
   }
 });
 
+router.post('/del', async (req, res) => {
+  // console.log(req.body)
+  const { id } = req.body;
+  const deleteItem = await Marker.destroy({ where: { id } })
+  res.json()
+})
+
 router.post("/", async (req, res) => {
   // console.log(req.body);
   // const {

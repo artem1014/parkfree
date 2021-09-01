@@ -31,8 +31,9 @@ const Nav = () => {
     setIsOpen(!isOpen);
   };
 
-
-  console.log('=============>', user)
+  if (user) {
+    console.log('==========user===>', user.role === 'admin')
+  }
 
   return (
 
@@ -55,56 +56,102 @@ const Nav = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               {user ? (
-                <>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/auth/signout"
-                      className="nav-link"
-                      activeClassName="active"
-                    >
-                      Sign out
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/account"
-                      className="nav-link"
-                      activeClassName="active"
-                    >
-                      Account
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/images"
-                      className="nav-link"
-                      activeClassName="active"
-                    >
-                      Images
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      to="/map"
-                      className="nav-link"
-                      activeClassName="active"
-                    >
-                      Map
-                    </NavLink>
-                  </li>
-                  <li>
-                    <IconButton onClick={updateStatus}>
-                      <Badge
-                        badgeContent={notificationValue}
-                        color="secondary"
-                        className="nav-item"
+                (user.role === 'admin') ? (
+                  <>
+                    <li className="nav-item">
+                      <NavLink
+                        to="/auth/signout"
+                        className="nav-link"
+                        activeClassName="active"
                       >
-                        <NotificationsIcon />
-                      </Badge>
-                    </IconButton>
-                    <Notification open={isOpen} notification={notification} />
-                  </li>
-                </>
+                        Sign out
+                    </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        to="/account"
+                        className="nav-link"
+                        activeClassName="active"
+                      >
+                        Account
+                    </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        to="/images"
+                        className="nav-link"
+                        activeClassName="active"
+                      >
+                        Images
+                    </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        to="/map"
+                        className="nav-link"
+                        activeClassName="active"
+                      >
+                        Map
+                    </NavLink>
+                    </li>
+                    <li>
+                      <IconButton onClick={updateStatus}>
+                        <Badge
+                          badgeContent={notificationValue}
+                          color="secondary"
+                          className="nav-item"
+                        >
+                          <NotificationsIcon />
+                        </Badge>
+                      </IconButton>
+                      <Notification open={isOpen} notification={notification} />
+                    </li>
+                  </>
+                )
+                  :
+                  (
+                    <>
+                      <li className="nav-item">
+                        <NavLink
+                          to="/auth/signout"
+                          className="nav-link"
+                          activeClassName="active"
+                        >
+                          Sign out
+                    </NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink
+                          to="/images"
+                          className="nav-link"
+                          activeClassName="active"
+                        >
+                          Images
+                    </NavLink>
+                      </li>
+                      <li className="nav-item">
+                        <NavLink
+                          to="/map"
+                          className="nav-link"
+                          activeClassName="active"
+                        >
+                          Map
+                    </NavLink>
+                      </li>
+                      <li>
+                        <IconButton onClick={updateStatus}>
+                          <Badge
+                            badgeContent={notificationValue}
+                            color="secondary"
+                            className="nav-item"
+                          >
+                            <NotificationsIcon />
+                          </Badge>
+                        </IconButton>
+                        <Notification open={isOpen} notification={notification} />
+                      </li>
+                    </>
+                  )
               ) : (
                 <>
                   <li className="nav-item">
@@ -132,7 +179,7 @@ const Nav = () => {
           </div>
         </div>
       </div>
-    </nav>
+    </nav >
   );
 };
 

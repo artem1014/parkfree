@@ -63,7 +63,7 @@ export const signOutStart = () => async (dispatch) => {
   const response = await fetch(SIGNOUT_USER, {
     credentials: "include",
   });
-  console.log("resporesponse", response);
+  // console.log("resporesponse", response);
   if (response.ok) {
     dispatch(deleteUser()); // в state с юзером кладется null
   }

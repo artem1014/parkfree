@@ -1,5 +1,5 @@
 import axios from 'axios'
-const { ADD_MARK_TO_ACCEPT, ACCEPT_MARK, DECLINE_MARK } = require("../types/markTypes")
+const { ADD_MARK_TO_ACCEPT, ACCEPT_MARK, DECLINE_MARK, DELETE_MARK } = require("../types/markTypes")
 
 export const addMarkAct = (longitude, latitude, adress, comment, pics, parkingPlaces, file) => async (dispatch) => {
   try {
@@ -46,5 +46,20 @@ export const declineMark = (payload) => {
   return {
     type: DECLINE_MARK,
     payload
+  }
+}
+export const deleteMarkAct = (id) => async (dispatch) => {
+  try {
+    axios.post('http://localhost:3005/del', { id })
+      .then(res => dispatch(deleteMark(id)))
+  } catch (e) {
+    console.log('error')
+  }
+}
+
+export const deleteMark = (id) => {
+  return {
+    type: DELETE_MARK,
+    payload: id
   }
 }
