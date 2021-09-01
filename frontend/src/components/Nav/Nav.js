@@ -51,7 +51,7 @@ const Nav = () => {
 
         <div className="container-fluid d-flex">
           <Link className="navbar-brand" to="/">
-            Home
+            Park Free
           </Link>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">

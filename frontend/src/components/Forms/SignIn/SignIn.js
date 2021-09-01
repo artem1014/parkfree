@@ -45,8 +45,8 @@ const SignIn = () => {
     let payload = Object.fromEntries(new FormData(e.target))
     console.log(payload)
     dispatch(signInStart(payload, history, from));
-    if(userSign === null) {
-       notify();
+    if (userSign === null) {
+      notify();
     }
   };
 
@@ -60,7 +60,7 @@ const SignIn = () => {
 
 
             <form onSubmit={submitHandler} >
-              <legend className="text-center text-light">User Sign In</legend>
+              <legend className="text-center text-light">Sign In</legend>
               <div className="mb-3">
                 <input onChange={changeHandler} value={userSignIn.email} className="form-control" type="text" name="email" placeholder='email' />
               </div>
