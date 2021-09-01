@@ -55,10 +55,12 @@ export const deleteNotification = (id) => ({
   payload: id,
 });
 
-export const deleteAllNotificationsStart = () => async (dispatch) => {
+export const deleteAllNotificationsStart = (setIsOpen) => async (dispatch) => {
   axios
     .delete(DELETE_ALL_NOTIFICATIONS_DB, { withCredentials: true })
     .then(() => dispatch(deleteAllNotifications()));
+    setIsOpen(false)
+
 };
 
 export const deleteAllNotifications = () => ({

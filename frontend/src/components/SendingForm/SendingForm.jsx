@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 
-const SendingForm = ({ sendForm, handleImageUpload, imageUploader, uploadedImage }) => {
-
-    const [files, setFiles] = useState([]);
-  
+const SendingForm = ({ sendForm, handleImageUpload, imageUploader, uploadedImage, setFiles, files }) => {
     const { getRootProps, getInputProps } = useDropzone({
       accept: "image/*",
       onDrop: (acceptedFiles) => {
@@ -40,7 +37,7 @@ const SendingForm = ({ sendForm, handleImageUpload, imageUploader, uploadedImage
         />
       </p>
 
-      <p type="Вставьте изображение">
+      {/* <p type="Вставьте изображение">
         <input
           type="file"
           accept="image/*"
@@ -48,9 +45,9 @@ const SendingForm = ({ sendForm, handleImageUpload, imageUploader, uploadedImage
           ref={imageUploader}
           name="file"
         />
-      </p>
+      </p> */}
 
-      {/* <div>
+      <div>
         <div className='formAddImage' {...getRootProps()}>
           <img
             className='add'
@@ -61,7 +58,7 @@ const SendingForm = ({ sendForm, handleImageUpload, imageUploader, uploadedImage
           <p>Add minimum 1 photo</p>
         </div>
         <div className='addImages'>{images}</div>
-      </div> */}
+      </div>
 
       <img className='inpimg'
         ref={uploadedImage}

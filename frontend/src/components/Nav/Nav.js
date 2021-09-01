@@ -5,49 +5,38 @@ import { useEffect, useState } from "react";
 import Badge from "@material-ui/core/Badge";
 import Notification from "../Notification";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllNotificationsStart,
-  getAllNotificationValueStart,
-  updateStatusNotificationsStart,
-} from "../../redux/actions/notificationAC";
-
-
+import { getAllNotificationsStart, getAllNotificationValueStart, updateStatusNotificationsStart } from "../../redux/actions/notificationAC";
 import style from "./Nav.module.css";
-import logos from "./car.svg";
 
 const Nav = () => {
   const user = useSelector((state) => state.user);
+  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
   const { notification, notificationValue } = useSelector(
     (state) => state.notifications
   );
-  console.log(notification);
-  console.log(notificationValue);
-
-  const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllNotificationsStart());
     dispatch(getAllNotificationValueStart());
-  }, []);
+  }, [notificationValue])
+
+
 
   const updateStatus = () => {
     dispatch(updateStatusNotificationsStart());
     setIsOpen(!isOpen);
-  };
 
-  if (user) {
-    console.log('==========user===>', user.role === 'admin')
-  }
+  };
 
   return (
     <nav className=" navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         {/* logo */}
         <div className={style.logo}>
-          <Link to='/'>
+          <Link to="/">
             {/* <img className={style.img} src={'https://www.vhv.rs/dpng/d/55-555134_vector-cars-logo-png-transparent-png.png'} /> */}
-            <img className={style.img} src={'./images/Daco_555134.png'} />
+            <img className={style.img} src={"./images/Daco_555134.png"} />
           </Link>
         </div>
 
@@ -58,7 +47,7 @@ const Nav = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               {user ? (
-                (user.role === 'admin') ? (
+                user.role === "admin" ? (
                   <>
                     <li className="nav-item">
                       <NavLink
@@ -67,7 +56,7 @@ const Nav = () => {
                         activeClassName="active"
                       >
                         Sign out
-                    </NavLink>
+                      </NavLink>
                     </li>
                     <li className="nav-item">
                       <NavLink
@@ -76,7 +65,7 @@ const Nav = () => {
                         activeClassName="active"
                       >
                         Account
-                    </NavLink>
+                      </NavLink>
                     </li>
                     <li className="nav-item">
                       <NavLink
@@ -85,7 +74,7 @@ const Nav = () => {
                         activeClassName="active"
                       >
                         Images
-                    </NavLink>
+                      </NavLink>
                     </li>
                     <li className="nav-item">
                       <NavLink
@@ -94,7 +83,7 @@ const Nav = () => {
                         activeClassName="active"
                       >
                         Map
-                    </NavLink>
+                      </NavLink>
                     </li>
                     <li>
                       <IconButton onClick={updateStatus}>
@@ -109,51 +98,49 @@ const Nav = () => {
                       <Notification open={isOpen} notification={notification} />
                     </li>
                   </>
+                ) : (
+                  <>
+                    <li className="nav-item">
+                      <NavLink
+                        to="/auth/signout"
+                        className="nav-link"
+                        activeClassName="active"
+                      >
+                        Sign out
+                      </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        to="/images"
+                        className="nav-link"
+                        activeClassName="active"
+                      >
+                        Images
+                      </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink
+                        to="/map"
+                        className="nav-link"
+                        activeClassName="active"
+                      >
+                        Map
+                      </NavLink>
+                    </li>
+                    <li>
+                      <IconButton onClick={updateStatus}>
+                        <Badge
+                          badgeContent={notificationValue}
+                          color="secondary"
+                          className="nav-item"
+                        >
+                          <NotificationsIcon />
+                        </Badge>
+                      </IconButton>
+                      <Notification open={isOpen} notification={notification} setIsOpen={setIsOpen}  />
+                    </li>
+                  </>
                 )
-                  :
-                  (
-                    <>
-                      <li className="nav-item">
-                        <NavLink
-                          to="/auth/signout"
-                          className="nav-link"
-                          activeClassName="active"
-                        >
-                          Sign out
-                    </NavLink>
-                      </li>
-                      <li className="nav-item">
-                        <NavLink
-                          to="/images"
-                          className="nav-link"
-                          activeClassName="active"
-                        >
-                          Images
-                    </NavLink>
-                      </li>
-                      <li className="nav-item">
-                        <NavLink
-                          to="/map"
-                          className="nav-link"
-                          activeClassName="active"
-                        >
-                          Map
-                    </NavLink>
-                      </li>
-                      <li>
-                        <IconButton onClick={updateStatus}>
-                          <Badge
-                            badgeContent={notificationValue}
-                            color="secondary"
-                            className="nav-item"
-                          >
-                            <NotificationsIcon />
-                          </Badge>
-                        </IconButton>
-                        <Notification open={isOpen} notification={notification} />
-                      </li>
-                    </>
-                  )
               ) : (
                 <>
                   <li className="nav-item">
@@ -180,7 +167,7 @@ const Nav = () => {
           </div>
         </div>
       </div>
-    </nav >
+    </nav>
   );
 };
 

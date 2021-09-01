@@ -16,7 +16,7 @@ export default function Map({}) {
   // const arr = [{ coords: [55.729324292067254, 37.65196207958984], adress: 'Россия, Москва, Шлюзовая набережная' }, { coords: [55.76069738614288, 37.64234904248048], adress: 'Россия, Москва, Чистопрудный бульвар, 12к7А' }]
 
   const [allMarks, setAllMarks] = useState([]);
-
+  const [files, setFiles] = useState([]);
   // useEffect(() => {
   //   axios.get('http://localhost:3005/allAccepted').then(res => {
   //     setAllMarks(res.data)
@@ -76,14 +76,18 @@ export default function Map({}) {
   const sendForm = (e) => {
     e.preventDefault();
     // Получаем все значения из формы по атрибуту name
-    const { file } = Object.fromEntries(new FormData(e.target));
+    // const { file } = Object.fromEntries(new FormData(e.target));
     // console.log(file);
-    const image = file.name;
+    // const image = file.name;
 
     // Эта штука собирает все значения через append и через axios отправляет на back
     let bodyFormData = new FormData();
-    bodyFormData.append("file", file);
-    bodyFormData.append("pics", image);
+    files.map((el) => {
+      bodyFormData.append("file", el);
+      bodyFormData.append("pics", el.name);
+    });
+    // bodyFormData.append("file", file);
+    // bodyFormData.append("pics", image);
     bodyFormData.append("latitude", placemarkCoords[0]);
     bodyFormData.append("longitude", placemarkCoords[1]);
     bodyFormData.append("address", adress);
@@ -268,7 +272,7 @@ export default function Map({}) {
       <div className='shit2'>
         {location.state && <button onClick={() => dispatch(acceptMarkAct(location.state.id))}> Accept </button>} 
         {location.state && <button onClick={() => dispatch(declineMarkAct(location.state.id))}> Decline </button>} 
-        {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} uploadedImage={uploadedImage} />
+        {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} uploadedImage={uploadedImage} setFiles={setFiles} files={files} />
         }
       </div>
     </div>

@@ -26,26 +26,25 @@ router.get("/signout", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
   try {
-
     const { email, password } = req.body;
-    // console.log('singin', req.body)
-    const user = await User.findOne({ where: { email }});
-    console.log('=====user', user)
-    console.log('=====password', password)
-    console.log('=====user.password', user.password)
-    console.log(password === user.password)
+    const user = await User.findOne({ where: { email } });
     if (user) {
       if (password === user.password) {
         req.session.user = user;
         //return res.status(200).json({ id: user.id, name: user.name });
         return res
           .status(200)
-          .json({ login: user.login, email: user.email, id: user.id, role: user.role });
+          .json({
+            login: user.login,
+            email: user.email,
+            id: user.id,
+            role: user.role,
+          });
       }
       return res.status(400);
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 });
 

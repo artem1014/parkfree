@@ -5,6 +5,7 @@ import {
   SIGNOUT_USER,
   CHECK_USER,
 } from "../../urls/userURLS";
+import { deleteAllNotifications, getAllNotificationsStart, getAllNotificationValueStart } from "./notificationAC";
 
 // вызывает логику юзера
 export const setUser = (user) => ({
@@ -29,7 +30,6 @@ export const signUpStart = (payload, history) => async (dispatch) => {
   });
   if (response.status === 200) {
     const user = await response.json();
-    console.log("USER SIGNED UP", user);
     dispatch(setUser(user));
     history.replace("/"); //если успешно, переходим сюда
   } else {
@@ -50,7 +50,8 @@ export const signInStart = (payload, history, from) => async (dispatch) => {
   });
   if (response.status === 200) {
     const user = await response.json();
-    // window.localStorage.setItem("user", JSON.stringify(user.login));
+    dispatch(getAllNotificationsStart());
+    dispatch(getAllNotificationValueStart());
     dispatch(setUser(user));
     return history.replace(from); //если вошли удачно, то перекидываем на страницу с инфой о пользователе
   } else {
@@ -65,6 +66,7 @@ export const signOutStart = () => async (dispatch) => {
   });
   // console.log("resporesponse", response);
   if (response.ok) {
+    dispatch(deleteAllNotifications())
     dispatch(deleteUser()); // в state с юзером кладется null
   }
 };

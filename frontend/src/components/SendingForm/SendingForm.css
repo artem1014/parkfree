@@ -1,6 +1,6 @@
 .form {
   width: 240px;
-  height: auto;
+  height: 400px;
   background: #e6e6e6;
   border-radius: 4px;
   box-shadow: 0 0 40px -10px #000;
@@ -10,6 +10,7 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
   position: relative;
+  overflow-y: auto;
 }
 h5 {
   margin: 10px 0;

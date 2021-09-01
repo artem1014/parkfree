@@ -8,9 +8,11 @@ import {
   deleteNotificationStart,
 } from "../../redux/actions/notificationAC";
 
-export default function Notification({ open, notification }) {
+export default function Notification({ open, notification, setIsOpen }) {
   const dispatch = useDispatch();
   if (!open) return null;
+
+
 
   return ReactDom.createPortal(
     <SimpleBar style={{ maxHeight: 300 }} className={style.form}>
@@ -18,7 +20,7 @@ export default function Notification({ open, notification }) {
         <div className={style.together}>
           <h6>Мои уведомления</h6>
           <h6
-            onClick={() => dispatch(deleteAllNotificationsStart())}
+            onClick={() => dispatch(deleteAllNotificationsStart(setIsOpen))}
             className={style.erase}
           >
             Стереть
@@ -26,8 +28,7 @@ export default function Notification({ open, notification }) {
         </div>
         {notification.length ? (
           notification.map((el) => (
-            <div key={el.id}>
-              <li className={style.together}>
+              <li key={el.id} className={style.together}>
                 {el.name}
                 <img
                   onClick={() => dispatch(deleteNotificationStart(el.id))}
@@ -37,7 +38,6 @@ export default function Notification({ open, notification }) {
                   alt="#"
                 />
               </li>
-            </div>
           ))
         ) : (
           <p className={style.empty}>Пусто</p>
