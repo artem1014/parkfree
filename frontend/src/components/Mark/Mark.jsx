@@ -6,6 +6,7 @@ import stylesMark from "./Mark.module.css";
 
 const Mark = ({ adress, id, longitude, latitude, identificator, pic }) => {
   const coords = [latitude, longitude];
+  console.log('Hey, soul sister')
 
   const plInfo = { coords, adress, id, pic };
 
