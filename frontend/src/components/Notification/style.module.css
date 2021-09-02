@@ -1,14 +1,15 @@
 .form {
   position: absolute;
   top: 63px;
-  left: 360px;
   margin: 0 auto;
+  right: 60px;
   width: 300px;
   min-height: 200px;
   max-height: 400px;
+  color: white;
   border-radius: 13px;
   border: 1px solid rgb(255, 255, 255);
-  background-color: #aab3e6;
+  /* background-color: #aab3e6; */
   margin: 0;
   padding: 0;
   display: flex;
@@ -16,6 +17,7 @@
   /* overflow: auto; */
   /* align-items: center; */
   opacity: 0.9;
+  z-index: 10000;
 }
 
 .form ul {
@@ -48,7 +50,7 @@
   list-style: none;
   margin: 0;
   padding: 0px 5px;
-  border-top: 1px solid #566be2;
+  border-top: 1px solid #477a85;
 }
 
 .form ul li:visited,
@@ -57,7 +59,7 @@
 }
 
 .form ul li:hover {
-  background-color: #8997e3;
+  background-color: #477a85;
 }
 
 .cross {
@@ -67,7 +69,7 @@
 }
 
 .cross:hover {
-  background-color: #566be2;
+  background-color: #477a85;
   border-radius: 50%;
 }
 
@@ -82,6 +84,6 @@
 }
 
 .erase:hover {
-  background-color: #8692d4;
+  background-color: #477a85;
   border-radius: 3px;
 }

@@ -3,9 +3,73 @@
   background-color: rgba(24, 59, 82, 0.4);
 }
 
+.nav__container {
+  /* width: 60%; */
+  height: 100px;
+  
+  display:grid;
+  grid-template-columns: 1fr 3fr 6fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+  "logonav textnav btnsnav"
+  ;
+  column-gap: 20px;
+  align-items: center;
+  justify-content: center;
+  align-content: end;
+
+  padding-bottom: 20px;
+}
+
+.nav__logo {
+  grid-area: logonav;
+}
+
+.nav__text {
+  grid-area: textnav;
+}
+
+.nav__btns {
+  grid-area: btnsnav;
+
+  list-style: none;
+
+  display: grid;
+  grid-auto-flow: column;
+
+  justify-content: end;
+
+  column-gap: 20px;
+
+  margin: 0;
+}
+
+.nav__btn {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.nav__none {
+  width: 1px;
+  height: 1px;
+  grid-area: nonenav;
+}
+
 /* отодвинули signin /up в право */
 .navbar {
   margin-left: auto;
+}
+
+.navbar__wrapper {
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  
 }
 /* name of the site in Navbar */
 .navbar_brand2 {
@@ -110,7 +174,8 @@
 } */
 
 .img {
-  width: 35%;
+  width: 80%;
+  height: auto;
 
   /* box-shadow: 0 0 40px -10px rgb(245, 241, 241); */
 }

@@ -38,20 +38,130 @@ const Nav = () => {
     setIsOpen(!isOpen);
   };
 
-  return (
-    <nav className={`navbar navbar-expand-lg navbar-light ${style.bg}`}>
-      <div className="container">
 
-        <div className={style.logo}>
+  return (
+    // <nav className={`navbar navbar-expand-lg navbar-light ${style.bg}`}>
+    <nav className={style.navbar__wrapper}>
+      <div className={style.nav__container}>
+
+        <div className={style.nav__logo}>
           <Link to="/map">
-            <img className={style.img} src={"./images/Daco_555134.png"} />
+            <img className={style.img} src={"./images/tachila1.svg"} />
           </Link>
         </div>
+        <Link className={`${style.navbar_brand2} ${style.nav__text}`} to="/map">
+          ParkFree
+        </Link>
 
-        <div className="container-fluid d-flex">
+        <ul className={style.nav__btns}>
+          {user ? (
+            user.role === "admin" ? (
+              <>
+                <li className={style.nav__btn}>
+                  <NavLink
+                    to="/auth/signout"
+                    className={style.nav_item2}
+                    activeClassName="active"
+                  >
+                    Sign out
+                      </NavLink>
+                </li>
+                <li className={style.nav__btn}>
+                  <NavLink
+                    to="/account"
+                    className={style.nav_item2}
+                    activeClassName="active"
+                  >
+                    Account
+                      </NavLink>
+                </li>
+                <li className={style.nav__btn}>
+                  <NavLink
+                    to="/map"
+                    className={style.nav_item2}
+                    activeClassName="active"
+                  >
+                    Map
+                      </NavLink>
+                </li>
+                <li className={style.nav__btn}>
+                  <IconButton onClick={updateStatus}>
+                    <Badge
+                      badgeContent={notificationValue}
+                      color="secondary"
+                    >
+                      <NotificationsIcon />
+                    </Badge>
+                  </IconButton>
+                  <Notification open={isOpen} setIsOpen={setIsOpen} />
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item mx-3 my-3">
+                  <NavLink
+                    to="/auth/signout"
+
+                    className={style.nav_item2}
+                    activeClassName="active"
+                  >
+                    Sign out
+                      </NavLink>
+                </li>
+                <li className="nav-item mx-3 my-3">
+                  <NavLink
+                    to="/map"
+                    className={style.nav_item2}
+                    activeClassName="active"
+                  >
+                    Map
+                      </NavLink>
+                </li>
+                <li>
+                  <IconButton color="inherit" onClick={updateStatus}>
+                    <Badge
+                      badgeContent={notificationValue}
+                      color="secondary"
+                      className="nav-item mx-5"
+                    >
+                      <NotificationsIcon />
+                    </Badge>
+                  </IconButton>
+                  <Notification open={isOpen} setIsOpen={setIsOpen} />
+                </li>
+              </>
+            )
+          ) : (
+            <>
+              <li className="nav-item mx-3 my-3">
+                <NavLink
+                  to="/signup"
+                  className={style.nav_item2}
+                  activeClassName="active"
+                >
+                  Sign Up
+                    </NavLink>
+              </li>
+              {" "}
+              <li className="nav-item mx-5 my-3">
+                <NavLink
+                  to="/signin"
+                  className={style.nav_item2}
+                  activeClassName="active"
+                >
+                  Sign In
+                    </NavLink>
+              </li>
+            </>
+          )}
+        </ul>
+
+        {/* <div className="container-fluid d-flex">
           <Link className={style.navbar_brand2} to="/map">
             ParkFree
           </Link>
+
+          
           <div className={style.navbar} id="navbarNav">
             <ul className="navbar-nav">
               {user ? (
@@ -157,7 +267,7 @@ const Nav = () => {
               )}
             </ul>
           </div>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

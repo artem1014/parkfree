@@ -32,6 +32,7 @@
   width: 100%;
   height: 100%;
   /* border: 5px solid rgb(233, 236, 248); */
+  padding-top: 100px
 }
 
 .wrapper {
@@ -41,7 +42,7 @@
   /* just-cont - сверху и снизу делает отступы, размещая box по середине */
   /* justify-content: center; */
   align-items: center;
-  height: 100vh;
+  padding: 40px 20px;
   color: white;
   max-width: 1100px;
   width: 50%;
@@ -59,7 +60,7 @@
   color: whitesmoke;
   /* font-weight: bold; */
   margin-top: 20px;
-  box-shadow: 0 0 40px -5px rgb(245, 241, 241);
+  /* box-shadow: 0 0 40px -5px rgb(245, 241, 241); */
 }
 
 .button_marks:hover {
@@ -77,11 +78,10 @@
   margin-top: 0;
   display: flex;
   width: 600px;
-  height: 100px;
+  height: auto;
   flex-direction: column;
   border-radius: 30px;
   overflow: hidden;
-  border: 1px solid rgb(233, 236, 248);
 }
 
 /* body {
@@ -169,3 +169,104 @@
 }
 
 img:hover { width:500px; } */
+
+.table {
+	width: 100%;
+	border: none;
+	/* margin: 20px;
+  padding: 20px; */
+  margin-bottom: 0;
+}
+.table thead th {
+	text-align: left;
+	border: 1px solid black;
+	padding: 10px 15px;
+	background: #d8d8d8;
+	font-size: 14px;
+  border: 1px solid white;
+}
+.table thead tr th:first-child {
+	border-radius: 8px 0 0 8px;
+  border: 1px solid white;
+}
+.table thead tr th:last-child {
+	border-radius: 0 8px 8px 0;
+  border: 1px solid white;
+}
+.table tbody td {
+	text-align: left;
+	border: none;
+	padding: 10px 15px;
+	font-size: 14px;
+	vertical-align: top;
+  border: 1px solid white;
+}
+.table th {
+  border: 1px solid white;
+  padding: 5px;
+  margin: 10px;
+}
+
+.table tbody tr td:first-child {
+	border-radius: 8px 0 0 8px;
+  border: 1px solid white;
+}
+.table tbody tr td:last-child {
+	border-radius: 0 8px 8px 0;
+  border: 1px solid white;
+}
+
+
+.input[type="checkbox"] {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+.label {
+  width: 200px;
+  height: 50px;
+  display:block;
+  background-color: #477a85;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.5s;
+  box-shadow: 0 0 20px #477a8550;
+}
+.label::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  background-color: #e8f5f7;
+  position: absolute;
+  border-radius: 70px;
+  top: 10px;
+  left: 15px;
+  transition: 0.5s;
+}
+
+.input:checked + label:after {
+  left: calc(100% - 10px);
+  transform: translateX(-100%);
+}
+
+.input:checked + label {
+  background-color: #243d42;
+}
+
+.label:active:after {
+  width: 60px;
+}
+
+.labelText {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(0, -50%);
+  transition: .5s;
+}
+
+.input:checked + label .labelText{
+  right: calc(100% - 20px);
+  transform: translate(100%, -50%);
+}

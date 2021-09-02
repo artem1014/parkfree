@@ -37,48 +37,79 @@ const Mark = ({ adress, id, longitude, latitude, identificator, pic }) => {
   };
 
   return (
-    <div className="d-flex justify-content-center flex-row align-items-center">
-      <img
-        className={stylesMark.pic}
-        src="https://static.thenounproject.com/png/141955-200.png"
-        alt=""
-      />
-      <p> {adress} </p>
-      <p>
-        {" "}
-        <img
-          className={stylesMark.pic}
-          src={`http://localhost:3005/uploads/${pic}`}
-        />{" "}
-      </p>
-      <div className="d-flex align-items-center">
+    <div className={stylesMark.item}>
+      <div>
+        <div style={{ display: 'flex' }}>
+          <div className={stylesMark.pic}>
+            <img
+
+              src={`http://localhost:3005/uploads/${pic}`}
+            />
+          </div>
+          {adress} </div>
+      </div>
+      <div className={stylesMark.buttonWrapper}>
         {identificator ? (
           <>
             <button onClick={acceptHandler} className={stylesMark.button_marks}>
-              {" "}
-              Принять{" "}
-            </button>
+              Принять</button>
             <button onClick={onMapHandler} className={stylesMark.button_marks}>
-              {" "}
-              на карте{" "}
-            </button>
+              на карте</button>
             <button
               onClick={declineHandler}
               className={stylesMark.button_marks}
-            >
-              {" "}
-              Отклонить{" "}
-            </button>
+            > Отклонить </button>
           </>
-        ) : (
-          <button onClick={deleteHandler} className={stylesMark.button_marks}>
-            {" "}
-            Удалить{" "}
-          </button>
-        )}
+        ) : <button onClick={deleteHandler} className={stylesMark.button_marks}>
+
+          Удалить
+        </button>}
       </div>
     </div>
   );
 };
 
 export default Mark;
+
+{/* <div className="d-flex justify-content-space-between flex-row align-items-center">
+        {/* <img
+          className={stylesMark.pic}
+          src="https://static.thenounproject.com/png/141955-200.png"
+          alt=""
+        /> */}
+    //     <p> {adress} </p>
+    //     <p style={{margin:'20px'}}>
+    //       {" "}
+    //       <img
+    //         className={stylesMark.pic}
+    //         src={`http://localhost:3005/uploads/${pic}`}
+    //       />{" "}
+    //     </p>
+    //     <div className="d-flex align-items-center">
+    //       {identificator ? (
+    //         <>
+    //           <button onClick={acceptHandler} className={stylesMark.button_marks}>
+    //             {" "}
+    //           Принять{" "}
+    //           </button>
+    //           <button onClick={onMapHandler} className={stylesMark.button_marks}>
+    //             {" "}
+    //           на карте{" "}
+    //           </button>
+    //           <button
+    //             onClick={declineHandler}
+    //             className={stylesMark.button_marks}
+    //           >
+    //             {" "}
+    //           Отклонить{" "}
+    //           </button>
+    //         </>
+    //       ) : (
+    //         <button onClick={deleteHandler} className={stylesMark.button_marks}>
+    //           {" "}
+    //         Удалить{" "}
+    //         </button>
+    //       )}
+    //     </div>
+    //   </div>
+    // </tr> */}

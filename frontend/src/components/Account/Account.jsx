@@ -12,6 +12,8 @@ const Account = () => {
   const [flag, setFlag] = useState(null);
   const [allMarkers, setAllMarkers] = useState([]);
 
+  const user = useSelector(state => state.user)
+
   const allMarks = useSelector((state) => state.marks);
 
   const allAcceptedMarks = allMarks.filter((el) => el.isAccepted === true);
@@ -32,13 +34,17 @@ const Account = () => {
   //   })
   // }, [])
 
-  const newMarkersHandler = () => {
-    setFlag(true);
-  };
+  // const newMarkersHandler = () => {
+  //   setFlag(true);
+  // };
 
-  const allMarkersHandler = () => {
-    setFlag(false);
-  };
+  // const allMarkersHandler = () => {
+  //   setFlag(false);
+  // };
+
+  const changeHandler = () => {
+    setFlag((prev) => !prev);
+  }
 
   return (
     <div className={stylesAcc.containerAcc}>
@@ -47,46 +53,68 @@ const Account = () => {
         {/* <div className="map"> */}
         {/* <div className="centring"> */}
 
+
+
+
+
+
+
+
+
+
+
+
         {/* <div className="shit" id="infoBlock"> */}
         <div className={stylesAcc.lk_card}>
-          <h2>Личный кабинет администратора</h2>
-          <p>Всего меток на сайте: {markersValue}</p>
+          <h1>Добро пожаловать, {user.login}</h1>
+          <span>Всего меток на сайте: {allAcceptedMarks.length} </span>
+          <span>В ожидании решения: {allNewMarks.length} </span>
         </div>
 
         <h3> Выберите действие </h3>
-        <button className={stylesAcc.button_marks} onClick={newMarkersHandler}>
-          {" "}
-          Новые метки{" "}
+        {/* <button className={stylesAcc.button_marks} onClick={newMarkersHandler}>
+
+          Новые метки
         </button>
         <button className={stylesAcc.button_marks} onClick={allMarkersHandler}>
-          {" "}
-          Вывести все метки{" "}
-        </button>
-        {/* </div> */}
 
-        {flag
-          ? allNewMarks.map((el) => (
-              <Mark
-                id={el.id}
-                identificator={true}
-                longitude={el.longitude}
-                latitude={el.latitude}
-                adress={el.address}
-                pic={el.pics}
-                key={el.id}
-              />
-            ))
-          : allAcceptedMarks.map((el) => (
-              <Mark
-                id={el.id}
-                identificator={false}
-                longitude={el.longitude}
-                latitude={el.latitude}
-                adress={el.address}
-                pic={el.pics}
-                key={el.id}
-              />
-            ))}
+          Вывести все метки
+        </button> */}
+
+        <input className={stylesAcc.input} onChange={changeHandler} type="checkbox" name="switch" id="switch" />
+        <label className={stylesAcc.label} for="switch">
+          <span className={stylesAcc.labelText}>{flag ? 'Новые' : 'Все'}</span></label>
+
+        {/* </div> */}
+        <div className='d-flex justify-content-center'>
+          <div className={stylesAcc.table}>
+
+            {flag
+              ? allNewMarks.map((el) => (
+                <Mark
+                  id={el.id}
+                  identificator={true}
+                  longitude={el.longitude}
+                  latitude={el.latitude}
+                  adress={el.address}
+                  pic={el.pics}
+                  key={el.id}
+                />
+              ))
+              : allAcceptedMarks.map((el) => (
+                <Mark
+                  id={el.id}
+                  identificator={false}
+                  longitude={el.longitude}
+                  latitude={el.latitude}
+                  adress={el.address}
+                  pic={el.pics}
+                  key={el.id}
+                />
+              ))}
+
+          </div>
+        </div>
       </div>
     </div>
     // </div>

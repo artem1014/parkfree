@@ -125,8 +125,8 @@ export default function Map({ }) {
     console.log('pics', pics[0])
 
     dispatch(addNotificationStart());
-    dispatch(addMarkAct({ longitude: placemarkCoords[1], latitude: placemarkCoords[0], address: adress, comment, pics: pics[0], parkingPlaces: 5 }));
-
+    // dispatch(addMarkAct({ longitude: placemarkCoords[1], latitude: placemarkCoords[0], address: adress, comment, pics: pics[0], parkingPlaces: 5 }));
+    dispatch(addMarkAct(bodyFormData))
     const div = document.querySelector('.ymap');
     div.innerHTML = '';
     window.ymaps.ready(init);
@@ -294,7 +294,8 @@ export default function Map({ }) {
       {curImg && <Popup img={curImg} close={handleClosePopup} />}
       <div id="map" className='ymap map'>
       </div>
-      <div className='shit2'>
+
+      <div className='pinInfo'>
         {location.state && flag && <button className='btn btn-success mx-2' onClick={acceptHandler}> Accept </button>}
         {location.state && flag && <button className='btn btn-warning mx-2' onClick={declineHandler}> Decline </button>}
         {location.state && flag && <button className='btn btn-danger mx-2' onClick={backHandler}> Back </button>}
@@ -304,6 +305,7 @@ export default function Map({ }) {
         {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} files={files} setFiles={setFiles} uploadedImage={uploadedImage} />
         }
       </div>
+      
       {/* <div className='shit addvertismentBlock'>
         <div>
           {setInterval(() => {

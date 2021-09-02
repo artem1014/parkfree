@@ -2,24 +2,18 @@ import axios from 'axios'
 const { ADD_MARK_TO_ACCEPT, ACCEPT_MARK, DECLINE_MARK, DELETE_MARK, GET_ALL_ACCEPTED_MARKS, GET_ALL_NEW_MARKS } = require("../types/markTypes")
 
 export const addMarkAct =
-  ({ longitude, latitude, address, comment, pics, parkingPlaces }) =>
+  (bodyFormData) =>
     async (dispatch) => {
       try {
+        console.log(bodyFormData)
         const addedItem = await fetch("http://localhost:3005/marker/add", {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          enctype: "multipart/form-data",
+          // headers: {
+          //   'Content-Type': 'application/json'
+          // },
+          // enctype: "multipart/form-data",
           credentials: 'include',
-          body: JSON.stringify({
-            longitude,
-            latitude,
-            address,
-            comment,
-            pics,
-            parkingPlaces,
-          })
+          body: bodyFormData,
         })
 
         const getAddedItem = await addedItem.json();

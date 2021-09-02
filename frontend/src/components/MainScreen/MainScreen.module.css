@@ -5,7 +5,7 @@
   position: relative;
 }
 .main_screen_wrapper2 {
-  width: 100vw;
+  /* width: 100vw; */
   /* min-height: 1024px; */
   min-height: 720px;
   overflow: hidden;
@@ -15,7 +15,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center; */
-  display: grid;
+  display: flex;
   /* grid-template-columns: 14fr 5fr; */
   /* changed grid fragmanets so the name wouldn't spread */
   grid-template-columns: 16fr 4fr;
@@ -26,33 +26,35 @@
 
 /* размер блока с названием  */
 .greeting_area {
-  display: flex;
-  justify-self: center;
+  /* display: flex; */
+  /* justify-self: center; */
+  order: 1;
+  max-width: 170px;
 
   /* color: #8a97e4; */
   /* слова welcome to  */
   color: #e9eaf1;
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   /* flex-direction: column; */
   /* justify-content: center;
   order: 2; */
-  grid-area: greet;
+  /* grid-area: greet; */
 }
 
 /* подпись под кнопкой */
 .greeting_words {
-  width: 100%;
+  /* width: 100%; */
   /* margin: 0 auto; */
   padding: 0px;
-  margin-right: 40%;
   margin-top: 30%;
+  /* text-align: right; */
 }
 
 /* название приложения */
 .greeting_words h3 {
   font-size: 50px;
-  font-weight: bold;
+  /* font-weight: bold; */
   margin: 0;
   padding: 0px 0px 0px 0px;
   /* обводка букв */
@@ -76,16 +78,17 @@
 }
 
 .tags_area {
-  width: 52%;
+  /* width: 50%; */
   /* order: 1; */
-  grid-area: tagss;
   justify-self: center;
+  order: 0;
+  flex-grow: 1;
 }
 
 .tags_area canvas {
-  margin-top: 80px;
-  width: 100%;
-  height: 75vh;
+  margin: 0 auto;
+  width: 80%;
+  height: 100%;
 }
 
 .button_register_top {
@@ -98,10 +101,14 @@
   color: whitesmoke;
   font-weight: bold;
   margin-top: 100px;
-  box-shadow: 0 0 40px -5px rgb(245, 241, 241);
+  /* box-shadow: 0 0 40px -5px rgb(245, 241, 241); */
+  display: block;
+  text-align: center;
+  text-decoration: none;
 }
 
 .button_register {
+  display: block;
   /* background-color: #2c6e8e; */
   opacity: 0.8;
   /* background-color: #1f5f80; */
@@ -111,8 +118,11 @@
   padding: 10px 40px;
   color: whitesmoke;
   font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+
   margin-top: 20px;
-  box-shadow: 0 0 40px -5px rgb(245, 241, 241);
+  /* box-shadow: 0 0 40px -5px rgb(245, 241, 241); */
 }
 
 .button_register:hover {
@@ -149,9 +159,6 @@
   /* animation: animate 5s linear infinite; */
 }
 
-.circle {
-  font-size:50px
-}
 
 .circle:hover {
   border:none

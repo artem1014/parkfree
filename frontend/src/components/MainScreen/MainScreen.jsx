@@ -55,20 +55,20 @@ export default function MainScreen({ submitHandler }) {
             <div className={style.greeting_words}>
               <h4>Welcome to</h4>
               <h3>Park Free</h3>
-              <NavLink to="/signin">
+              <NavLink className={style.button_register_top} to="/signin">
                 {/* кнопка с первой станицы ведет на регистрацию */}
-                <button className={style.button_register_top}>Sign In</button>
+               Sign In
               </NavLink>
-              <NavLink to="/signup">
+              <NavLink className={style.button_register} to="/signup">
                 {/* кнопка с первой станицы ведет на регистрацию */}
-                <button className={style.button_register}>Sign Up</button>
+                Sign Up
               </NavLink>
               {/* <p>In order to use our application, please register.</p> */}
             </div>
           </div>
 
           <div className={style.tags_area}>
-            <canvas width="700" height="700" id="myCanvas">
+            <canvas width="600" height="600" id="myCanvas">
               <ul>
                 <li>
                   <a className={style.circle} href="#">
