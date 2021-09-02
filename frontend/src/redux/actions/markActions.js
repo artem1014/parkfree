@@ -4,8 +4,6 @@ const { ADD_MARK_TO_ACCEPT, ACCEPT_MARK, DECLINE_MARK, DELETE_MARK, GET_ALL_ACCE
 export const addMarkAct =
   ({ longitude, latitude, address, comment, pics, parkingPlaces }) =>
     async (dispatch) => {
-      console.log('in addMarkAct');
-      console.log(longitude, latitude, address, comment, pics, parkingPlaces)
       try {
         const addedItem = await fetch("http://localhost:3005/marker/add", {
           method: 'POST',
@@ -24,8 +22,6 @@ export const addMarkAct =
         })
 
         const getAddedItem = await addedItem.json();
-        console.log('blabla');
-        console.log('ADDED DATA', getAddedItem);
         dispatch(addMark(getAddedItem));
       } catch (e) {
         console.log("error");
@@ -92,7 +88,6 @@ export const deleteMark = (id) => {
 export const getAllAcceptedMarkAct = () => async (dispatch) => {
   try {
     const allMarks = await axios.get('http://localhost:3005/marker/all')
-    console.log('ETO AKSHON', allMarks.data)
     dispatch(getAllAcceptedMark(allMarks.data))
   } catch (e) {
     console.log('error')

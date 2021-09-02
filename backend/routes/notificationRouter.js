@@ -1,28 +1,31 @@
 const router = require("express").Router();
-const { Notification } = require("../db/models");
-
-router.post("/", async (req, res) => {
-  const userID = req.session.user.id;
-  if (userID !== 2) {
-
-    const { name } = await Notification.create({
-      userID,
-      name: "Ожидайте подтверждения модератора",
-    });
-    await Notification.create({
-      userID: 2,
-      name: "Пришла новая метка на согласование",
-    });
-    res.json({ newMarker, name, userID });
-  }
-})
+const { Notification, Marker } = require("../db/models");
 
 router.get("/", async (req, res) => {
   try {
     const userID = req.session.user.id;
-    const notifications = await Notification.findAll({ where: { userID } });
+    if (userID !== 2) {
+      const { name } = await Notification.create({
+        userID,
+        name: "Ожидайте подтверждения модератора",
+      });
+      const { id } = await Notification.create({
+        userID: 2,
+        name: "Пришла новая метка на согласование",
+      });
+      res.json({ id, name, userID });
+    }
+  } catch (error) {}
+});
+
+router.get("/all", async (req, res) => {
+  try {
+    const userID = req.session.user.id;
+    const notifications = await Notification.findAll({
+      where: { userID },
+    });
     res.json(notifications);
-  } catch (error) { }
+  } catch (error) {}
 });
 
 router.delete("/", async (req, res) => {
@@ -32,22 +35,22 @@ router.delete("/", async (req, res) => {
       where: { id },
     });
     res.json(id);
-  } catch (error) { }
+  } catch (error) {}
 });
 
 router.delete("/all", async (req, res) => {
   try {
     const userID = req.session.user.id;
-    const notifications = await Notification.destroy({ where: { userID } });
-    res.json(notifications);
-  } catch (error) { }
+    await Notification.destroy({ where: { userID } });
+    res.json();
+  } catch (error) {}
 });
 
 router.get("/status", async (req, res) => {
   try {
     const userID = req.session.user.id;
     await Notification.update({ viewed: true }, { where: { userID } });
-  } catch (error) { }
+  } catch (error) {}
 });
 
 router.get("/value", async (req, res) => {
@@ -57,7 +60,31 @@ router.get("/value", async (req, res) => {
       where: { userID, viewed: false },
     });
     res.json(notifications.length);
-  } catch (error) { }
+  } catch (error) {}
+});
+
+router.post("/accept", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const { userID } = await Marker.findOne({ where: { id } });
+    const { name } = await Notification.create({
+      userID,
+      name: "Ваша метка успешно одобрена",
+    });
+    res.json({ id, name, userID });
+  } catch (error) {}
+});
+
+router.post("/decline", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const { userID } = await Marker.findOne({ where: { id } });
+    const { name } = await Notification.create({
+      userID,
+      name: "Ваша метка не одобрена",
+    });
+    res.json({ id, name, userID });
+  } catch (error) {}
 });
 
 module.exports = router;

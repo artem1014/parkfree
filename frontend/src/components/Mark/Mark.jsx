@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { acceptMarkAct, declineMarkAct, deleteMarkAct } from "../../redux/actions/markActions";
+import { acceptNotificationStart, declineNotificationStart } from "../../redux/actions/notificationAC";
 import './Mark.css'
 
 const Mark = ({ adress, id, longitude, latitude, identificator }) => {
@@ -17,6 +18,7 @@ const Mark = ({ adress, id, longitude, latitude, identificator }) => {
 
   const acceptHandler = () => {
     dispatch(acceptMarkAct(id))
+    dispatch(acceptNotificationStart(id))
   }
 
   // const marks = useSelector(state => console.log(state.marks))
@@ -30,6 +32,7 @@ const Mark = ({ adress, id, longitude, latitude, identificator }) => {
 
   const declineHandler = () => {
     dispatch(declineMarkAct(id))
+    dispatch(declineNotificationStart(id))
   }
 
   const deleteHandler = () => {

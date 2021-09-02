@@ -29,25 +29,23 @@ router.post("/add", async (req, res) => {
       latitude,
       address,
       comment,
-      pics,
+      pics: pics[0],
       parkingPlaces,
     };
 
     const userID = req.session.user.id;
-    console.log('REQBODY', req.body)
 
     const newMarkerFromDB = await Marker.create({
       longitude,
       latitude,
       address,
       comment,
-      pics,
+      pics: pics[0],
       parkingPlaces,
       userID,
     });
 
     const response = newMarkerFromDB.dataValues
-    console.log(response);
     // const { name } = await Notification.create({
     //   userID,
     //   name: "Ожидайте подтверждения модератора",
@@ -59,7 +57,6 @@ router.post("/add", async (req, res) => {
     res.sendStatus(401)
 
   }
-  console.log('hello');
 });
 
 router.post("/", async (req, res) => {

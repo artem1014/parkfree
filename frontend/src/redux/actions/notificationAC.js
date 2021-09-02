@@ -7,6 +7,9 @@ import {
   RESET_NOTIFICATION,
 } from "../types/notificationTypes";
 import {
+  ACCEPT_NOTIFICATION_DB,
+  ADD_NOTIFICATION_DB,
+  DECLINE_NOTIFICATION_DB,
   DELETE_ALL_NOTIFICATIONS_DB,
   DELETE_NOTIFICATION_DB,
   GET_ALL_NOTIFICATIONS_DB,
@@ -15,12 +18,16 @@ import {
 } from "../../urls/notificationURLS";
 import axios from "axios";
 
+export const addNotificationStart = () => async (dispatch) => {
+  axios
+    .get(ADD_NOTIFICATION_DB, { withCredentials: true })
+    .then((res) => dispatch(addNotification(res.data)));
+};
+
 export const addNotification = (data) => ({
   type: ADD_NOTIFICATION,
   payload: data,
 });
-
-
 
 export const getAllNotificationsStart = () => async (dispatch) => {
   axios.get(GET_ALL_NOTIFICATIONS_DB, { withCredentials: true }).then((res) => {
@@ -48,7 +55,7 @@ export const getNotificationsValue = (value) => ({
 
 export const deleteNotificationStart = (id) => async (dispatch) => {
   axios
-    .delete(DELETE_NOTIFICATION_DB, { data: { id } })
+    .delete(DELETE_NOTIFICATION_DB, { data: { id } }, { withCredentials: true })
     .then((res) => dispatch(deleteNotification(res.data)));
 };
 
@@ -57,12 +64,10 @@ export const deleteNotification = (id) => ({
   payload: id,
 });
 
-export const deleteAllNotificationsStart = (setIsOpen) => async (dispatch) => {
+export const deleteAllNotificationsStart = () => async (dispatch) => {
   axios
     .delete(DELETE_ALL_NOTIFICATIONS_DB, { withCredentials: true })
     .then(() => dispatch(deleteAllNotifications()));
-    setIsOpen(false)
-
 };
 
 export const deleteAllNotifications = () => ({
@@ -77,3 +82,11 @@ export const updateStatusNotificationsStart = () => async (dispatch) => {
 export const resetNotifications = () => ({
   type: RESET_NOTIFICATION,
 });
+
+export const acceptNotificationStart = (id) => async (dispatch) => {
+  axios.post(ACCEPT_NOTIFICATION_DB, { id }, { withCredentials: true });
+};
+
+export const declineNotificationStart = (id) => async (dispatch) => {
+  axios.post(DECLINE_NOTIFICATION_DB, { id }, { withCredentials: true });
+};
