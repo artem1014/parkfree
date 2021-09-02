@@ -43,14 +43,14 @@ const Nav = () => {
       <div className="container">
 
         <div className={style.logo}>
-          <Link to="/">
+          <Link to="/map">
             <img className={style.img} src={"./images/Daco_555134.png"} />
           </Link>
         </div>
 
         <div className="container-fluid d-flex">
-          <Link className={style.navbar_brand2} to="/">
-            Park Free
+          <Link className={style.navbar_brand2} to="/map">
+            ParkFree
           </Link>
           <div className={style.navbar} id="navbarNav">
             <ul className="navbar-nav">
