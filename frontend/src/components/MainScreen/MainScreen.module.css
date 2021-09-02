@@ -15,9 +15,10 @@
   flex-direction: row;
   align-items: center;
   justify-content: center; */
-
   display: grid;
-  grid-template-columns: 14fr 6fr;
+  /* grid-template-columns: 14fr 5fr; */
+  /* changed grid fragmanets so the name wouldn't spread */
+  grid-template-columns: 16fr 4fr;
   grid-template-rows: auto;
   grid-template-areas: "tagss greet";
   position: relative;
@@ -88,30 +89,40 @@
 }
 
 .button_register_top {
-  /* background-color: #a0a4b8; */
-  background-color: #2c6e8e;
-  border: 2px solid rgb(233, 236, 248);
-  /* border: 2px solid rgb(134, 140, 179); */
+  /* background-color: #2c6e8e; */
+  /* background-color: #1f5f80; */
+  border: 1px solid rgb(233, 236, 248);
+  opacity: 0.8;
   border-radius: 30px;
   padding: 10px 40px;
   color: whitesmoke;
   font-weight: bold;
   margin-top: 100px;
+  box-shadow: 0 0 40px -5px rgb(245, 241, 241);
 }
 
 .button_register {
-  /* background-color: #a0a4b8; */
-  background-color: #2c6e8e;
-  border: 2px solid rgb(233, 236, 248);
+  /* background-color: #2c6e8e; */
+  opacity: 0.8;
+  /* background-color: #1f5f80; */
+  border: 1px solid rgb(233, 236, 248);
   /* border: 2px solid rgb(134, 140, 179); */
   border-radius: 30px;
   padding: 10px 40px;
   color: whitesmoke;
   font-weight: bold;
   margin-top: 20px;
+  box-shadow: 0 0 40px -5px rgb(245, 241, 241);
 }
 
 .button_register:hover {
+  /* background-color: #7493b4; */
+  /* background-color: #10415a; */
+  background-color: #1f5f80;
+  color: whitesmoke;
+  transition: 0.5s;
+}
+.button_register_top:hover {
   /* background-color: #7493b4; */
   background-color: #1f5f80;
   color: whitesmoke;
@@ -131,11 +142,19 @@
   /* border-bottom: 2px solid rgb(231, 226, 226); */
   /* border-top: 2px solid whitesmoke; */
   display: inline-block;
-  /* dnsjdhjshj */
+  /* mirror reflection under Main Name */
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
   line-height: 0.8em;
   outline: 0;
   /* animation: animate 5s linear infinite; */
+}
+
+.circle {
+  font-size:50px
+}
+
+.circle:hover {
+  border:none
 }
 /* 
 @keyframes animate {
@@ -169,8 +188,7 @@
   }
 } */
 
-
-/* если будет время нанесем эфект пыли на эффект */
+/* если будет время нанесем  */
 
 .fire {
   animation: animation 1s ease-in-out infinite alternate;

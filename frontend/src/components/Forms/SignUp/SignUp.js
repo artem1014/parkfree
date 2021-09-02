@@ -36,13 +36,13 @@ const SignUp = () => {
         <div className={style.wrapper}>
           <div className=".card_sign_in">
             <form onSubmit={submitHandler}>
-              <legend className="text-center text-light">User Sign Up</legend>
+              <legend className="text-center text-light">Sign Up</legend>
               <div className="mb-3">
                 <input onChange={changeHandler} className="form-control" value={userSignUp.login} type="text" name="login" placeholder='login' />
               </div>
 
               <div className="mb-3">
-                <input onChange={changeHandler} className="form-control" value={userSignUp.email} type="text" name="email" placeholder='email' />
+                <input onChange={changeHandler} className="form-control" value={userSignUp.email} type="email" name="email" placeholder='email' />
               </div>
               <div className="mb-3">
                 <input onChange={changeHandler} className="form-control" value={userSignUp.password} type="password" name="password" placeholder='password' />
