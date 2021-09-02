@@ -22,6 +22,7 @@
 }
 
 .navbar_brand2:hover {
+  align-items: left;
   color: rgb(216, 220, 241);
 }
 
@@ -43,20 +44,20 @@
   /* align-items: center; */
   filter: invert(70%);
 }
-
+/* 
 .title {
   text-align: center;
-}
-.title h2 {
+} */
+/* .title h2 {
   font-weight: bold;
   margin-bottom: 5%;
-}
-.body form {
+} */
+/* .body form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.body form input {
+} */
+/* .body form input {
   font-size: 16px;
   line-height: 24px;
   min-height: 40px;
@@ -66,20 +67,20 @@
   border-radius: 3px;
   border: 1px solid rgb(136, 132, 132);
   margin-bottom: 5%;
-}
-.body form button {
+} */
+/* .body form button {
   margin: 5px auto 5% auto;
 }
 .bottomSettng {
   display: flex;
   justify-content: space-between;
-}
+} */
 /* .bottomSettng input{
   margin: 0;
   padding: 0;
 } */
 
-.rememberPassword {
+/* .rememberPassword {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -88,8 +89,8 @@
   cursor: pointer;
   min-height: 0 !important;
   padding: 0 !important;
-}
-.link,
+} */
+/* .link,
 .footer p,
 .forgotPassword p {
   line-height: none;
@@ -106,10 +107,10 @@
 .footer {
   width: 100%;
   text-align: center;
-}
+} */
 
 .img {
-  width: 100px;
+  width: 35%;
 
   /* box-shadow: 0 0 40px -10px rgb(245, 241, 241); */
 }
@@ -117,18 +118,18 @@
 /* one more - light background under logo*/
 /* in component  */
 /* <div className={style.color}></div> */
-.color {
+/* .color {
   position: absolute;
   border-radius: 8px;
   filter: blur(33px);
-}
+} */
 
-.color:nth-child(1) {
+/* .color:nth-child(1) {
   top: -960px;
-  /* left: -200; */
+  left: -200;
   width: 180px;
   height: 1035px;
-  /* background: #98a4c7; */
+  background: #98a4c7;
   background: #f7f8fb;
   animation: animate1 75s linear infinite;
-}
+} */

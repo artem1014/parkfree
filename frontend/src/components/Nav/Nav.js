@@ -44,7 +44,6 @@ const Nav = () => {
 
         <div className={style.logo}>
           <Link to="/">
-            {/* <img className={style.img} src={'https://www.vhv.rs/dpng/d/55-555134_vector-cars-logo-png-transparent-png.png'} /> */}
             <img className={style.img} src={"./images/Daco_555134.png"} />
           </Link>
         </div>
