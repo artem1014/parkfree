@@ -8,7 +8,7 @@ import { useLocation } from "react-router";
 import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
 import { acceptMarkAct, addMarkAct, declineMarkAct } from "../../redux/actions/markActions";
 import SendingForm from "../SendingForm/SendingForm";
-import { addNotificationStart } from "../../redux/actions/notificationAC";
+import { acceptNotificationStart, addNotificationStart, declineNotificationStart } from "../../redux/actions/notificationAC";
 import Popup from "../Popup/Popup";
 import { useHistory } from "react-router";
 
@@ -73,6 +73,7 @@ export default function Map({ }) {
   };
 
   const acceptHandler = () => {
+    dispatch(acceptNotificationStart(location.state.id))
     dispatch(acceptMarkAct(location.state.id))
     setFlag(false)
     // const div = document.querySelector('.ymap');
@@ -82,6 +83,7 @@ export default function Map({ }) {
   }
 
   const declineHandler = () => {
+    dispatch(declineNotificationStart(location.state.id))
     dispatch(declineMarkAct(location.state.id))
     setFlag(false)
     // const div = document.querySelector('.ymap');
@@ -109,8 +111,8 @@ export default function Map({ }) {
       pics.push(el.name)
     });
 
-    
-    
+
+
     // bodyFormData.append("file", file);
     // bodyFormData.append("pics", image);
     bodyFormData.append("latitude", placemarkCoords[0]);
@@ -118,14 +120,15 @@ export default function Map({ }) {
     bodyFormData.append("address", adress);
     bodyFormData.append("comment", e.target.comment.value);
     bodyFormData.append("parkingPlaces", 5);
-    
+
     const comment = e.target.comment.value
-    
+    console.log('pics', pics[0])
+
     dispatch(addNotificationStart());
-    dispatch(addMarkAct({longitude: placemarkCoords[1], latitude: placemarkCoords[0], address: adress, comment, pics: pics[0], parkingPlaces: 5}));
+    dispatch(addMarkAct({ longitude: placemarkCoords[1], latitude: placemarkCoords[0], address: adress, comment, pics: pics[0], parkingPlaces: 5 }));
 
     const div = document.querySelector('.ymap');
-    div.innerHTML = ''; 
+    div.innerHTML = '';
     window.ymaps.ready(init);
   };
 
@@ -149,7 +152,6 @@ export default function Map({ }) {
       let adminNewPlacemark = new window.ymaps.Placemark(
         location.state.coords,
         {
-          hintContent: 'ЗДАРОВА', //хинт при наведении на метку
           iconCaption: "поиск" // balloon 
         },
         {
@@ -168,18 +170,22 @@ export default function Map({ }) {
         // console.log('dsfsgsgsdgdsgdsgsdg')
         // console.log(allMarks[i].pics)
         let pl = new window.ymaps.Placemark([allMarks[i].latitude, allMarks[i].longitude]);
+        console.log(allMarks)
         pl.properties.set({
           iconCaption: allMarks[i].address,
           balloonContent: `
           <div> 
-          ${allMarks[i].address} 
+
+          <span> <b> Адрес </b> </span> <br />
+          <span> ${allMarks[i].address} </span>
           <br/> 
-          <button 
-          onClick={()=> setCurImg(http://localhost:3005/uploads/${allMarks[i].pics})} 
-          type='button' 
-          id='statdiv'> 
+          <span> <b> Координаты </b> </span> <br />
+          <span> ${allMarks[i].latitude}, ${allMarks[i].longitude} </span>
+          <br/>
+          <span> <b> Комментарий </b> </span> <br />
+          <span> ${allMarks[i].comment} </span>
+          <br/>
           <img id='stat' src=http://localhost:3005/uploads/${allMarks[i].pics} /> 
-          </button> 
           </div>`
         });
         myMap.geoObjects.add(pl);
@@ -218,7 +224,6 @@ export default function Map({ }) {
       return new window.ymaps.Placemark(
         coords,
         {
-          hintContent: "ЗДАРОВА", //хинт при наведении на метку
           iconCaption: "поиск", // balloon
         },
         {
@@ -294,7 +299,7 @@ export default function Map({ }) {
         {location.state && flag && <button className='btn btn-warning mx-2' onClick={declineHandler}> Decline </button>}
         {location.state && flag && <button className='btn btn-danger mx-2' onClick={backHandler}> Back </button>}
         <div className="imgdiv">
-        {location.state && flag && <img className='picmap' src={`http://localhost:3005/uploads/${location.state.pic}`} />}
+          {location.state && flag && <img className='picmap' src={`http://localhost:3005/uploads/${location.state.pic}`} />}
         </div>
         {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} files={files} setFiles={setFiles} uploadedImage={uploadedImage} />
         }

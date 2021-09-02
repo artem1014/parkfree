@@ -55,18 +55,17 @@ export const acceptMark = (id) => {
 
 export const declineMarkAct = (id) => async (dispatch) => {
   try {
-    const payload = (await axios.post("http://localhost:3005/marker/decline", { id }))
-      .data;
-    dispatch(declineMark(payload));
+    await axios.post("http://localhost:3005/marker/declineAct", { id }, { withCredentials: true })
+    .then(res => dispatch(declineMark(id)))
   } catch (e) {
     console.log("error");
   }
 };
 
-export const declineMark = (payload) => {
+export const declineMark = (id) => {
   return {
     type: DECLINE_MARK,
-    payload
+    payload: id
   }
 }
 

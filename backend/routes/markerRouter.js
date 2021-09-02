@@ -29,7 +29,7 @@ router.post("/add", async (req, res) => {
       latitude,
       address,
       comment,
-      pics: pics[0],
+      pics,
       parkingPlaces,
     };
 
@@ -40,7 +40,7 @@ router.post("/add", async (req, res) => {
       latitude,
       address,
       comment,
-      pics: pics[0],
+      pics,
       parkingPlaces,
       userID,
     });
@@ -149,16 +149,36 @@ router.post("/accept", async (req, res) => {
 })
 
 router.post("/decline", async (req, res) => {
-  const { id } = req.body;
-  await Marker.update({ isChecked: true }, { where: { id } });
-  const { userID } = await Marker.findOne({ where: { id } });
-  const allMarkers = await Marker.findAll({});
-  if (userID !== 2) {
-    await Notification.create({
-      userID,
-      name: "Ваша метка не одобрена модератором",
-    });
-    res.json(allMarkers);
+  try {
+    const { id } = req.body;
+    await Marker.update(
+      { isChecked: true },
+      { where: { id } }
+    );
+    const { userID } = await Marker.findOne({ where: { id } });
+    const allMarkers = await Marker.findAll({});
+    if (userID !== 2) {
+      await Notification.create({
+        userID,
+        name: "Ваша метка не одобрена модератором",
+      });
+      res.json(allMarkers);
+    }
+  } catch (e) {
+    console.log(e)
+  }
+});
+
+router.post("/declineAct", async (req, res) => {
+  try {
+    const { id } = req.body;
+    await Marker.update(
+      { isChecked: true },
+      { where: { id } }
+    );
+    res.sendStatus(200)
+  } catch (e) {
+    console.log(e)
   }
 });
 

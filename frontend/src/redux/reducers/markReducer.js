@@ -24,7 +24,15 @@ const markReducer = (state = [], action) => {
 
     case DECLINE_MARK:
       {
-        return action.payload
+        return (state.map(el => {
+          if (el.id === action.payload) {
+            return {
+              ...el,
+              isChecked: true,
+            }
+          }
+          return el
+        }))
       }
 
     case DELETE_MARK:
