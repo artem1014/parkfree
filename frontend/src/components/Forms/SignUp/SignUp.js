@@ -42,7 +42,7 @@ const SignUp = () => {
               </div>
 
               <div className="mb-3">
-                <input onChange={changeHandler} className="form-control" value={userSignUp.email} type="text" name="email" placeholder='email' />
+                <input onChange={changeHandler} className="form-control" value={userSignUp.email} type="email" name="email" placeholder='email' />
               </div>
               <div className="mb-3">
                 <input onChange={changeHandler} className="form-control" value={userSignUp.password} type="password" name="password" placeholder='password' />

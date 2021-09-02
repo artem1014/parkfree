@@ -62,11 +62,11 @@ const SignIn = () => {
             <form onSubmit={submitHandler} >
               <legend className="text-center text-light">Sign In</legend>
               <div className="mb-3">
-                <input onChange={changeHandler} value={userSignIn.email} className="form-control" type="text" name="email" placeholder='email' />
+                <input onChange={changeHandler} value={userSignIn.email} className={style.form_controlFreePar} type="email" name="email" placeholder='email' />
               </div>
 
               <div className="mb-3">
-                <input onChange={changeHandler} value={userSignIn.password} className="form-control" type="password" name="password" placeholder='password' />
+                <input onChange={changeHandler} value={userSignIn.password} className={style.form_controlFreePar} type="password" name="password" placeholder='password' />
               </div>
 
               <button className={style.button_register} type="submit" >Sign In</button>
