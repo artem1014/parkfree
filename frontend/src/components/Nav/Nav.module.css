@@ -11,6 +11,7 @@
 .navbar_brand2 {
   /* padding-left: 23; */
   /* justify-content: left; */
+  margin-left: -170px;
   padding-right: 5;
   color: white;
   text-decoration: none;
@@ -35,7 +36,8 @@
 
 .logo {
   position: relative;
-  width: 20%;
+  margin-left: 100px;
+  width: 30%;
   height: 100%;
   border-radius: 30px;
   /* border: 2px solid rgb(57, 63, 110); */
@@ -43,6 +45,7 @@
   justify-content: center;
   /* align-items: center; */
   filter: invert(70%);
+  /* margin: 0; */
 }
 /* 
 .title {

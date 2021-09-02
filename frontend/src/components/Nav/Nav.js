@@ -47,9 +47,8 @@ const Nav = () => {
             <img className={style.img} src={"./images/Daco_555134.png"} />
           </Link>
         </div>
-
         <div className="container-fluid d-flex">
-          <Link className={style.navbar_brand2} to="/">
+          <Link className={style.navbar_brand2} to="/map">
             Park Free
           </Link>
           <div className={style.navbar} id="navbarNav">
@@ -102,7 +101,7 @@ const Nav = () => {
                     <li className="nav-item mx-3 my-3">
                       <NavLink
                         to="/auth/signout"
-                        
+
                         className={style.nav_item2}
                         activeClassName="active"
                       >
@@ -118,6 +117,7 @@ const Nav = () => {
                         Map
                       </NavLink>
                     </li>
+
                     <li>
                       <IconButton onClick={updateStatus}>
                         <Badge

@@ -24,7 +24,6 @@ export default function MainScreen({ submitHandler }) {
              'myCanvas',
              '',
              {textColour: 'white',
-            //  {textColour: 'rgb(101, 125, 233)',
              outlineColour: '#03bcf4',
              fontweight:'bold', 
              filter: 'contrast(200%)',
@@ -57,7 +56,7 @@ export default function MainScreen({ submitHandler }) {
               <h3>Park Free</h3>
               <NavLink to="/signin">
                 {/* кнопка с первой станицы ведет на регистрацию */}
-                <button className={style.button_register_top}>Sign In</button>
+                <button className={style.button_register_top}>Sign  In</button>
               </NavLink>
               <NavLink to="/signup">
                 {/* кнопка с первой станицы ведет на регистрацию */}
@@ -71,144 +70,88 @@ export default function MainScreen({ submitHandler }) {
             <canvas width="700" height="700" id="myCanvas">
               <ul>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚜 Ул.Пушкина
-                  </a>
+                  <a className={style.circle} href="#">🚜 Ул.Пушкина</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚙 Ул.Ленина
-                  </a>
+                  <a className={style.circle} href="#">🚙 Ул.Ленина</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚲 Ул.Фестивальная
-                  </a>
+                  <a className={style.circle} href="#">🚲 Ул.Фестивальная</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚚 Ул.Гагарина
-                  </a>
+                  <a className={style.circle} href="#">🚚 Ул.Гагарина</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚙 Ул.Лермонтова
-                  </a>
+                  <a className={style.circle} href="#">🚙 Ул.Лермонтова</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚜 Ул.Курчатова
-                  </a>
+                  <a className={style.circle} href="#">🚜 Ул.Курчатова</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🛺 Ул.Брежнева
-                  </a>
+                  <a className={style.circle} href="#">🛺 Ул.Брежнева</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚐 Ул.Орджоникидзе
-                  </a>
+                  <a className={style.circle} href="#">🚐 Ул.Орджоникидзе</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🛵 Ул.Неглинная
-                  </a>
+                  <a className={style.circle} href="#">🛵 Ул.Неглинная</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚛 Садовое кольцо
-                  </a>
+                  <a className={style.circle} href="#">🚛 Садовое кольцо</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚖 Вознесенский переулок
-                  </a>
+                  <a className={style.circle} href="#">🚖 Вознесенский переулок</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚍 Ул.Никольская
-                  </a>
+                  <a className={style.circle} href="#">🚍 Ул.Никольская</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🏎 ул.Фестивальная
-                  </a>
+                  <a className={style.circle} href="#">🏎 ул.Фестивальная</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚖 рт.Антропова
-                  </a>
+                  <a className={style.circle} href="#">🚖 рт.Антропова</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚎 Журнал
-                  </a>
+                  <a className={style.circle} href="#">🚎 Журнал</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚍 Шабловская
-                  </a>
+                  <a className={style.circle} href="#">🚍 Шабловская</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚕 Ул.Первомайская
-                  </a>
+                  <a className={style.circle} href="#">🚕 Ул.Первомайская</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚑 Ул.Ботанический Сад
-                  </a>
+                  <a className={style.circle} href="#">🚑 Ул.Ботанический Сад</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🛵 Крутицкий пер.
-                  </a>
+                  <a className={style.circle} href="#">🛵 Крутицкий пер.</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🛥 Фрунзенская наб.
-                  </a>
+                  <a className={style.circle} href="#">🛥 Фрунзенская наб.</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚔 Ул.Охотный ряд
-                  </a>
+                  <a className={style.circle} href="#">🚔 Ул.Охотный ряд</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚘 Ул.Большая Лубянка
-                  </a>
+                  <a className={style.circle} href="#">🚘 Ул.Большая Лубянка</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚲 Ул.Кузнецкий мост
-                  </a>
+                  <a className={style.circle} href="#">🚲 Ул.Кузнецкий мост</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🛻 Ул.Бахатлукума
-                  </a>
+                  <a className={style.circle} href="#">🛻 Ул.Бахатлукума</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚙Ул.Фестивальная
-                  </a>
+                  <a className={style.circle} href="#">🚙Ул.Фестивальная</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🏍 Ул.Молодежная
-                  </a>
+                  <a className={style.circle} href="#">🏍 Ул.Молодежная</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚔 ТЦ "Гагаринский"
-                  </a>
+                  <a className={style.circle} href="#">🚔 ТЦ "Гагаринский"</a>
                 </li>
                 <li>
-                  <a className={style.circle} href="#">
-                    🚎 Прт.Ленина
-                  </a>
+                  <a className={style.circle} href="#">🚎 Прт.Ленина</a>
                 </li>
               </ul>
             </canvas>

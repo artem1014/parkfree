@@ -1,14 +1,17 @@
 .form {
   position: absolute;
-  top: 63px;
-  left: 360px;
+  top: 65px;
+  right: 15px;
+  
+  color: white;
   margin: 0 auto;
   width: 300px;
   min-height: 200px;
   max-height: 400px;
   border-radius: 13px;
   border: 1px solid rgb(255, 255, 255);
-  background-color: #aab3e6;
+
+  /* background-color: #aab3e6; */
   margin: 0;
   padding: 0;
   display: flex;
@@ -16,6 +19,8 @@
   /* overflow: auto; */
   /* align-items: center; */
   opacity: 0.9;
+  box-shadow: 0 0 40px -5px rgb(245, 241, 241);
+  z-index: 10000;
 }
 
 .form ul {
@@ -48,7 +53,7 @@
   list-style: none;
   margin: 0;
   padding: 0px 5px;
-  border-top: 1px solid #566be2;
+  border-top: 1px solid #cddce4;
 }
 
 .form ul li:visited,
@@ -57,7 +62,8 @@
 }
 
 .form ul li:hover {
-  background-color: #8997e3;
+  background-color: #548197;
+  border-radius: 5px;
 }
 
 .cross {
@@ -67,7 +73,7 @@
 }
 
 .cross:hover {
-  background-color: #566be2;
+  background-color: #2a6c8d;
   border-radius: 50%;
 }
 
@@ -77,11 +83,11 @@
 }
 
 .erase {
-  padding: 0 6px 10px 6px;
-  margin: 0 6px 20px 0;
+  /* padding: 0 6px 10px 6px; */
+  margin: 0 6px 20px 30px;
 }
-
+/* 
 .erase:hover {
   background-color: #8692d4;
   border-radius: 3px;
-}
+} */

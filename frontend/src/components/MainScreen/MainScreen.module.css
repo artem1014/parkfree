@@ -94,11 +94,12 @@
   border: 1px solid rgb(233, 236, 248);
   opacity: 0.8;
   border-radius: 30px;
-  padding: 10px 40px;
+  /* padding-left: 37px; */
+  padding: 10px 43px;
   color: whitesmoke;
   font-weight: bold;
   margin-top: 100px;
-  box-shadow: 0 0 40px -5px rgb(245, 241, 241);
+  box-shadow: 0 0 20px -5px rgb(245, 241, 241);
 }
 
 .button_register {
@@ -112,7 +113,7 @@
   color: whitesmoke;
   font-weight: bold;
   margin-top: 20px;
-  box-shadow: 0 0 40px -5px rgb(245, 241, 241);
+  box-shadow: 0 0 20px -5px rgb(245, 241, 241);
 }
 
 .button_register:hover {
@@ -150,11 +151,11 @@
 }
 
 .circle {
-  font-size:50px
+  font-size: 50px;
 }
 
 .circle:hover {
-  border:none
+  border: none !important;
 }
 /* 
 @keyframes animate {

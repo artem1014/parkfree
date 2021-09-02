@@ -18,7 +18,7 @@ export default function Notification({ open, setIsOpen }) {
     <SimpleBar style={{ maxHeight: 300 }} className={style.form}>
       <ul>
         <div className={style.together}>
-          <h6>Мои уведомления</h6>
+          <h6>Уведомления</h6>
           <h6
             onClick={() => dispatch(deleteAllNotificationsStart(setIsOpen))}
             className={style.erase}
