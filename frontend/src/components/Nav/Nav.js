@@ -104,7 +104,7 @@ const Nav = () => {
                           <NotificationsIcon />
                         </Badge>
                       </IconButton>
-                      <Notification open={isOpen} />
+                      <Notification open={isOpen} setIsOpen={setIsOpen} />
                     </li>
                   </>
                 ) : (

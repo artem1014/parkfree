@@ -8,8 +8,6 @@ const Mark = ({ adress, id, longitude, latitude, identificator }) => {
 
   const coords = [latitude, longitude]
 
-  
-
   const plInfo = { coords, adress, id }
 
   const dispatch = useDispatch();

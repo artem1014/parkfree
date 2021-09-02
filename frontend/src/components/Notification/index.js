@@ -20,7 +20,7 @@ export default function Notification({ open, setIsOpen }) {
         <div className={style.together}>
           <h6>Мои уведомления</h6>
           <h6
-            onClick={() => dispatch(deleteAllNotificationsStart())}
+            onClick={() => dispatch(deleteAllNotificationsStart(setIsOpen))}
             className={style.erase}
           >
             Стереть
