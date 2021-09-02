@@ -1,7 +1,8 @@
+import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router";
 
 function PrivateRoute({ children, ...rest }) {
-  let auth = JSON.parse(window.localStorage.getItem("user"));
+  let auth = useSelector(state => state.user);
   return (
     <Route
       {...rest}
@@ -11,7 +12,7 @@ function PrivateRoute({ children, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: "/auth/signin",
+              pathname: "/signin",
               state: { from: location }
             }}
           />

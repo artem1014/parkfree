@@ -3,13 +3,13 @@ import { useHistory } from "react-router";
 import { acceptMarkAct, declineMarkAct, deleteMarkAct } from "../../redux/actions/markActions";
 import './Mark.css'
 
-const Mark = ({ adress, id, longitude, latitude, identificator }) => {
+const Mark = ({ adress, id, longitude, latitude, identificator, pic }) => {
 
   const coords = [latitude, longitude]
 
   
 
-  const plInfo = { coords, adress, id }
+  const plInfo = { coords, adress, id, pic }
 
   const dispatch = useDispatch();
 
@@ -39,7 +39,8 @@ const Mark = ({ adress, id, longitude, latitude, identificator }) => {
   return (
     <div className="d-flex justify-content-center flex-row align-items-center">
       <img className='pic' src='https://static.thenounproject.com/png/141955-200.png' alt="" />
-      <p> адрес: {adress} </p>
+      <p> {adress} </p>
+      <p> <img className='pic' src={`http://localhost:3005/uploads/${pic}`} /> </p>
       <div className='d-flex align-items-center'>
         {identificator
           ?

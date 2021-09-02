@@ -12,6 +12,7 @@ export const addMarkAct =
           headers: {
             'Content-Type': 'application/json'
           },
+          enctype: "multipart/form-data",
           credentials: 'include',
           body: JSON.stringify({
             longitude,

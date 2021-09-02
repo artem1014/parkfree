@@ -36,8 +36,8 @@ const SendingForm = ({ sendForm, handleImageUpload, imageUploader, uploadedImage
           name="comment"
         />
       </p>
-
-      {/* <p type="Вставьте изображение">
+{/* 
+      <p type="Вставьте изображение">
         <input
           type="file"
           accept="image/*"

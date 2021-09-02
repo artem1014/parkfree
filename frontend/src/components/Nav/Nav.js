@@ -78,15 +78,6 @@ const Nav = () => {
                     </li>
                     <li className="nav-item mx-3 my-3">
                       <NavLink
-                        to="/images"
-                        className={style.nav_item2}
-                        activeClassName="active"
-                      >
-                        Images
-                      </NavLink>
-                    </li>
-                    <li className="nav-item mx-3 my-3">
-                      <NavLink
                         to="/map"
                         className={style.nav_item2}
                         activeClassName="active"
