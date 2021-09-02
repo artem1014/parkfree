@@ -24,7 +24,7 @@ const Account = () => {
 
 
   // useEffect(() => {
-    // axios.get(GET_ALL_MARKERS_DB).then(res => { // gets new markers
+  // axios.get(GET_ALL_MARKERS_DB).then(res => { // gets new markers
   //     setMarkersValue(res.data.count)
   //     setMarkers(res.data.markers)
   //   }, [])
@@ -47,29 +47,25 @@ const Account = () => {
   // console.log(arr)
   return (
     <>
-      <div id="gradient"></div>
-      <div id="card">
-        <img
-          src="https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9c33caef-be28-4257-b7ed-a407698f1a32/280x420"
-          alt=""
-        />
-        <h2>Добро пожаловать в ЛК</h2>
-        <p>Admin</p>
-        <p>Всего заметок на сайте: {markersValue}</p>
-      </div>
-      <div id="infoBlock">
-        <h3> Выберите </h3>
-        <div> 
-          <button onClick={newMarkersHandler}> Новые метки </button>
-          <button onClick={allMarkersHandler}> Вывести все метки </button>
+      <div className="block-wrapper__map">
+        <div className='map'>
+          <div className='centring'>
+            <h3> Выберите </h3>
+            <button className='btn btn-success mx-2' onClick={newMarkersHandler}> Новые метки </button>
+            <button className='btn btn-success' onClick={allMarkersHandler}> Вывести все метки </button>
+          </div>
+          {flag ? allNewMarks.map(el => <Mark id={el.id} identificator={true} longitude={el.longitude}
+            latitude={el.latitude} adress={el.address} pic={el.pics} key={el.id} />)
+            :
+            allAcceptedMarks.map(el => <Mark id={el.id} identificator={false} longitude={el.longitude}
+              latitude={el.latitude} adress={el.address} pic={el.pics} key={el.id} />)}
+        </div>
+        <div className='shit' id='infoBlock'>
+          <h2>Добро пожаловать в ЛК</h2>
+          <p>Admin</p>
+          <p>Всего заметок на сайте: {markersValue}</p>
         </div>
 
-    {flag ? allNewMarks.map(el => <Mark id={el.id} identificator={true} longitude={el.longitude}
-    latitude={el.latitude} adress={el.address} key={el.id}/>) 
-    : 
-    allAcceptedMarks.map(el => <Mark id={el.id} identificator={false} longitude={el.longitude}
-      latitude={el.latitude} adress={el.address} key={el.id}/>) 
-    }
       </div>
     </>
   );

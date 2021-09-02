@@ -2,7 +2,7 @@ import axios from 'axios'
 const { ADD_MARK_TO_ACCEPT, ACCEPT_MARK, DECLINE_MARK, DELETE_MARK, GET_ALL_ACCEPTED_MARKS, GET_ALL_NEW_MARKS } = require("../types/markTypes")
 
 export const addMarkAct =
-  ({ longitude, latitude, address, comment, pics, parkingPlaces }) =>
+  ({ longitude, latitude, address, comment, pics, parkingPlaces, file }) =>
     async (dispatch) => {
       console.log('in addMarkAct');
       console.log(longitude, latitude, address, comment, pics, parkingPlaces)
@@ -12,6 +12,7 @@ export const addMarkAct =
           headers: {
             'Content-Type': 'application/json'
           },
+          enctype: "multipart/form-data",
           credentials: 'include',
           body: JSON.stringify({
             longitude,
@@ -20,6 +21,7 @@ export const addMarkAct =
             comment,
             pics,
             parkingPlaces,
+          
           })
         })
 

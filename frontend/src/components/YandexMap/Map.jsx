@@ -73,21 +73,22 @@ export default function Map({ }) {
     }
   };
 
-
   const acceptHandler = () => {
     dispatch(acceptMarkAct(location.state.id))
     setFlag(false)
-    const div = document.querySelector('.ymap');
-    div.innerHTML = '';
-    window.ymaps.ready(init);
+    // const div = document.querySelector('.ymap');
+    // div.innerHTML = '';
+    // window.ymaps.ready(init);
+    window.history.back()
   }
 
   const declineHandler = () => {
     dispatch(declineMarkAct(location.state.id))
     setFlag(false)
-    const div = document.querySelector('.ymap');
-    div.innerHTML = '';
-    window.ymaps.ready(init);
+    // const div = document.querySelector('.ymap');
+    // div.innerHTML = '';
+    // window.ymaps.ready(init);
+    window.history.back()
   }
 
   const backHandler = () => {
@@ -120,7 +121,7 @@ export default function Map({ }) {
     dispatch(addMarkAct({longitude: placemarkCoords[1], latitude: placemarkCoords[0], address: adress, comment, pics: image, parkingPlaces: 5}));
 
     const div = document.querySelector('.ymap');
-    div.innerHTML = '';
+    div.innerHTML = ''; 
     window.ymaps.ready(init);
   };
 
@@ -291,11 +292,22 @@ export default function Map({ }) {
       <div id="map" className='ymap map'>
       </div>
       <div className='shit2'>
-        {location.state && flag && <button onClick={acceptHandler}> Accept </button>}
-        {location.state && flag && <button onClick={declineHandler}> Decline </button>}
-        {location.state && flag && <button onClick={backHandler}> Back </button>}
+        {location.state && flag && <button className='btn btn-success mx-2' onClick={acceptHandler}> Accept </button>}
+        {location.state && flag && <button className='btn btn-warning mx-2' onClick={declineHandler}> Decline </button>}
+        {location.state && flag && <button className='btn btn-danger mx-2' onClick={backHandler}> Back </button>}
+        <div className="imgdiv">
+        {location.state && flag && <img className='picmap' src={`http://localhost:3005/uploads/${location.state.pic}`} />}
+        </div>
         {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} uploadedImage={uploadedImage} />
         }
+      </div>
+      <div className='shit addvertismentBlock'>
+        <div>
+          {setInterval(() => {
+            // <img src={`./pics/${Math.floor(Math.random() * 10)}`} />
+            <img src='http://localhost:3000//pics/1' />
+          }, 2500)}
+        </div>
       </div>
     </div>
   );

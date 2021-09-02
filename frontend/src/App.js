@@ -59,12 +59,12 @@ function App() {
               <Route exact path="/auth/signout">
                 <SignOut />
               </Route>
-              <Route exact path="/map">
+              <PrivateRoute exact path="/map">
                 <Main />
-              </Route>
-              <Route exact path="/account">
+              </PrivateRoute>
+              <PrivateRoute exact path="/account">
                 <Account />
-              </Route>
+              </PrivateRoute>
               <Route exact path="/test">
                 <TestImage />
               </Route>

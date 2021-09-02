@@ -89,15 +89,6 @@ const Nav = () => {
                     </li>
                     <li className="nav-item">
                       <NavLink
-                        to="/images"
-                        className="nav-link"
-                        activeClassName="active"
-                      >
-                        Images
-                    </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink
                         to="/map"
                         className="nav-link"
                         activeClassName="active"
@@ -129,15 +120,6 @@ const Nav = () => {
                           activeClassName="active"
                         >
                           Sign out
-                    </NavLink>
-                      </li>
-                      <li className="nav-item">
-                        <NavLink
-                          to="/images"
-                          className="nav-link"
-                          activeClassName="active"
-                        >
-                          Images
                     </NavLink>
                       </li>
                       <li className="nav-item">
