@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "simplebar/dist/simplebar.min.css";
 import SimpleBar from "simplebar-react";
 import style from "./style.module.css";
@@ -8,11 +8,11 @@ import {
   deleteNotificationStart,
 } from "../../redux/actions/notificationAC";
 
-export default function Notification({ open, notification, setIsOpen }) {
+export default function Notification({ open, setIsOpen }) {
+  const { notification } = useSelector((state) => state.notifications);
   const dispatch = useDispatch();
   if (!open) return null;
-
-
+  console.log(notification);
 
   return ReactDom.createPortal(
     <SimpleBar style={{ maxHeight: 300 }} className={style.form}>
@@ -28,16 +28,16 @@ export default function Notification({ open, notification, setIsOpen }) {
         </div>
         {notification.length ? (
           notification.map((el) => (
-              <li key={el.id} className={style.together}>
-                {el.name}
-                <img
-                  onClick={() => dispatch(deleteNotificationStart(el.id))}
-                  id={el.id}
-                  className={style.cross}
-                  src="/images/cross-sign.svg"
-                  alt="#"
-                />
-              </li>
+            <li key={el.id} className={style.together}>
+              {el.name}
+              <img
+                onClick={() => dispatch(deleteNotificationStart(el.id))}
+                id={el.id}
+                className={style.cross}
+                src="/images/cross-sign.svg"
+                alt="#"
+              />
+            </li>
           ))
         ) : (
           <p className={style.empty}>Пусто</p>

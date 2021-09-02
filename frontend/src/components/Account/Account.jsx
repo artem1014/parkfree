@@ -19,7 +19,6 @@ const Account = () => {
 
   const allNewMarks = allMarks.filter(el => el.isChecked === false)
 
-  console.log('NEWMARKS', allNewMarks)
   // const newMarks = useSelector(state => state.newMarks)
 
 

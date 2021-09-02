@@ -8,13 +8,12 @@ import { useLocation } from "react-router";
 import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
 import { acceptMarkAct, addMarkAct, declineMarkAct } from "../../redux/actions/markActions";
 import SendingForm from "../SendingForm/SendingForm";
-import { addNotification } from "../../redux/actions/notificationAC";
+import { addNotificationStart } from "../../redux/actions/notificationAC";
 import Popup from "../Popup/Popup";
 import { useHistory } from "react-router";
 
 export default function Map({ }) {
   let myPlacemark;
-
 
   let history = useHistory();
   const [files, setFiles] = useState([]);
@@ -122,13 +121,8 @@ export default function Map({ }) {
     
     const comment = e.target.comment.value
     
-    
-    console.log('==========>', pics)
+    dispatch(addNotificationStart());
     dispatch(addMarkAct({longitude: placemarkCoords[1], latitude: placemarkCoords[0], address: adress, comment, pics: pics[0], parkingPlaces: 5}));
-    // axios.post(SEND_FORMS, bodyFormData, { withCredentials: true }).then((res) => {
-      // dispatch(addNotification({ userID: res.data.userID, name: res.data.name }));
-    // })
-    
 
     const div = document.querySelector('.ymap');
     div.innerHTML = ''; 
@@ -136,9 +130,6 @@ export default function Map({ }) {
   };
 
   const init = () => {
-
-    // console.log('==========>', arr)
-
     const myMap = new window.ymaps.Map(
       "map",
       {
@@ -171,9 +162,6 @@ export default function Map({ }) {
       });
       myMap.geoObjects.add(adminNewPlacemark);
     }
-
-    // console.log('dgsdg', allMarks)
-
 
     if (allMarks.length) {
       for (let i = 0; i < allMarks.length; i++) {

@@ -5,37 +5,37 @@ import { useEffect, useState } from "react";
 import Badge from "@material-ui/core/Badge";
 import Notification from "../Notification";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllNotificationsStart, getAllNotificationValueStart, updateStatusNotificationsStart } from "../../redux/actions/notificationAC";
+import {
+  getAllNotificationsStart,
+  getAllNotificationValueStart,
+  updateStatusNotificationsStart,
+} from "../../redux/actions/notificationAC";
 import style from "./Nav.module.css";
 import logos from "./car.svg";
-import { getAllAcceptedMarkAct, getAllNewMarkAct } from "../../redux/actions/markActions";
-
+import {
+  getAllAcceptedMarkAct,
+  getAllNewMarkAct,
+} from "../../redux/actions/markActions";
 
 const Nav = () => {
-
   const user = useSelector((state) => state.user);
-  const allMarks = useSelector(state => state.marks)
+  const allMarks = useSelector((state) => state.marks);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const { notification, notificationValue } = useSelector(
-    (state) => state.notifications
-  );
+  const { notificationValue } = useSelector((state) => state.notifications);
 
   useEffect(() => {
-    dispatch(getAllNotificationsStart());
-    dispatch(getAllNotificationValueStart());
-    dispatch(getAllAcceptedMarkAct()); 
-  }, [notificationValue]) // вот тут может быть ошибка
-
-
-  
-  console.log('allMarks', allMarks);
-
+    if (user) {
+      console.log('From Nav');
+      dispatch(getAllNotificationsStart());
+      dispatch(getAllNotificationValueStart());
+      dispatch(getAllAcceptedMarkAct());
+    }
+  }, [user]); // вот тут может быть ошибка
 
   const updateStatus = () => {
     dispatch(updateStatusNotificationsStart());
     setIsOpen(!isOpen);
-
   };
 
   return (
@@ -95,7 +95,7 @@ const Nav = () => {
                           <NotificationsIcon />
                         </Badge>
                       </IconButton>
-                      <Notification open={isOpen} notification={notification} />
+                      <Notification open={isOpen} setIsOpen={setIsOpen} />
                     </li>
                   </>
                 ) : (
@@ -108,15 +108,6 @@ const Nav = () => {
                         activeClassName="active"
                       >
                         Sign out
-                      </NavLink>
-                    </li>
-                    <li className="nav-item mx-3 my-3">
-                      <NavLink
-                        to="/images"
-                        className={style.nav_item2}
-                        activeClassName="active"
-                      >
-                        Images
                       </NavLink>
                     </li>
                     <li className="nav-item mx-3 my-3">
@@ -138,7 +129,7 @@ const Nav = () => {
                           <NotificationsIcon />
                         </Badge>
                       </IconButton>
-                      <Notification open={isOpen} notification={notification} setIsOpen={setIsOpen}  />
+                      <Notification open={isOpen} setIsOpen={setIsOpen} />
                     </li>
                   </>
                 )

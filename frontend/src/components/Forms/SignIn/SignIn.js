@@ -1,23 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useLocation } from "react-router"
-import { signInStart } from "../../../redux/actions/user.ac"
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router";
+import { signInStart } from "../../../redux/actions/user.ac";
 // import signin from "./signin.module.css";
 import style from "./signin.module.css";
 import Nav from "../../Nav/Nav";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
-
   const [userSignIn, setUserSignIn] = useState({
     email: "",
     password: "",
   });
 
-  const userSign = useSelector(state => state.user)
+  const userSign = useSelector((state) => state.user);
 
   let history = useHistory();
   let location = useLocation();
@@ -30,20 +28,20 @@ const SignIn = () => {
 
   const dispatch = useDispatch();
 
-  const notify = () => toast('ВВЕДИ НОРМАЛЬНЫЕ ДАННЫЕ', {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });;
+  const notify = () =>
+    toast("ВВЕДИ НОРМАЛЬНЫЕ ДАННЫЕ", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   const submitHandler = (e) => {
     e.preventDefault(); //  чтобы при нажатии кнопки не происходила перерендера страницы
-    let payload = Object.fromEntries(new FormData(e.target))
-    // console.log(payload)
+    let payload = Object.fromEntries(new FormData(e.target));
     dispatch(signInStart(payload, history, from));
     if (userSign === null) {
       notify();
@@ -75,15 +73,15 @@ const SignIn = () => {
           </div>
         </div>
       </div>
+
     )
   )
-}
+    }
+    
+export default SignIn;
 
-
-export default SignIn
-
-
-{/* <div className={style.container}>
+// {
+  /* <div className={style.container}>
 <div className={style.wrapper}>
   <form onSubmit={submitHandler} className="d-flex flex-column align-items-center bg-light text-dark p-3 border rounded-3">
     <legend className="text-center mb-4">User Sign In</legend>
@@ -98,4 +96,5 @@ export default SignIn
     <button className={style.button_register} type="submit" >Sign In</button>
   </form>
 </div>
-</div> */}
+</div> */
+// }
