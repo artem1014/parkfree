@@ -1,32 +1,30 @@
-import axios from 'axios'
-const { ADD_MARK_TO_ACCEPT, ACCEPT_MARK, DECLINE_MARK, DELETE_MARK, GET_ALL_ACCEPTED_MARKS, GET_ALL_NEW_MARKS } = require("../types/markTypes")
+import axios from "axios";
+const {
+  ADD_MARK_TO_ACCEPT,
+  ACCEPT_MARK,
+  DECLINE_MARK,
+  DELETE_MARK,
+  GET_ALL_ACCEPTED_MARKS,
+  GET_ALL_NEW_MARKS,
+} = require("../types/markTypes");
 
-export const addMarkAct =
-  ({ longitude, latitude, address, comment, pics, parkingPlaces }) =>
-    async (dispatch) => {
-      try {
-        const addedItem = await fetch("http://localhost:3005/marker/add", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          credentials: 'include',
-          body: JSON.stringify({
-            longitude,
-            latitude,
-            address,
-            comment,
-            pics,
-            parkingPlaces,
-          })
-        })
-
-        const getAddedItem = await addedItem.json();
-        dispatch(addMark(getAddedItem));
-      } catch (e) {
-        console.log("error");
-      }
-    };
+export const addMarkAct = (bodyFormData) => async (dispatch) => {
+  try {
+    const addedItem = await fetch("http://localhost:3005/marker/add", {
+      method: "POST",
+      // headers: {
+      //   'Content-Type': 'multipart/form-data'
+      // },
+      // enctype: "multipart/form-data",
+      credentials: "include",
+      body: bodyFormData,
+    });
+    const getAddedItem = await addedItem.json();
+    dispatch(addMark(getAddedItem));
+  } catch (e) {
+    console.log("error");
+  }
+};
 
 export const addMark = (newMark) => {
   return {
@@ -38,68 +36,77 @@ export const addMark = (newMark) => {
 export const acceptMarkAct = (id) => async (dispatch) => {
   try {
     axios
-      .post("http://localhost:3005/marker/accept", { id }, { withCredentials: true })
-      .then((res) => dispatch(acceptMark(id)))
+      .post(
+        "http://localhost:3005/marker/accept",
+        { id },
+        { withCredentials: true }
+      )
+      .then((res) => dispatch(acceptMark(id)));
   } catch (e) {
-    console.log('err')
+    console.log("err");
   }
 };
 
 export const acceptMark = (id) => {
   return {
     type: ACCEPT_MARK,
-    payload: id
+    payload: id,
   };
 };
 
 export const declineMarkAct = (id) => async (dispatch) => {
   try {
-    const payload = (await axios.post("http://localhost:3005/marker/decline", { id }))
-      .data;
-    dispatch(declineMark(payload));
+    await axios
+      .post(
+        "http://localhost:3005/marker/declineAct",
+        { id },
+        { withCredentials: true }
+      )
+      .then((res) => dispatch(declineMark(id)));
   } catch (e) {
     console.log("error");
   }
 };
 
-export const declineMark = (payload) => {
+export const declineMark = (id) => {
   return {
     type: DECLINE_MARK,
-    payload
-  }
-}
+    payload: id,
+  };
+};
 
 export const deleteMarkAct = (id) => async (dispatch) => {
   try {
-    axios.post('http://localhost:3005/marker/del', { id })
-      .then(res => dispatch(deleteMark(id)))
+    axios
+      .post("http://localhost:3005/marker/del", { id })
+      .then((res) => dispatch(deleteMark(id)));
   } catch (e) {
-    console.log('error')
+    console.log("error");
   }
-}
+};
 
 export const deleteMark = (id) => {
   return {
     type: DELETE_MARK,
-    payload: id
-  }
-}
+    payload: id,
+  };
+};
 
 export const getAllAcceptedMarkAct = () => async (dispatch) => {
   try {
-    const allMarks = await axios.get('http://localhost:3005/marker/all')
-    dispatch(getAllAcceptedMark(allMarks.data))
+    const allMarks = await axios.get("http://localhost:3005/marker/all");
+    dispatch(getAllAcceptedMark(allMarks.data));
   } catch (e) {
-    console.log('error')
+    console.log("error");
   }
-}
+};
 
 export const getAllAcceptedMark = (arrOfMarks) => {
   return {
     type: GET_ALL_ACCEPTED_MARKS,
-    payload: arrOfMarks
-  }
-}
+    payload: arrOfMarks,
+  };
+};
 
 // export const getAllNewMarkAct = () => async (dispatch) => {
 //   try {

@@ -39,56 +39,46 @@ const Nav = () => {
   };
 
   return (
-    <nav className=" navbar navbar-expand-lg navbar-light bg-light">
+    <nav className={`navbar navbar-expand-lg navbar-light ${style.bg}`}>
       <div className="container">
-        {/* logo */}
+
         <div className={style.logo}>
           <Link to="/">
-            {/* <img className={style.img} src={'https://www.vhv.rs/dpng/d/55-555134_vector-cars-logo-png-transparent-png.png'} /> */}
             <img className={style.img} src={"./images/Daco_555134.png"} />
           </Link>
         </div>
 
         <div className="container-fluid d-flex">
-          <Link className="navbar-brand" to="/">
-            Home
+          <Link className={style.navbar_brand2} to="/">
+            Park Free
           </Link>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className={style.navbar} id="navbarNav">
             <ul className="navbar-nav">
               {user ? (
                 user.role === "admin" ? (
                   <>
-                    <li className="nav-item">
+                    <li className="nav-item mx-3 my-3">
                       <NavLink
                         to="/auth/signout"
-                        className="nav-link"
+                        className={style.nav_item2}
                         activeClassName="active"
                       >
                         Sign out
                       </NavLink>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item mx-3 my-3">
                       <NavLink
                         to="/account"
-                        className="nav-link"
+                        className={style.nav_item2}
                         activeClassName="active"
                       >
                         Account
                       </NavLink>
                     </li>
-                    <li className="nav-item">
-                      <NavLink
-                        to="/images"
-                        className="nav-link"
-                        activeClassName="active"
-                      >
-                        Images
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
+                    <li className="nav-item mx-3 my-3">
                       <NavLink
                         to="/map"
-                        className="nav-link"
+                        className={style.nav_item2}
                         activeClassName="active"
                       >
                         Map
@@ -99,7 +89,7 @@ const Nav = () => {
                         <Badge
                           badgeContent={notificationValue}
                           color="secondary"
-                          className="nav-item"
+                          className="nav-item mx-3 my-3"
                         >
                           <NotificationsIcon />
                         </Badge>
@@ -109,28 +99,20 @@ const Nav = () => {
                   </>
                 ) : (
                   <>
-                    <li className="nav-item">
+                    <li className="nav-item mx-3 my-3">
                       <NavLink
                         to="/auth/signout"
-                        className="nav-link"
+                        
+                        className={style.nav_item2}
                         activeClassName="active"
                       >
                         Sign out
                       </NavLink>
                     </li>
-                    <li className="nav-item">
-                      <NavLink
-                        to="/images"
-                        className="nav-link"
-                        activeClassName="active"
-                      >
-                        Images
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
+                    <li className="nav-item mx-3 my-3">
                       <NavLink
                         to="/map"
-                        className="nav-link"
+                        className={style.nav_item2}
                         activeClassName="active"
                       >
                         Map
@@ -141,7 +123,7 @@ const Nav = () => {
                         <Badge
                           badgeContent={notificationValue}
                           color="secondary"
-                          className="nav-item"
+                          className="nav-item mx-5"
                         >
                           <NotificationsIcon />
                         </Badge>
@@ -152,19 +134,20 @@ const Nav = () => {
                 )
               ) : (
                 <>
-                  <li className="nav-item">
+                  <li className="nav-item mx-3 my-3">
                     <NavLink
                       to="/signup"
-                      className="nav-link"
+                      className={style.nav_item2}
                       activeClassName="active"
                     >
                       Sign Up
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  {" "}
+                  <li className="nav-item mx-5 my-3">
                     <NavLink
                       to="/signin"
-                      className="nav-link"
+                      className={style.nav_item2}
                       activeClassName="active"
                     >
                       Sign In
@@ -182,3 +165,146 @@ const Nav = () => {
 
 export default Nav;
 //export default withStyles(styles)(ClassNames);
+
+
+// <nav className=" navbar navbar-expand-lg navbar-light bg-light">
+// <div className="container">
+//   <div className={style.logo}>
+//     <Link to='/'>
+//       {/* <img className={style.img} src={'https://www.vhv.rs/dpng/d/55-555134_vector-cars-logo-png-transparent-png.png'} /> */}
+//       <img className={style.img} src={'./images/Daco_555134.png'} />
+//     </Link>
+//   </div>
+
+//   <div className="container-fluid d-flex">
+//     <Link className="navbar-brand" to="/">
+//       Park Free
+//     </Link>
+//     <div className="collapse navbar-collapse" id="navbarNav">
+//       <ul className="navbar-nav">
+//         {user ? (
+//           (user.role === 'admin') ? (
+//             <>
+//               <li className="nav-item">
+//                 <NavLink
+//                   to="/auth/signout"
+//                   className="nav-link"
+//                   activeClassName="active"
+//                 >
+//                   Sign out
+//               </NavLink>
+//               </li>
+//               <li className="nav-item">
+//                 <NavLink
+//                   to="/account"
+//                   className="nav-link"
+//                   activeClassName="active"
+//                 >
+//                   Account
+//               </NavLink>
+//               </li>
+//               <li className="nav-item">
+//                 <NavLink
+//                   to="/images"
+//                   className="nav-link"
+//                   activeClassName="active"
+//                 >
+//                   Images
+//               </NavLink>
+//               </li>
+//               <li className="nav-item">
+//                 <NavLink
+//                   to="/map"
+//                   className="nav-link"
+//                   activeClassName="active"
+//                 >
+//                   Map
+//               </NavLink>
+//               </li>
+//               <li>
+//                 <IconButton onClick={updateStatus}>
+//                   <Badge
+//                     badgeContent={notificationValue}
+//                     color="secondary"
+//                     className="nav-item"
+//                   >
+//                     <NotificationsIcon />
+//                   </Badge>
+//                 </IconButton>
+//                 <Notification open={isOpen} notification={notification} />
+//               </li>
+//             </>
+//           )
+//             :
+//             (
+//               <>
+//                 <li className="nav-item">
+//                   <NavLink
+//                     to="/auth/signout"
+//                     className="nav-link"
+//                     activeClassName="active"
+//                   >
+//                     Sign out
+//               </NavLink>
+//                 </li>
+//                 <li className="nav-item">
+//                   <NavLink
+//                     to="/images"
+//                     className="nav-link"
+//                     activeClassName="active"
+//                   >
+//                     Images
+//               </NavLink>
+//                 </li>
+//                 <li className="nav-item">
+//                   <NavLink
+//                     to="/map"
+//                     className="nav-link"
+//                     activeClassName="active"
+//                   >
+//                     Map
+//               </NavLink>
+//                 </li>
+//                 <li>
+//                   <IconButton onClick={updateStatus}>
+//                     <Badge
+//                       badgeContent={notificationValue}
+//                       color="secondary"
+//                       className="nav-item"
+//                     >
+//                       <NotificationsIcon />
+//                     </Badge>
+//                   </IconButton>
+//                   <Notification open={isOpen} notification={notification} />
+//                 </li>
+//               </>
+//             )
+//         ) : (
+//           <>
+//             <li className="nav-item">
+//               <NavLink
+//                 to="/signup"
+//                 className="nav-link"
+//                 activeClassName="active"
+//               >
+//                 Sign Up
+//               </NavLink>
+//             </li>
+//             <li className="nav-item">
+//               <NavLink
+//                 to="/signin"
+//                 className="nav-link"
+//                 activeClassName="active"
+//               >
+//                 Sign In
+//               </NavLink>
+//             </li>
+//           </>
+//         )}
+//       </ul>
+//     </div>
+//   </div>
+// </div>
+// </nav >
+// );
+// };

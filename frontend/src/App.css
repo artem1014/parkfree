@@ -1,51 +1,14 @@
 .App {
   text-align: center;
-  /* background-image: ("/Users/alevtinabrown/Documents/1_ Final_project /1_ MainProjectFreeParking/parkfree/frontend/public/images/city.png"); */
-  /* background-color: rgb(45, 69, 105); */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  /* background-color: #282c34; */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  /* color: #61dafb; */
-  color: #032731;
-}
-
-.body {
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-}
 
 .block-wrapper {
   width: 100%;
   height: auto;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,14 +18,18 @@
 .block-wrapper__map {
   width: 100%;
   height: auto;
-
   display: grid;
   grid-template-columns: 20% 60% 20%;
   grid-template-rows: auto;
   align-items: center;
-  grid-template-areas: 
-  "shit map shit2"
-  ;
+  grid-template-areas: "shit map shit2";
+}
+
+
+.centring {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
 }
 
 .map {
@@ -75,24 +42,11 @@
 
 .shit2 {
   grid-area: shit2;
-
 }
 
-.block {
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.containerApp {
+/* .containerApp {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
@@ -100,77 +54,10 @@
   overflow: hidden;
   transition: 1s all;
   background: linear-gradient(to bottom, #565a61, #dff1ff);
-}
-
-.color {
-  position: absolute;
-  border-radius: 150px;
-  filter: blur(40px);
-}
-
-.color:nth-child(1) {
-  top: -950px;
-  width: 1550px;
-  height: 2000px;
-
-  background: #66665f;
-  animation: animate1 75s linear infinite;
-}
-
-/* .color:nth-child(2) {
-  bottom: -350px;
-  left: -400px;
-  /* width: 850px; */
-/* width: 100%;
-  height: 1050px;
-  background: #e1dff0;
-  animation: animate2 65s linear infinite;
-} */
-
-/* .color:nth-child(3) {
-  bottom: -450px;
-  right: -200px;
-  width: 1200px;
-  height: 1050px;
-  background: #156beb;
-  animation: animate3 45s linear infinite;
-} */
-
-/* @keyframes animate1 {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(200px);
-  }
-} 
-
-@keyframes animate2 {
-  0%,
-  100% {
-    transform: translateX(0px);
-
-  }
-  50% {
-    transform: translateX(300px);
-
-  }
-}
-
-@keyframes animate3 {
-  0%,
-  100% {
-    transform: translateX(0px);
-
-  }
-  50% {
-    transform: translateX(-200px);
-
-  } 
 } */
 
 #stat { 
+  margin: 10px;
   height: 100%;  
   object-fit: cover;
   position: relative;

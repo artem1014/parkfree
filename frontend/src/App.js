@@ -37,19 +37,14 @@ function App() {
       <div style={{
         backgroundImage: `url(${'https://images.unsplash.com/photo-1572799135571-73597b373a9e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1491&q=80'})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
+        backgroundSize: 'cover',
         overflow: 'hidden',
       }} >
 
         < Router >
-
-          < Nav />
-          {/* <div className="container py-5"> */}
           <div style={{ position: "relative" }}>
+            < Nav />
             <Switch>
-              {/* <PrivateRoute path="/user/notesList">
-            <Main />
-          </PrivateRoute>  */}
               <Route exact path="/signup">
                 <SignUp />
               </Route>
@@ -59,12 +54,12 @@ function App() {
               <Route exact path="/auth/signout">
                 <SignOut />
               </Route>
-              <Route exact path="/map">
+              <PrivateRoute exact path="/map">
                 <Main />
-              </Route>
-              <Route exact path="/account">
+              </PrivateRoute>
+              <PrivateRoute exact path="/account">
                 <Account />
-              </Route>
+              </PrivateRoute>
               <Route exact path="/test">
                 <TestImage />
               </Route>

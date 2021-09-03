@@ -1,0 +1,26 @@
+.pic {
+  height: 50px;
+  /* height: 10px; */
+}
+
+.button_marks {
+  /* background-color: #2c6e8e; */
+  opacity: 0.8;
+  /* background-color: #1f5f80; */
+  border: 1px solid rgb(233, 236, 248);
+  /* border: 2px solid rgb(134, 140, 179); */
+  border-radius: 30px;
+  /* padding: 10px 40px; */
+  color: whitesmoke;
+  /* font-weight: bold; */
+  margin-top: 20px;
+  box-shadow: 0 0 40px -5px rgb(245, 241, 241);
+}
+
+.button_marks:hover {
+  /* background-color: #7493b4; */
+  /* background-color: #10415a; */
+  background-color: #1f5f80;
+  color: whitesmoke;
+  transition: 0.5s;
+}

@@ -30,7 +30,7 @@ export const signUpStart = (payload, history) => async (dispatch) => {
   if (response.status === 200) {
     const user = await response.json();
     dispatch(setUser(user));
-    history.replace("/"); //если успешно, переходим сюда
+    history.replace("/map"); //если успешно, переходим сюда
   } else {
     history.replace("/signup"); //иначе остаемся на странице реги
   }
@@ -64,7 +64,8 @@ export const signOutStart = () => async (dispatch) => {
   // console.log("resporesponse", response);
   if (response.ok) {
     // dispatch(deleteAllNotifications())
-    // dispatch(deleteUser()); // в state с юзером кладется null
+    dispatch(deleteUser()); // в state с юзером кладется null
+    localStorage.removeItem('user');
   }
 };
 
