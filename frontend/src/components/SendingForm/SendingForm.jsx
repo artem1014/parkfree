@@ -54,7 +54,7 @@ const SendingForm = ({
         />
       </p> */}
 
-      <div className="mb-3 draganddrop">
+      {!files.length && <div className="mb-3 draganddrop">
         <div className='dragPic' {...getRootProps()}>
           <img
             className="add"
@@ -63,7 +63,7 @@ const SendingForm = ({
           />
           <input {...getInputProps()} />
         </div>
-      </div>
+      </div>}
         <div className="addImages">{images}</div>
 
       <img className="inpimg" ref={uploadedImage} />

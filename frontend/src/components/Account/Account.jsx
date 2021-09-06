@@ -49,29 +49,13 @@ const Account = () => {
   return (
     <div className={stylesAcc.containerAcc}>
       <div className={stylesAcc.wrapper}>
-        {/* <div className="block-wrapper__map"> */}
-        {/* <div className="map"> */}
-        {/* <div className="centring"> */}
-
-
-
-
-
-
-
-
-
-
-
-
-        {/* <div className="shit" id="infoBlock"> */}
         <div className={stylesAcc.lk_card}>
           <h1>Добро пожаловать, {user.login}</h1>
           <span>Всего меток на сайте: {allAcceptedMarks.length} </span>
           <span>В ожидании решения: {allNewMarks.length} </span>
         </div>
 
-        <h3> Выберите действие </h3>
+        <h3> Выберите метки </h3>
         {/* <button className={stylesAcc.button_marks} onClick={newMarkersHandler}>
 
           Новые метки
@@ -82,7 +66,7 @@ const Account = () => {
         </button> */}
 
         <input className={stylesAcc.input} onChange={changeHandler} type="checkbox" name="switch" id="switch" />
-        <label className={stylesAcc.label} for="switch">
+        <label className={stylesAcc.label} htmlFor="switch">
           <span className={stylesAcc.labelText}>{flag ? 'Новые' : 'Все'}</span></label>
 
         {/* </div> */}

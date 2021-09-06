@@ -1,13 +1,16 @@
 .form {
   position: absolute;
-  top: 63px;
+  /* top: 63px; */
   margin: 0 auto;
-  right: 60px;
+  bottom: -5px;
+  transform: translateY(100%);
+
+  right: 0;
   width: 300px;
   min-height: 200px;
   max-height: 400px;
   color: white;
-  border-radius: 13px;
+  border-radius: 4px;
   border: 1px solid rgb(255, 255, 255);
   /* background-color: #aab3e6; */
   margin: 0;
@@ -16,7 +19,9 @@
   justify-content: center;
   /* overflow: auto; */
   /* align-items: center; */
-  opacity: 0.9;
+  /* opacity: 0.9; */
+  background-color: rgba(31, 95, 128, 0.8);
+
   z-index: 10000;
 }
 
@@ -76,11 +81,12 @@
 .together {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .erase {
-  padding: 0 6px 10px 6px;
-  margin: 0 6px 20px 0;
+  padding:6px;
+  /* margin: 0 6px 20px 0; */
 }
 
 .erase:hover {

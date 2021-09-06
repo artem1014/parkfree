@@ -45,11 +45,11 @@ const Nav = () => {
       <div className={style.nav__container}>
 
         <div className={style.nav__logo}>
-          <Link to="/map">
+          <Link to="/">
             <img className={style.img} src={"./images/tachila1.svg"} />
           </Link>
         </div>
-        <Link className={`${style.navbar_brand2} ${style.nav__text}`} to="/map">
+        <Link className={`${style.navbar_brand2} ${style.nav__text}`} to="/">
           ParkFree
         </Link>
 
@@ -98,7 +98,7 @@ const Nav = () => {
               </>
             ) : (
               <>
-                <li className="nav-item mx-3 my-3">
+                <li className="nav-item my-3">
                   <NavLink
                     to="/auth/signout"
 
@@ -108,7 +108,7 @@ const Nav = () => {
                     Sign out
                       </NavLink>
                 </li>
-                <li className="nav-item mx-3 my-3">
+                <li className="nav-item my-3">
                   <NavLink
                     to="/map"
                     className={style.nav_item2}
@@ -117,12 +117,12 @@ const Nav = () => {
                     Map
                       </NavLink>
                 </li>
-                <li>
+                <li className={style.nav__btn}>
                   <IconButton color="inherit" onClick={updateStatus}>
                     <Badge
                       badgeContent={notificationValue}
                       color="secondary"
-                      className="nav-item mx-5"
+                      className="nav-item"
                     >
                       <NotificationsIcon />
                     </Badge>
@@ -133,7 +133,7 @@ const Nav = () => {
             )
           ) : (
             <>
-              <li className="nav-item mx-3 my-3">
+              <li className="nav-item my-3">
                 <NavLink
                   to="/signup"
                   className={style.nav_item2}
@@ -143,7 +143,7 @@ const Nav = () => {
                     </NavLink>
               </li>
               {" "}
-              <li className="nav-item mx-5 my-3">
+              <li className="nav-item my-3">
                 <NavLink
                   to="/signin"
                   className={style.nav_item2}

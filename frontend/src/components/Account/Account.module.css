@@ -45,19 +45,21 @@
   padding: 40px 20px;
   color: white;
   max-width: 1100px;
+  border-radius: 4px;
   width: 50%;
   border: 1px solid rgb(233, 236, 248);
 }
 
 .button_marks {
   /* background-color: #2c6e8e; */
+
   opacity: 0.8;
   /* background-color: #1f5f80; */
   border: 1px solid rgb(233, 236, 248);
   /* border: 2px solid rgb(134, 140, 179); */
   border-radius: 30px;
   /* padding: 10px 40px; */
-  color: whitesmoke;
+  color: white;
   /* font-weight: bold; */
   margin-top: 20px;
   /* box-shadow: 0 0 40px -5px rgb(245, 241, 241); */
@@ -67,7 +69,24 @@
   /* background-color: #7493b4; */
   /* background-color: #10415a; */
   background-color: #1f5f80;
-  color: whitesmoke;
+  color: white;
+  transition: 0.5s;
+  /* transition: all 0.3s ease-out; */
+}
+
+.acc {
+  opacity: 0.8;
+  border: 1px solid rgb(233, 236, 248);
+  border-radius: 30px;
+  color: white;
+  margin-top: 20px;
+}
+
+.acc:hover {
+  /* background-color: #7493b4; */
+  /* background-color: #10415a; */
+  background-color: #42747e;
+  color: white;
   transition: 0.5s;
   /* transition: all 0.3s ease-out; */
 }
@@ -226,7 +245,8 @@ img:hover { width:500px; } */
   width: 200px;
   height: 50px;
   display:block;
-  background-color: #477a85;
+  background-color: #1f5f80;
+  border: 1px solid white;
   border-radius: 100px;
   position: relative;
   cursor: pointer;
@@ -251,7 +271,7 @@ img:hover { width:500px; } */
 }
 
 .input:checked + label {
-  background-color: #243d42;
+  background-color: #42747e;
 }
 
 .label:active:after {

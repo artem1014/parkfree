@@ -59,9 +59,9 @@ button {
   padding: 8px 12px;
   margin: 8px 0 0;
   font-family: "Montserrat", sans-serif;
-  border: 2px solid #78788c;
+  /* border: 2px solid #78788c; */
   background: 0;
-  color: #5a5a6e;
+  color: #fff !important;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -81,9 +81,9 @@ button:hover {
   font-size: 13px;
   box-shadow: 10px 10px 40px -14px #000;
 }
-span {
+/* span {
   margin: 0 5px 0 15px;
-}
+} */
 
 .inpimg {
   max-height: 50px;

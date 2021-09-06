@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
 import Account from "../Account/Account";
+import Map from "../YandexMap/Map";
 
 export default function MainScreen({ submitHandler }) {
   const user = useSelector((state) => state.user);
@@ -45,10 +46,21 @@ export default function MainScreen({ submitHandler }) {
   return (
     <>
       {user ? (
-        <div className={style.main_screen_wrapper}>
-          {/* <Здесь будет вызываться личный кабинет юзера /> */}
-          <Account />
-        </div>
+        user.role === 'admin' ? (
+          <div>
+            {/* <div className={style.wrapper}> */}
+   
+                {/* <Здесь будет вызываться личный кабинет юзера /> */}
+                <Account />
+           
+            {/* </div> */}
+          </div>
+        ) : (
+          <div className={style.block_wrapper__map}>
+            {/* <Здесь будет вызываться личный кабинет юзера /> */}
+            <Map />
+          </div>
+        )
       ) : (
         <div className={style.main_screen_wrapper2}>
           <div className={style.greeting_area}>

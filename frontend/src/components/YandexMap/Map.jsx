@@ -175,7 +175,7 @@ export default function Map({ }) {
           iconCaption: allMarks[i].address,
           balloonContent: `
           <div> 
-
+          <div id='stat-text'>
           <span> <b> Адрес </b> </span> <br />
           <span> ${allMarks[i].address} </span>
           <br/> 
@@ -184,8 +184,11 @@ export default function Map({ }) {
           <br/>
           <span> <b> Комментарий </b> </span> <br />
           <span> ${allMarks[i].comment} </span>
-          <br/>
-          <img id='stat' src=http://localhost:3005/uploads/${allMarks[i].pics} /> 
+          </div>
+
+          <div id='stat'>
+          <img src=http://localhost:3005/uploads/${allMarks[i].pics} /> 
+          </div>
           </div>`
         });
         myMap.geoObjects.add(pl);
@@ -200,23 +203,25 @@ export default function Map({ }) {
 
     // Слушаем клик на карте.
     myMap.events.add("click", function (e) {
-      let newCoords = e.get("coords"); // вытяигиваем координаты
-      if (myPlacemark) {
-        // если метка создана
-        myPlacemark.geometry.setCoordinates(newCoords);
-        // myMap.geoObjects.remove(myPlacemark)
+      if (!location.state) {
+        let newCoords = e.get("coords"); // вытяигиваем координаты
+        if (myPlacemark) {
+          // если метка создана
+          myPlacemark.geometry.setCoordinates(newCoords);
+          // myMap.geoObjects.remove(myPlacemark)
+        }
+        // Если нет – создаем.
+        else {
+          myPlacemark = createPlacemark(newCoords);
+          myMap.geoObjects.add(myPlacemark);
+          // Слушаем событие окончания перетаскивания на метке.
+          myPlacemark.events.add("dragend", function () {
+            getAddress(myPlacemark.geometry.getCoordinates());
+          });
+        }
+        setPlacemarkCoords(myPlacemark.geometry._coordinates);
+        getAddress(newCoords);
       }
-      // Если нет – создаем.
-      else {
-        myPlacemark = createPlacemark(newCoords);
-        myMap.geoObjects.add(myPlacemark);
-        // Слушаем событие окончания перетаскивания на метке.
-        myPlacemark.events.add("dragend", function () {
-          getAddress(myPlacemark.geometry.getCoordinates());
-        });
-      }
-      setPlacemarkCoords(myPlacemark.geometry._coordinates);
-      getAddress(newCoords);
     });
 
     // Создание метки.
@@ -296,16 +301,20 @@ export default function Map({ }) {
       </div>
 
       <div className='pinInfo'>
-        {location.state && flag && <button className='btn btn-success mx-2' onClick={acceptHandler}> Accept </button>}
-        {location.state && flag && <button className='btn btn-warning mx-2' onClick={declineHandler}> Decline </button>}
-        {location.state && flag && <button className='btn btn-danger mx-2' onClick={backHandler}> Back </button>}
-        <div className="imgdiv">
-          {location.state && flag && <img className='picmap' src={`http://localhost:3005/uploads/${location.state.pic}`} />}
-        </div>
-        {adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} files={files} setFiles={setFiles} uploadedImage={uploadedImage} />
+        {location.state && flag && <div>
+          <div className="imgdiv">
+            <img className='picmap' src={`http://localhost:3005/uploads/${location.state.pic}`} />
+          </div>
+          <button className='map-btn' onClick={acceptHandler}> Принять </button>
+          <button className='map-btn' onClick={declineHandler}> Отклонить </button>
+          <button className='map-btn' onClick={backHandler}> Назад </button>
+        </div>}
+
+        {!location.state && adress && placemarkCoords && <SendingForm sendForm={sendForm} handleImageUpload={handleImageUpload} imageUploader={imageUploader} files={files} setFiles={setFiles} uploadedImage={uploadedImage} />
         }
+
       </div>
-      
+
       {/* <div className='shit addvertismentBlock'>
         <div>
           {setInterval(() => {

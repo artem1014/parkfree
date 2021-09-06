@@ -52,13 +52,13 @@ const Mark = ({ adress, id, longitude, latitude, identificator, pic }) => {
       <div className={stylesMark.buttonWrapper}>
         {identificator ? (
           <>
-            <button onClick={acceptHandler} className={stylesMark.button_marks}>
+            <button onClick={acceptHandler} className={stylesMark.acc}>
               Принять</button>
-            <button onClick={onMapHandler} className={stylesMark.button_marks}>
-              на карте</button>
+            <button onClick={onMapHandler} className={stylesMark.acc}>
+              На карте</button>
             <button
               onClick={declineHandler}
-              className={stylesMark.button_marks}
+              className={stylesMark.acc}
             > Отклонить </button>
           </>
         ) : <button onClick={deleteHandler} className={stylesMark.button_marks}>

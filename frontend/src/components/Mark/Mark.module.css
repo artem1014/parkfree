@@ -28,6 +28,24 @@
   /* box-shadow: 0 0 40px -5px rgb(245, 241, 241); */
 }
 
+.acc {
+  opacity: 0.8;
+  border: 1px solid rgb(233, 236, 248);
+  border-radius: 30px;
+  color: white;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.acc:hover {
+  /* background-color: #7493b4; */
+  /* background-color: #10415a; */
+  background-color: #42747e;
+  color: white;
+  transition: 0.5s;
+  /* transition: all 0.3s ease-out; */
+}
+
 .button_marks:last-child {
   margin-right: 0;
 }
