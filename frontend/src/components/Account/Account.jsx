@@ -6,7 +6,6 @@ import Mark from "../Mark/Mark";
 import stylesAcc from "./Account.module.css";
 
 const Account = () => {
-  // const arr = [{ coords: [55.72242171789997, 37.55932930905152], adress: 'Россия, Москва, улица Хамовнический Вал, 36' }, { coords: [55.76069738614288, 37.64234904248048], adress: 'Россия, Москва, Чистопрудный бульвар, 12к7А' }];
   const [markers, setMarkers] = useState([]);
   const [markersValue, setMarkersValue] = useState(0);
   const [flag, setFlag] = useState(null);
@@ -19,28 +18,6 @@ const Account = () => {
   const allAcceptedMarks = allMarks.filter((el) => el.isAccepted === true);
 
   const allNewMarks = allMarks.filter(el => el.isChecked === false)
-
-  // const newMarks = useSelector(state => state.newMarks)
-
-  // useEffect(() => {
-  // axios.get(GET_ALL_MARKERS_DB).then(res => { // gets new markers
-  //     setMarkersValue(res.data.count)
-  //     setMarkers(res.data.markers)
-  //   }, [])
-
-  //   axios.get('http://localhost:3005/all') //gets all markers
-  //   .then(res => {
-  //     setAllMarkers(res.data)
-  //   })
-  // }, [])
-
-  // const newMarkersHandler = () => {
-  //   setFlag(true);
-  // };
-
-  // const allMarkersHandler = () => {
-  //   setFlag(false);
-  // };
 
   const changeHandler = () => {
     setFlag((prev) => !prev);
@@ -56,20 +33,7 @@ const Account = () => {
         </div>
 
         <h3> Выберите метки </h3>
-        {/* <button className={stylesAcc.button_marks} onClick={newMarkersHandler}>
 
-          Новые метки
-        </button>
-        <button className={stylesAcc.button_marks} onClick={allMarkersHandler}>
-
-          Вывести все метки
-        </button> */}
-
-        <input className={stylesAcc.input} onChange={changeHandler} type="checkbox" name="switch" id="switch" />
-        <label className={stylesAcc.label} htmlFor="switch">
-          <span className={stylesAcc.labelText}>{flag ? 'Новые' : 'Все'}</span></label>
-
-        {/* </div> */}
         <div className='d-flex justify-content-center'>
           <div className={stylesAcc.table}>
 
@@ -101,8 +65,6 @@ const Account = () => {
         </div>
       </div>
     </div>
-    // </div>
-    // </div>
   );
 };
 

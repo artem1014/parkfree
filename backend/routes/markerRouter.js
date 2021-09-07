@@ -9,18 +9,15 @@ router.get("/", async (req, res) => {
 
 router.get("/all", async (req, res) => {
   const allMarkers = await Marker.findAll({ raw: true });
-  // console.log('ALL =====================', allMarkers)
   res.json(allMarkers);
 });
 
 router.get("/allNew", async (req, res) => {
   const allNewMarkers = await Marker.findAll({ where: { isChecked: false } });
-  // console.log('ALLNEW =====================', allNewMarkers)
   res.json(allNewMarkers);
 });
 
 router.post("/add", async (req, res) => {
-  // console.log(req.body);
   try {
     const { longitude, latitude, address, comment, pics, parkingPlaces } =
       req.body;
@@ -46,11 +43,7 @@ router.post("/add", async (req, res) => {
     });
 
     const response = newMarkerFromDB.dataValues
-    // const { name } = await Notification.create({
-    //   userID,
-    //   name: "Ожидайте подтверждения модератора",
-    // });
-    // res.json(response);
+
     res.json(response)
   } catch (error) {
     console.log('ERROR IN CREATE', error);
@@ -60,7 +53,6 @@ router.post("/add", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  // console.log(req.body);
   try {
     const { longitude, latitude, address, comment, pics, parkingPlaces } =
       req.body;
@@ -120,14 +112,6 @@ router.post('/acceptNots', async (req, res) => {
         name: "Ваша метка одобрена модератором",
       });
       const allMarkers = await Marker.findAll({});
-      // allMarkers.map(async (el) => {
-      //   if (el.id === id) {
-      //     el.isAccepted = !el.isAccepted;
-      //     el.isChecked = true;
-      //     await Marker.update({where: {id}})
-      //     return el;
-      //   } else return el;
-      // });
       res.json({ name, allMarkers });
     }
   } catch (error) {
@@ -183,15 +167,9 @@ router.post("/declineAct", async (req, res) => {
 });
 
 router.post("/del", async (req, res) => {
-  // console.log(req.body)
   const { id } = req.body;
   const deleteItem = await Marker.destroy({ where: { id } });
   res.json();
 });
-
-
-
-// Отправляет данные на сервер
-
 
 module.exports = router;

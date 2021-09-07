@@ -19,8 +19,6 @@ const Mark = ({ adress, id, longitude, latitude, identificator, pic }) => {
     dispatch(acceptNotificationStart(id))
   }
 
-  // const marks = useSelector(state => console.log(state.marks))
-
   const onMapHandler = () => {
     history.push({
       pathname: "/map",
@@ -62,7 +60,6 @@ const Mark = ({ adress, id, longitude, latitude, identificator, pic }) => {
             > Отклонить </button>
           </>
         ) : <button onClick={deleteHandler} className={stylesMark.button_marks}>
-
           Удалить
         </button>}
       </div>
@@ -71,46 +68,3 @@ const Mark = ({ adress, id, longitude, latitude, identificator, pic }) => {
 };
 
 export default Mark;
-
-{/* <div className="d-flex justify-content-space-between flex-row align-items-center">
-        {/* <img
-          className={stylesMark.pic}
-          src="https://static.thenounproject.com/png/141955-200.png"
-          alt=""
-        /> */}
-    //     <p> {adress} </p>
-    //     <p style={{margin:'20px'}}>
-    //       {" "}
-    //       <img
-    //         className={stylesMark.pic}
-    //         src={`http://localhost:3005/uploads/${pic}`}
-    //       />{" "}
-    //     </p>
-    //     <div className="d-flex align-items-center">
-    //       {identificator ? (
-    //         <>
-    //           <button onClick={acceptHandler} className={stylesMark.button_marks}>
-    //             {" "}
-    //           Принять{" "}
-    //           </button>
-    //           <button onClick={onMapHandler} className={stylesMark.button_marks}>
-    //             {" "}
-    //           на карте{" "}
-    //           </button>
-    //           <button
-    //             onClick={declineHandler}
-    //             className={stylesMark.button_marks}
-    //           >
-    //             {" "}
-    //           Отклонить{" "}
-    //           </button>
-    //         </>
-    //       ) : (
-    //         <button onClick={deleteHandler} className={stylesMark.button_marks}>
-    //           {" "}
-    //         Удалить{" "}
-    //         </button>
-    //       )}
-    //     </div>
-    //   </div>
-    // </tr> */}

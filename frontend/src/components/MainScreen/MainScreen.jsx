@@ -1,5 +1,4 @@
 import React from "react";
-//import Login from "../Login/Login";
 import style from "./MainScreen.module.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -10,13 +9,6 @@ import Map from "../YandexMap/Map";
 
 export default function MainScreen({ submitHandler }) {
   const user = useSelector((state) => state.user);
-  // const user = localStorage.getItem("user"); // т.к. у нас есть д.б. нам уже не нужен локал сторэдж
-
-  //const [modalShow, setModalShow] = useState(false);
-
-  // const toggle = () => {
-  //   setModalShow(!modalShow);
-  // };
 
   useEffect(() => {
     eval(
@@ -48,16 +40,10 @@ export default function MainScreen({ submitHandler }) {
       {user ? (
         user.role === 'admin' ? (
           <div>
-            {/* <div className={style.wrapper}> */}
-   
-                {/* <Здесь будет вызываться личный кабинет юзера /> */}
                 <Account />
-           
-            {/* </div> */}
           </div>
         ) : (
           <div className={style.block_wrapper__map}>
-            {/* <Здесь будет вызываться личный кабинет юзера /> */}
             <Map />
           </div>
         )
@@ -68,14 +54,11 @@ export default function MainScreen({ submitHandler }) {
               <h4>Welcome to</h4>
               <h3>Park Free</h3>
               <NavLink className={style.button_register_top} to="/signin">
-                {/* кнопка с первой станицы ведет на регистрацию */}
                Sign In
               </NavLink>
               <NavLink className={style.button_register} to="/signup">
-                {/* кнопка с первой станицы ведет на регистрацию */}
                 Sign Up
               </NavLink>
-              {/* <p>In order to use our application, please register.</p> */}
             </div>
           </div>
 

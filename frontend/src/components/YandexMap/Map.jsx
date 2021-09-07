@@ -9,7 +9,6 @@ import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
 import { acceptMarkAct, addMarkAct, declineMarkAct } from "../../redux/actions/markActions";
 import SendingForm from "../SendingForm/SendingForm";
 import { acceptNotificationStart, addNotificationStart, declineNotificationStart } from "../../redux/actions/notificationAC";
-import Popup from "../Popup/Popup";
 import { useHistory } from "react-router";
 
 export default function Map({ }) {
@@ -30,12 +29,9 @@ export default function Map({ }) {
   const [adress, setAdress] = useState('')
   const [province, setProvince] = useState('')
   const [allPlacemarks, setAllPlacemarks] = useState([])
-  const [curImg, setCurImg] = useState(null)
   const [flag, setFlag] = useState(true)
 
-  const handleClosePopup = () => {
-    setCurImg(null)
-  }
+
 
   const location = useLocation(); //принимаем координаты новой метки из личного кабинета, чтобы высветить ее на карте
   const dispatch = useDispatch();
@@ -296,7 +292,6 @@ export default function Map({ }) {
 
   return (
     <div className="block-wrapper__map">
-      {curImg && <Popup img={curImg} close={handleClosePopup} />}
       <div id="map" className='ymap map'>
       </div>
 

@@ -34,9 +34,7 @@ function TestImage() {
 
   const sendForm = (e) => {
     e.preventDefault();
-    // Получаем все значения из формы по атрибуту name
     const { text } = Object.fromEntries(new FormData(e.target));
-    // Эта штука собирает все значения через append и через axios отправляет на back
     if (text.trim()) {
       let bodyFormData = new FormData();
       files.map((el) => {

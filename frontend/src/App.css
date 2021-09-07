@@ -16,10 +16,7 @@
   height: 100%;
   display: flex;
   justify-content: flex-end;
-  /* grid-template-columns: 20% 60% 20%; */
-  /* grid-template-rows: auto; */
   align-items: center;
-  /* grid-template-areas: "shit map pinInfo"; */
 }
 
 .centring {
@@ -29,27 +26,13 @@
 }
 
 .map {
-  /* grid-area: map; */
   width: 60%;
 }
 
 .pinInfo {
-  /* grid-area: pinInfo; */
   width: 20%;
   padding-left: 20px;
 }
-
-/* .containerApp {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  transition: 1s all;
-  background: linear-gradient(to bottom, #565a61, #dff1ff);
-} */
 
 #stat {
   width: 400px;
@@ -75,6 +58,4 @@
 #stat-text {
   padding-bottom: 10px;
 }
-/* #statdiv:hover #stat { 
-  transform: scale(1.1);
-} */
+

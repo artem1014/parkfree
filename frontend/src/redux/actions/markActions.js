@@ -8,10 +8,6 @@ export const addMarkAct =
         console.log(bodyFormData)
         const addedItem = await fetch("http://localhost:3005/marker/add", {
           method: 'POST',
-          // headers: {
-          //   'Content-Type': 'application/json'
-          // },
-          // enctype: "multipart/form-data",
           credentials: 'include',
           body: bodyFormData,
         })
@@ -95,19 +91,3 @@ export const getAllAcceptedMark = (arrOfMarks) => {
   }
 }
 
-// export const getAllNewMarkAct = () => async (dispatch) => {
-//   try {
-//     const allNewMarks = await axios.get('http://localhost:3005/marker/allNew')
-//     console.log(allNewMarks.data)
-//       dispatch(getAllNewMark(allNewMarks.data))
-//   } catch (e) {
-//     console.log('error')
-//   }
-// }
-
-// export const getAllNewMark = (arrOfNewMarks) => {
-//   return {
-//     type: GET_ALL_NEW_MARKS,
-//     payload: arrOfNewMarks
-//   }
-// }

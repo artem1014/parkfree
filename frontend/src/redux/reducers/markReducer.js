@@ -40,12 +40,12 @@ const markReducer = (state = [], action) => {
         return state.filter(el => el.id != action.payload)
       }
 
-    case GET_ALL_ACCEPTED_MARKS: // метки для админского кабинета
+    case GET_ALL_ACCEPTED_MARKS:
       {
         return action.payload
       }
 
-    case GET_ALL_NEW_MARKS: //метки для админского кабинета
+    case GET_ALL_NEW_MARKS:
       {
         return action.payload
       }

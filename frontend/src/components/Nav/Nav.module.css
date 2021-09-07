@@ -1,12 +1,9 @@
-/* only with rgba.... 0.4 - kind a opasity but only on specific place not all block */
 .bg {
   background-color: rgba(24, 59, 82, 0.4);
 }
 
 .nav__container {
-  /* width: 60%; */
   height: 100px;
-  
   display:grid;
   grid-template-columns: 1fr 3fr 6fr;
   grid-template-rows: auto;
@@ -17,7 +14,6 @@
   align-items: center;
   justify-content: center;
   align-content: end;
-
   padding-bottom: 20px;
 }
 
@@ -31,16 +27,11 @@
 
 .nav__btns {
   grid-area: btnsnav;
-
   list-style: none;
-
   display: grid;
   grid-auto-flow: column;
-
   justify-content: end;
-
   column-gap: 20px;
-
   margin: 0;
 }
 
@@ -59,7 +50,6 @@
   grid-area: nonenav;
 }
 
-/* отодвинули signin /up в право */
 .navbar {
   margin-left: auto;
 }
@@ -72,18 +62,13 @@
   justify-content: center;
   
 }
-/* name of the site in Navbar */
+
 .navbar_brand2 {
-  /* padding-left: 23; */
-  /* justify-content: left; */
   padding-right: 5;
   color: white;
   text-decoration: none;
   font-size: 30px;
   font-weight: bold;
-  /* смещение-x | смещение-y | радиус-размытия | цвет */
-  /* text-shadow: 0px 2px 6px rgb(243, 242, 247); */
-  /* text-shadow: 6px 1px 6px rgb(126, 137, 156); */
 }
 
 .navbar_brand2:hover {
@@ -103,99 +88,12 @@
   width: 20%;
   height: 100%;
   border-radius: 30px;
-  /* border: 2px solid rgb(57, 63, 110); */
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   filter: invert(70%);
 }
-/* 
-.title {
-  text-align: center;
-} */
-/* .title h2 {
-  font-weight: bold;
-  margin-bottom: 5%;
-} */
-/* .body form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
-/* .body form input {
-  font-size: 16px;
-  line-height: 24px;
-  min-height: 40px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-width: 1px;
-  border-radius: 3px;
-  border: 1px solid rgb(136, 132, 132);
-  margin-bottom: 5%;
-} */
-/* .body form button {
-  margin: 5px auto 5% auto;
-}
-.bottomSettng {
-  display: flex;
-  justify-content: space-between;
-} */
-/* .bottomSettng input{
-  margin: 0;
-  padding: 0;
-} */
-
-/* .rememberPassword {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.checkbox {
-  cursor: pointer;
-  min-height: 0 !important;
-  padding: 0 !important;
-} */
-/* .link,
-.footer p,
-.forgotPassword p {
-  line-height: none;
-  cursor: pointer;
-  color: blue;
-  user-select: none;
-  margin-bottom: 0;
-}
-.link:hover,
-.footer p:hover,
-.forgotPassword p:hover {
-  color: rgb(48, 48, 240);
-}
-.footer {
-  width: 100%;
-  text-align: center;
-} */
 
 .img {
   width: 80%;
   height: auto;
-
-  /* box-shadow: 0 0 40px -10px rgb(245, 241, 241); */
 }
-
-/* one more - light background under logo*/
-/* in component  */
-/* <div className={style.color}></div> */
-/* .color {
-  position: absolute;
-  border-radius: 8px;
-  filter: blur(33px);
-} */
-
-/* .color:nth-child(1) {
-  top: -960px;
-  left: -200;
-  width: 180px;
-  height: 1035px;
-  background: #98a4c7;
-  background: #f7f8fb;
-  animation: animate1 75s linear infinite;
-} */

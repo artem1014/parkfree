@@ -6,9 +6,7 @@ import {
   CHECK_USER,
 } from "../../urls/userURLS";
 
-// вызывает логику юзера
 export const setUser = (user) => ({
-  // 2!
   type: SET_USER,
   payload: user,
 });
@@ -18,59 +16,52 @@ export const deleteUser = () => ({
 });
 
 export const signUpStart = (payload, history) => async (dispatch) => {
-  //регистрация
   const response = await fetch(REGISTRATION_USER, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include", // настройка для Cors
-    body: JSON.stringify(payload), //отправляем на бэк все данные введенные в форму
+    credentials: "include",
+    body: JSON.stringify(payload), 
   });
   if (response.status === 200) {
     const user = await response.json();
     dispatch(setUser(user));
-    history.replace("/map"); //если успешно, переходим сюда
+    history.replace("/map"); 
   } else {
-    history.replace("/signup"); //иначе остаемся на странице реги
+    history.replace("/signup");
   }
 };
 
 export const signInStart = (payload, history, from) => async (dispatch) => {
-  // вход // setState can be here
   const response = await fetch(SIGNIN_USER, {
-    // вот тут я захардкодил путь, чтобы было понятнее
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     credentials: "include",
-    body: JSON.stringify(payload), //отправляем данные из формы на бэк
+    body: JSON.stringify(payload), 
   });
   if (response.status === 200) {
     const user = await response.json();
     dispatch(setUser(user));
-    return history.replace(from); //если вошли удачно, то перекидываем на страницу с инфой о пользователе
+    return history.replace(from);
   } else {
-    return history.replace("/"); //иначе остаемся на странице входа
+    return history.replace("/");
   }
 };
 
 export const signOutStart = () => async (dispatch) => {
-  //выход
   const response = await fetch(SIGNOUT_USER, {
     credentials: "include",
   });
-  // console.log("resporesponse", response);
   if (response.ok) {
-    // dispatch(deleteAllNotifications())
-    dispatch(deleteUser()); // в state с юзером кладется null
+    dispatch(deleteUser());
     localStorage.removeItem('user');
   }
 };
 
 export const checkAuthStart = () => async (dispatch) => {
-  //особая семеновская магия с проверкой аутентификации
   const response = await fetch(CHECK_USER, {
     method: "GET",
     headers: {

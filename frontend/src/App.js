@@ -12,7 +12,6 @@ import Main from "./components/Main/Main";
 import Account from "./components/Account/Account";
 import MainScreen from "./components/MainScreen/MainScreen";
 import TestImage from "./components/testImage";
-// import { blue } from "@material-ui/core/colors";
 
 function App() {
   const dispatch = useDispatch();
